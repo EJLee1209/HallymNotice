@@ -22,7 +22,14 @@ struct Constants {
 
     static let keywordCellIdentifier = "keywordCell"
     
-    static let defaultKeywords: [String] = [
-        "장학금", "등록금", "진로", "근로", "인턴", "취업", "병무청"
+    static let defaultKeywords: [Keyword] = [
+        Keyword(text: "장학금", isSelected: false),
+        Keyword(text: "등록금", isSelected: false),
+        Keyword(text: "진로", isSelected: false),
+        Keyword(text: "근로", isSelected: false),
+        Keyword(text: "인턴", isSelected: false),
+        Keyword(text: "취업", isSelected: false),
+        Keyword(text: "병무청", isSelected: false),
+        Keyword(text: "버스", isSelected: false),
     ]
 }

@@ -47,7 +47,14 @@ final class KeywordCell: UICollectionViewCell {
             make.top.bottom.equalToSuperview().inset(8)
         }
     }
-    func bind(keyword: String) {
-        label.text = keyword
+    func bind(keyword: Keyword) {
+        label.text = keyword.text
+        if keyword.isSelected {
+            bgView.backgroundColor = ThemeColor.primary
+            label.textColor = .white
+        } else {
+            bgView.backgroundColor = ThemeColor.secondary
+            label.textColor = ThemeColor.gray
+        }
     }
 }

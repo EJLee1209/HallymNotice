@@ -121,12 +121,14 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         
         inputTextField.doneButtonTap
             .sink { text in
-                self.viewModel.appendKeyword(text)
+                let keyword = Keyword(text: text, isSelected: true)
+                self.viewModel.appendKeyword(keyword)
             }.store(in: &cancellables)
         
-        
-            
-        
+        collectionView.didSelectItemPublisher
+            .sink { indexPath in
+                self.viewModel.selectKeyword(indexPath.row)
+            }.store(in: &cancellables)
     }
 
     func makeAttributedText() -> NSMutableAttributedString {

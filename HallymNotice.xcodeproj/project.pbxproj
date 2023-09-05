@@ -25,6 +25,7 @@
 		CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */; };
 		CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D052AA7381000A4A726 /* KeywordCell.swift */; };
 		CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */; };
+		CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D092AA75B1D00A4A726 /* Keyword.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTextField.swift; sourceTree = "<group>"; };
 		CF6B2D052AA7381000A4A726 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		CF6B2D092AA75B1D00A4A726 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		CF6B2CE32AA6EE5700A4A726 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF6B2D092AA75B1D00A4A726 /* Keyword.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF6B2CF22AA724A600A4A726 /* ThemeFont.swift in Sources */,
+				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,

@@ -1,0 +1,13 @@
+//
+//  Keyword.swift
+//  HallymNotice
+//
+//  Created by 이은재 on 2023/09/05.
+//
+
+import Foundation
+
+struct Keyword: Hashable {
+    let text: String
+    var isSelected: Bool
+}
