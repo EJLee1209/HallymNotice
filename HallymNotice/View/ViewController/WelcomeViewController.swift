@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
 
 final class WelcomeViewController: UIViewController, BaseViewController {
     
@@ -32,7 +34,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     private lazy var inputTextField: BackgroundTextField = {
         let view = BackgroundTextField()
         view.setBackgroundColor(ThemeColor.secondary)
-        view.setPlaceHolder("직접 입력해서 추가")
+        view.setPlaceHolder(Constants.inputPlaceHolder)
         view.setCornerRadius(radius: 8)
         view.addAccessoryView()
         return view
@@ -56,6 +58,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         return sv
     }()
     
+    private var cancellables: Set<AnyCancellable> = .init()
     let viewModel: WelcomeViewModel
     
     //MARK: - init
@@ -104,6 +107,10 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         viewModel.setUpDataSource(collectionView: collectionView)
         viewModel.updateHand(with: Constants.defaultKeywords)
         
+        inputTextField.doneButtonTap
+            .sink { text in
+                print("\(text) 추가")
+            }.store(in: &cancellables)
     }
 
     func makeAttributedText() -> NSMutableAttributedString {
@@ -115,6 +122,10 @@ final class WelcomeViewController: UIViewController, BaseViewController {
             [.font: ThemeFont.bold(ofSize: 12)]
             , range: NSMakeRange(12, 15))
         return text
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 

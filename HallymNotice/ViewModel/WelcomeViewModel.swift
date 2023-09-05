@@ -17,7 +17,7 @@ typealias Snapshot = NSDiffableDataSourceSnapshot<WelcomeSection, String>
 
 final class WelcomeViewModel {
     
-    private var dataSource: DataSource!
+    private var dataSource: DataSource?
     
     // Diffable Datasource를 구현하기 위해서 2가지 커스텀 메서드를 구현하면 된다.
     // 기존의 UITableViewDataSource/UICollectionViewDataSource 의 필수 메서드 2가지를 커스텀 메서드로 구현하면 됨.
@@ -33,6 +33,6 @@ final class WelcomeViewModel {
         var snapshot = Snapshot() // 스냅샷 생성
         snapshot.appendSections(WelcomeSection.allCases) // 섹션 추가
         snapshot.appendItems(keywords) // 항목 추가
-        dataSource.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
+        dataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
     }
 }

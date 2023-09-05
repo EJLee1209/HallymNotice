@@ -6,16 +6,35 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
 
 final class BackgroundTextField: UIView {
     
     private var backgroundView: UIView = UIView()
     private var textField: UITextField = UITextField()
     
+    private var cancellables: Set<AnyCancellable> = .init()
+    private var textSubject: CurrentValueSubject<String,Never> = .init("")
+    var textPublisher: AnyPublisher<String,Never> {
+        return textSubject.eraseToAnyPublisher()
+    }
+    
+    private var doneButtonTapSubject: PassthroughSubject<String,Never> = .init()
+    var doneButtonTap: AnyPublisher<String,Never> {
+        return doneButtonTapSubject.eraseToAnyPublisher()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         layout()
+        
+        textField.textPublisher
+            .sink { [weak self] text in
+                guard let text = text else { return }
+                self?.textSubject.send(text)
+            }.store(in: &cancellables)
     }
     
     required init?(coder: NSCoder) {
@@ -72,6 +91,7 @@ final class BackgroundTextField: UIView {
     
     @objc func doneButtonTapped() {
         textField.endEditing(true)
+        doneButtonTapSubject.send(textSubject.value)
     }
 }
 

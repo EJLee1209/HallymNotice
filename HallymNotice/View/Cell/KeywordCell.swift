@@ -24,17 +24,6 @@ final class KeywordCell: UICollectionViewCell {
         return label
     }()
     
-    override var isSelected: Bool {
-        willSet {
-            if newValue {
-                bgView.backgroundColor = ThemeColor.primary
-                label.textColor = .white
-            } else {
-                bgView.backgroundColor = ThemeColor.secondary
-                label.textColor = ThemeColor.gray
-            }
-        }
-    }
     
     //MARK: - init
     override init(frame: CGRect) {
