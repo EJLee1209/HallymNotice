@@ -10,7 +10,7 @@ import UIKit
 final class WelcomeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
-    
+
     
     //MARK: - LifeCycle
     override func viewDidLoad() {

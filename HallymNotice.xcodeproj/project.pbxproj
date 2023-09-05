@@ -14,6 +14,8 @@
 		CF6B2CDF2AA6EDFF00A4A726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */; };
 		CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CE52AA6EEAE00A4A726 /* WelcomeViewController.swift */; };
 		CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CE72AA7229000A4A726 /* BaseViewController.swift */; };
+		CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF6B2CEA2AA7244800A4A726 /* SnapKit */; };
+		CF6B2CEE2AA7245D00A4A726 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CF6B2CED2AA7245D00A4A726 /* CombineCocoa */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF6B2CEE2AA7245D00A4A726 /* CombineCocoa in Frameworks */,
+				CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +130,10 @@
 			dependencies = (
 			);
 			name = HallymNotice;
+			packageProductDependencies = (
+				CF6B2CEA2AA7244800A4A726 /* SnapKit */,
+				CF6B2CED2AA7245D00A4A726 /* CombineCocoa */,
+			);
 			productName = HallymNotice;
 			productReference = CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */;
 			productType = "com.apple.product-type.application";
@@ -154,6 +162,10 @@
 				Base,
 			);
 			mainGroup = CF6B2CBE2AA6ED6600A4A726;
+			packageReferences = (
+				CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CF6B2CEC2AA7245D00A4A726 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+			);
 			productRefGroup = CF6B2CC82AA6ED6600A4A726 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -392,6 +404,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CF6B2CEC2AA7245D00A4A726 /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF6B2CEA2AA7244800A4A726 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CF6B2CED2AA7245D00A4A726 /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF6B2CEC2AA7245D00A4A726 /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF6B2CBF2AA6ED6600A4A726 /* Project object */;
 }
