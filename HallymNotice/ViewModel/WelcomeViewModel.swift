@@ -17,7 +17,24 @@ typealias Snapshot = NSDiffableDataSourceSnapshot<WelcomeSection, String>
 
 final class WelcomeViewModel {
     
+    private var cancellables: Set<AnyCancellable> = .init()
     private var dataSource: DataSource?
+    let keywords: CurrentValueSubject<[String],Never>
+    
+    init(keywords: [String]) {
+        self.keywords = .init(keywords)
+        
+        self.keywords
+            .sink { [weak self] update in
+                self?.updateHand(with: update)
+            }.store(in: &cancellables)
+    }
+    
+    func appendKeyword(_ keyword: String) {
+        var newKeywords = keywords.value
+        newKeywords.append(keyword)
+        keywords.send(newKeywords)
+    }
     
     // Diffable Datasource를 구현하기 위해서 2가지 커스텀 메서드를 구현하면 된다.
     // 기존의 UITableViewDataSource/UICollectionViewDataSource 의 필수 메서드 2가지를 커스텀 메서드로 구현하면 됨.

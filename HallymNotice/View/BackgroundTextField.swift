@@ -68,6 +68,10 @@ final class BackgroundTextField: UIView {
         backgroundView.addCornerRadius(radius: radius)
     }
     
+    func setTextFieldFont(font: UIFont) {
+        textField.font = font
+    }
+    
     func addAccessoryView() {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 36))
         toolBar.barStyle = .default
@@ -91,7 +95,12 @@ final class BackgroundTextField: UIView {
     
     @objc func doneButtonTapped() {
         textField.endEditing(true)
-        doneButtonTapSubject.send(textSubject.value)
+        
+        let text = textSubject.value
+        if text != "" {
+            doneButtonTapSubject.send(text)
+        }
+        
     }
 }
 

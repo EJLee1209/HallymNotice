@@ -37,6 +37,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         view.setPlaceHolder(Constants.inputPlaceHolder)
         view.setCornerRadius(radius: 8)
         view.addAccessoryView()
+        view.setTextFieldFont(font: ThemeFont.regular(ofSize: 12))
         return view
     }()
     
@@ -109,8 +110,9 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         
         inputTextField.doneButtonTap
             .sink { text in
-                print("\(text) 추가")
+                self.viewModel.appendKeyword(text)
             }.store(in: &cancellables)
+        
     }
 
     func makeAttributedText() -> NSMutableAttributedString {

@@ -23,7 +23,7 @@ class HomeViewController: UIViewController, BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let welcomeVM = WelcomeViewModel()
+        let welcomeVM = WelcomeViewModel(keywords: Constants.defaultKeywords)
         let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
         welcomeVC.modalPresentationStyle = .fullScreen
         present(welcomeVC, animated: true)
