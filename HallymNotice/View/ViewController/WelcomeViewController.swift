@@ -74,6 +74,8 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     
     //MARK: - LifeCycle
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +83,15 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     //MARK: - Helpers
     func layout() {
@@ -113,6 +124,9 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                 self.viewModel.appendKeyword(text)
             }.store(in: &cancellables)
         
+        
+            
+        
     }
 
     func makeAttributedText() -> NSMutableAttributedString {
@@ -128,6 +142,22 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    
+    //MARK: - Actions
+    
+    @objc func keyboardUp(notification:NSNotification) {
+        UIView.animate(
+            withDuration: 0.3
+            , animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -50)
+            }
+        )
+    }
+    
+    @objc func keyboardDown() {
+        self.view.transform = .identity
     }
 }
 
