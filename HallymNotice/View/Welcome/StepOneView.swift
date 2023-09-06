@@ -119,7 +119,7 @@ final class StepOneView: UIView {
         nextButton.tapPublisher
             .sink { _ in
                 // 2단계 설정으로 이동
-                viewModel.stepSubject.send(2)
+                viewModel.stepChanged(step: 2)
             }.store(in: &cancellables)
         
     }

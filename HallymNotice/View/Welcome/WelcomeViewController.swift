@@ -13,6 +13,14 @@ import Lottie
 final class WelcomeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.setTitle(" 뒤로", for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
     private let stepTwoView: StepTwoView = .init()
@@ -54,9 +62,15 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     //MARK: - Helpers
     func layout() {
         view.backgroundColor = .white
+        
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(18)
+        }
+        
         view.addSubview(guideView)
         guideView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(108)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.left.right.equalToSuperview().inset(18)
         }
         
@@ -71,7 +85,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         stepOneView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            make.bottom.equalTo(view).offset(-50)
         }
     }
     
@@ -80,7 +94,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         stepTwoView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            make.bottom.equalTo(view).offset(-50)
         }
     }
     
@@ -90,24 +104,28 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                 self?.guideView.bind(title: title, subTitle: subTitle)
             }.store(in: &cancellables)
         
-        viewModel.stepSubject
-            .sink { [weak self] step in
-                switch step {
-                case 1:
-                    self?.stepOneView.isHidden = false
-                    self?.stepTwoView.isHidden = true
-                case 2:
-                    self?.stepOneView.isHidden = true
-                    self?.stepTwoView.isHidden = false
-                case 3:
-                    break
-                default:
-                    break
+        viewModel.stepOneViewIsHidden
+            .assign(to: \.isHidden, on: self.stepOneView)
+            .store(in: &cancellables)
+        
+        viewModel.stepTwoViewIsHidden
+            .handleEvents(receiveOutput: { [weak self] isHidden in
+                if !isHidden {
+                    self?.stepTwoView.playAnimate()
+                } else{
+                    self?.stepTwoView.pauseAnimate()
                 }
-            }.store(in: &cancellables)
+            })
+            .assign(to: \.isHidden, on: self.stepTwoView)
+            .store(in: &cancellables)
         
         stepOneView.bind(viewModel: viewModel)
         stepTwoView.bind(viewModel: viewModel)
+        
+        backButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.viewModel.stepChanged(step: 1)
+            }.store(in: &cancellables)
         
     }
     

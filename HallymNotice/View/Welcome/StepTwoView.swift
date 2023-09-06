@@ -16,7 +16,6 @@ final class StepTwoView: UIView {
     private lazy var lottieAnimationView: LottieAnimationView = {
         let view = LottieAnimationView(name: "animation_notification")
         view.loopMode = .loop
-        view.play()
         return view
     }()
     
@@ -69,6 +68,7 @@ final class StepTwoView: UIView {
     
     //MARK: - Helpers
     private func layout() {
+        
         addSubview(vStackView)
         vStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -77,6 +77,16 @@ final class StepTwoView: UIView {
         lottieAnimationView.snp.makeConstraints { make in
             make.height.equalTo(lottieAnimationView.snp.width)
         }
+        
+        
+    }
+    
+    func playAnimate() {
+        self.lottieAnimationView.play()
+    }
+    
+    func pauseAnimate() {
+        self.lottieAnimationView.pause()
     }
     
     func bind(viewModel: WelcomeViewModel) {

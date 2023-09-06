@@ -41,7 +41,10 @@ final class WelcomeViewModel {
 //    1단계 : 키워드 등록
 //    2단계 : 새 공지 알림 여부 확인
 //    3단계 : 모든 설정 완료
-    let stepSubject: CurrentValueSubject<Int, Never> = .init(1)
+    private let stepSubject: CurrentValueSubject<Int, Never> = .init(1)
+    var step: AnyPublisher<Int, Never> {
+        return stepSubject.eraseToAnyPublisher()
+    }
     
     // GuideView의 Title
     private let guideTitleSubject: CurrentValueSubject<String, Never> = .init(Constants.welcomeTitle1)
@@ -55,6 +58,23 @@ final class WelcomeViewModel {
         return guideSubTitleSubject.eraseToAnyPublisher()
     }
     
+    // stepOneView isHidden
+    private let stepOneViewIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(false)
+    var stepOneViewIsHidden: AnyPublisher<Bool, Never> {
+        return stepOneViewIsHiddenSubject.eraseToAnyPublisher()
+    }
+    
+    // stepTwoView isHidden
+    private let stepTwoViewIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
+    var stepTwoViewIsHidden: AnyPublisher<Bool, Never> {
+        return stepTwoViewIsHiddenSubject.eraseToAnyPublisher()
+    }
+    
+    // stepThreeView isHidden
+    private let stepThreeViewIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
+    var stepThreeViewIsHidden: AnyPublisher<Bool, Never> {
+        return stepThreeViewIsHiddenSubject.eraseToAnyPublisher()
+    }
     
     
     //MARK: - init
@@ -70,10 +90,7 @@ final class WelcomeViewModel {
                 self?.validationSubject.send(selected.count > 0)
             }.store(in: &cancellables)
         
-        self.stepSubject
-            .sink { [weak self] step in
-                self?.stepChanged(step: step)
-            }.store(in: &cancellables)
+        
     }
     
     //MARK: - Input
@@ -96,16 +113,27 @@ final class WelcomeViewModel {
     
     
     func stepChanged(step: Int) {
+        stepSubject.send(step)
+        
         switch step {
         case 1:
             guideTitleSubject.send(Constants.welcomeTitle1)
             guideSubTitleSubject.send(Constants.welcomeSubTitle1)
+            stepOneViewIsHiddenSubject.send(false)
+            stepTwoViewIsHiddenSubject.send(true)
+            stepThreeViewIsHiddenSubject.send(true)
         case 2:
             guideTitleSubject.send(Constants.welcomeTitle2)
             guideSubTitleSubject.send(Constants.welcomeSubTitle2)
+            stepOneViewIsHiddenSubject.send(true)
+            stepTwoViewIsHiddenSubject.send(false)
+            stepThreeViewIsHiddenSubject.send(true)
         case 3:
             guideTitleSubject.send(Constants.welcomeTitle3)
             guideSubTitleSubject.send(Constants.welcomeSubTitle3)
+            stepOneViewIsHiddenSubject.send(true)
+            stepTwoViewIsHiddenSubject.send(true)
+            stepThreeViewIsHiddenSubject.send(false)
         default:
             return
         }

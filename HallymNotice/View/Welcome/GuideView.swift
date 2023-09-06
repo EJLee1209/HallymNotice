@@ -36,11 +36,11 @@ final class GuideView: UIView {
     func bind(title: String, subTitle: String) {
         let text = NSMutableAttributedString(
             string: title,
-            attributes: [.font: ThemeFont.bold(ofSize: 32)]
+            attributes: [.font: ThemeFont.bold(ofSize: 24)]
         )
         let attrString = NSAttributedString(
             string: subTitle,
-            attributes: [.font: ThemeFont.bold(ofSize: 16)]
+            attributes: [.font: ThemeFont.bold(ofSize: 14)]
         )
         text.append(attrString)
         guideLabel.attributedText = text
