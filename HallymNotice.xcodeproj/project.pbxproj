@@ -10,6 +10,7 @@
 		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
 		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
+		CF531B182AA825E100803669 /* StepTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B172AA825E100803669 /* StepTwoView.swift */; };
 		CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */; };
 		CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */; };
 		CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
+		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
 		CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HallymNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
 				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
 				CF531B142AA8211000803669 /* StepOneView.swift */,
+				CF531B172AA825E100803669 /* StepTwoView.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				CF6B2CFE2AA72B7E00A4A726 /* GuideView.swift in Sources */,
 				CF6B2CDF2AA6EDFF00A4A726 /* HomeViewController.swift in Sources */,
 				CF6B2CF32AA724A600A4A726 /* ThemeColor.swift in Sources */,
+				CF531B182AA825E100803669 /* StepTwoView.swift in Sources */,
 				CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */,
 				CF6B2CF82AA724BE00A4A726 /* UIColor+Extension.swift in Sources */,
 			);

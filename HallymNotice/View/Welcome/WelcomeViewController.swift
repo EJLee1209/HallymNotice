@@ -15,13 +15,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     //MARK: - Properties
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
-    
-    private lazy var lottieAnimationView: LottieAnimationView = {
-        let view = LottieAnimationView(name: "animation_notification")
-        view.loopMode = .loop
-        view.play()
-        return view
-    }()
+    private let stepTwoView: StepTwoView = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
     let viewModel: WelcomeViewModel
@@ -67,12 +61,23 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         }
         
         layoutStepOne()
+        layoutStepTwo()
         
+        stepTwoView.isHidden = true
     }
     
     func layoutStepOne() {
         view.addSubview(stepOneView)
         stepOneView.snp.makeConstraints { make in
+            make.top.equalTo(guideView.snp.bottom).offset(66)
+            make.left.right.equalToSuperview().inset(18)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+        }
+    }
+    
+    func layoutStepTwo() {
+        view.addSubview(stepTwoView)
+        stepTwoView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
@@ -85,7 +90,25 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                 self?.guideView.bind(title: title, subTitle: subTitle)
             }.store(in: &cancellables)
         
+        viewModel.stepSubject
+            .sink { [weak self] step in
+                switch step {
+                case 1:
+                    self?.stepOneView.isHidden = false
+                    self?.stepTwoView.isHidden = true
+                case 2:
+                    self?.stepOneView.isHidden = true
+                    self?.stepTwoView.isHidden = false
+                case 3:
+                    break
+                default:
+                    break
+                }
+            }.store(in: &cancellables)
+        
         stepOneView.bind(viewModel: viewModel)
+        stepTwoView.bind(viewModel: viewModel)
+        
     }
     
     
