@@ -30,6 +30,9 @@
 		CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D052AA7381000A4A726 /* KeywordCell.swift */; };
 		CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */; };
 		CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D092AA75B1D00A4A726 /* Keyword.swift */; };
+		CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD5362AA849F800F56444 /* StepThreeView.swift */; };
+		CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */ = {isa = PBXBuildFile; fileRef = CFFAD5382AA84A3300F56444 /* animation_check.json */; };
+		CFFAD53B2AA84F8200F56444 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD53A2AA84F8200F56444 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		CF6B2D052AA7381000A4A726 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		CF6B2D092AA75B1D00A4A726 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		CFFAD5362AA849F800F56444 /* StepThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeView.swift; sourceTree = "<group>"; };
+		CFFAD5382AA84A3300F56444 /* animation_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_check.json; sourceTree = "<group>"; };
+		CFFAD53A2AA84F8200F56444 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +84,7 @@
 				CF6B2CE52AA6EEAE00A4A726 /* WelcomeViewController.swift */,
 				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
 				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
-				CF531B142AA8211000803669 /* StepOneView.swift */,
-				CF531B172AA825E100803669 /* StepTwoView.swift */,
+				CFFAD5352AA849EC00F56444 /* StepView */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				CF531B122AA81F6900803669 /* animation_notification.json */,
+				CFFAD5382AA84A3300F56444 /* animation_check.json */,
 				CF6B2CE32AA6EE5700A4A726 /* Model */,
 				CF6B2CE22AA6EE5100A4A726 /* App */,
 				CF6B2CE02AA6EE3600A4A726 /* View */,
@@ -139,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				CF6B2D092AA75B1D00A4A726 /* Keyword.swift */,
+				CFFAD53A2AA84F8200F56444 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +184,16 @@
 				CF6B2D002AA72D7400A4A726 /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CFFAD5352AA849EC00F56444 /* StepView */ = {
+			isa = PBXGroup;
+			children = (
+				CF531B142AA8211000803669 /* StepOneView.swift */,
+				CF531B172AA825E100803669 /* StepTwoView.swift */,
+				CFFAD5362AA849F800F56444 /* StepThreeView.swift */,
+			);
+			path = StepView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF6B2CD72AA6ED6700A4A726 /* LaunchScreen.storyboard in Resources */,
+				CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */,
 				CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */,
 				CF531B132AA81F6900803669 /* animation_notification.json in Resources */,
 			);
@@ -267,6 +285,7 @@
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
 				CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */,
+				CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */,
 				CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */,
 				CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */,
 				CF6B2CF92AA724BE00A4A726 /* UIView+Extension.swift in Sources */,
@@ -277,6 +296,7 @@
 				CF531B182AA825E100803669 /* StepTwoView.swift in Sources */,
 				CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */,
 				CF6B2CF82AA724BE00A4A726 /* UIColor+Extension.swift in Sources */,
+				CFFAD53B2AA84F8200F56444 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

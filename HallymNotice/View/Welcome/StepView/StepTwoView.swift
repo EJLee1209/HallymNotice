@@ -53,6 +53,8 @@ final class StepTwoView: UIView {
         return sv
     }()
     
+    private var cancellables: Set<AnyCancellable> = .init()
+    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,9 +92,21 @@ final class StepTwoView: UIView {
     }
     
     func bind(viewModel: WelcomeViewModel) {
+        positivieButton
+            .tapPublisher
+            .sink { [weak self] _ in
+                viewModel.isNewNoticeReceiveNotify = true
+                viewModel.stepChanged(step: 3)
+                self?.pauseAnimate()
+            }.store(in: &cancellables)
         
-        
-        
+        negativeButton
+            .tapPublisher
+            .sink { [weak self] _ in
+                viewModel.isNewNoticeReceiveNotify = false
+                viewModel.stepChanged(step: 3)
+                self?.pauseAnimate()
+            }.store(in: &cancellables)
     }
     
 }

@@ -76,6 +76,14 @@ final class WelcomeViewModel {
         return stepThreeViewIsHiddenSubject.eraseToAnyPublisher()
     }
     
+    // backButton isHidden
+    private let backButtonIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
+    var backButtonIsHidden: AnyPublisher<Bool, Never> {
+        return backButtonIsHiddenSubject.eraseToAnyPublisher()
+    }
+    
+    // 새 공지가 올라왔을 때 알림 수신 여부
+    var isNewNoticeReceiveNotify: Bool = false
     
     //MARK: - init
     init(keywords: [Keyword]) {
@@ -91,6 +99,14 @@ final class WelcomeViewModel {
             }.store(in: &cancellables)
         
         
+    }
+    
+    private var lastGuideText: String {
+        let keywordsCount = selectedKeywords.count
+        let isNewNotiStr = isNewNoticeReceiveNotify ? "O" : "X"
+        let subTitle = "\n\(keywordsCount)개 키워드 등록,\n새 공지 알림 \(isNewNotiStr)\n\n공지 사항을 놓치지 않게 해드릴게요."
+        
+        return subTitle
     }
     
     //MARK: - Input
@@ -117,23 +133,35 @@ final class WelcomeViewModel {
         
         switch step {
         case 1:
+            // guideView의 Text 변경
             guideTitleSubject.send(Constants.welcomeTitle1)
             guideSubTitleSubject.send(Constants.welcomeSubTitle1)
+            
+            // 단계별 View의 isHidden 속성값 변경
             stepOneViewIsHiddenSubject.send(false)
             stepTwoViewIsHiddenSubject.send(true)
             stepThreeViewIsHiddenSubject.send(true)
+            
+            // Back Button의 isHidden 속성값 변경
+            backButtonIsHiddenSubject.send(true)
         case 2:
             guideTitleSubject.send(Constants.welcomeTitle2)
             guideSubTitleSubject.send(Constants.welcomeSubTitle2)
+            
             stepOneViewIsHiddenSubject.send(true)
             stepTwoViewIsHiddenSubject.send(false)
             stepThreeViewIsHiddenSubject.send(true)
+            
+            backButtonIsHiddenSubject.send(false)
         case 3:
             guideTitleSubject.send(Constants.welcomeTitle3)
-            guideSubTitleSubject.send(Constants.welcomeSubTitle3)
+            guideSubTitleSubject.send(lastGuideText)
+            
             stepOneViewIsHiddenSubject.send(true)
             stepTwoViewIsHiddenSubject.send(true)
             stepThreeViewIsHiddenSubject.send(false)
+            
+            backButtonIsHiddenSubject.send(true)
         default:
             return
         }

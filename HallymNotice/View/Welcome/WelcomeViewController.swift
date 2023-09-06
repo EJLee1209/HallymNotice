@@ -24,6 +24,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
     private let stepTwoView: StepTwoView = .init()
+    private let stepThreeView: StepThreeView = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
     let viewModel: WelcomeViewModel
@@ -76,6 +77,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         
         layoutStepOne()
         layoutStepTwo()
+        layoutStepThree()
         
         stepTwoView.isHidden = true
     }
@@ -98,7 +100,20 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         }
     }
     
+    func layoutStepThree() {
+        view.addSubview(stepThreeView)
+        stepThreeView.snp.makeConstraints { make in
+            make.top.equalTo(guideView.snp.bottom).offset(66)
+            make.left.right.equalToSuperview().inset(18)
+            make.bottom.equalTo(view).offset(-50)
+        }
+    }
+    
     func bind() {
+        viewModel.backButtonIsHidden
+            .assign(to: \.isHidden, on: self.backButton)
+            .store(in: &cancellables)
+        
         viewModel.guideTitle.zip(viewModel.guideSubTitle)
             .sink { [weak self] (title, subTitle) in
                 self?.guideView.bind(title: title, subTitle: subTitle)
@@ -119,14 +134,26 @@ final class WelcomeViewController: UIViewController, BaseViewController {
             .assign(to: \.isHidden, on: self.stepTwoView)
             .store(in: &cancellables)
         
-        stepOneView.bind(viewModel: viewModel)
-        stepTwoView.bind(viewModel: viewModel)
+        viewModel.stepThreeViewIsHidden
+            .handleEvents(receiveOutput: { [weak self] isHidden in
+                if !isHidden {
+                    self?.stepThreeView.playAnimate()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now()+4) { [weak self] in
+                        self?.dismiss(animated: true)
+                    }
+                }
+            })
+            .assign(to: \.isHidden, on: self.stepThreeView)
+            .store(in: &cancellables)
         
         backButton.tapPublisher
             .sink { [weak self] _ in
                 self?.viewModel.stepChanged(step: 1)
             }.store(in: &cancellables)
         
+        stepOneView.bind(viewModel: viewModel)
+        stepTwoView.bind(viewModel: viewModel)
     }
     
     

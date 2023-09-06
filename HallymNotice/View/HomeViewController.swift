@@ -16,26 +16,25 @@ class HomeViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let welcomeVM = WelcomeViewModel(keywords: Constants.defaultKeywords)
-        let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
-        welcomeVC.modalPresentationStyle = .fullScreen
-        present(welcomeVC, animated: true)
+        layout()
+            
+        presentWelcomeVC()
     }
     
     //MARK: - Helpers
     func layout() {
-        
+        view.backgroundColor = .white
     }
     
     func bind() {
         
+    }
+    
+    private func presentWelcomeVC() {
+        let welcomeVM = WelcomeViewModel(keywords: Constants.defaultKeywords)
+        let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
+        welcomeVC.modalPresentationStyle = .fullScreen
+        present(welcomeVC, animated: true)
     }
     
 }
