@@ -112,15 +112,25 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     func bind() {
         viewModel.guideTitle.zip(viewModel.guideSubTitle)
             .sink { [weak self] (title, subTitle) in
-                self?.guideView.bind(title: title, subTitle: subTitle)
+                UIView.animate(withDuration: 0.25) {
+                    self?.guideView.layer.opacity = 0
+                    self?.guideView.layoutIfNeeded()
+                } completion: { _ in
+                    
+                    self?.guideView.bind(title: title, subTitle: subTitle)
+                    UIView.animate(withDuration: 0.25) {
+                        self?.guideView.layer.opacity = 1
+                        self?.guideView.layoutIfNeeded()
+                    }
+                }
             }.store(in: &cancellables)
         
         viewModel.backButtonIsHidden
-            .assign(to: \.isHidden, on: self.backButton)
+            .assign(to: \.isHidden, on: self.backButton, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         viewModel.stepOneViewIsHidden
-            .assign(to: \.isHidden, on: self.stepOneView)
+            .assign(to: \.isHidden, on: self.stepOneView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         viewModel.stepTwoViewIsHidden
@@ -131,7 +141,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                     self?.stepTwoView.pauseAnimate()
                 }
             })
-            .assign(to: \.isHidden, on: self.stepTwoView)
+            .assign(to: \.isHidden, on: self.stepTwoView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         viewModel.stepThreeViewIsHidden
@@ -144,7 +154,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                     }
                 }
             })
-            .assign(to: \.isHidden, on: self.stepThreeView)
+            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 1))
             .store(in: &cancellables)
         
         backButton.tapPublisher
