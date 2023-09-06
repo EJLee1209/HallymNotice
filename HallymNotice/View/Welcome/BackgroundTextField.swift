@@ -100,6 +100,7 @@ final class BackgroundTextField: UIView {
         if text != "" {
             doneButtonTapSubject.send(text)
         }
+        textField.text = ""
         
     }
 }

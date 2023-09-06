@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
+		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
+		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
 		CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */; };
 		CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */; };
 		CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */; };
@@ -29,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
+		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HallymNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,12 +62,25 @@
 			files = (
 				CF6B2CEE2AA7245D00A4A726 /* CombineCocoa in Frameworks */,
 				CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */,
+				CF531B112AA81E2A00803669 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF531B162AA8213000803669 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				CF6B2D052AA7381000A4A726 /* KeywordCell.swift */,
+				CF6B2CE52AA6EEAE00A4A726 /* WelcomeViewController.swift */,
+				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
+				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
+				CF531B142AA8211000803669 /* StepOneView.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
 		CF6B2CBE2AA6ED6600A4A726 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +100,7 @@
 		CF6B2CC92AA6ED6600A4A726 /* HallymNotice */ = {
 			isa = PBXGroup;
 			children = (
+				CF531B122AA81F6900803669 /* animation_notification.json */,
 				CF6B2CE32AA6EE5700A4A726 /* Model */,
 				CF6B2CE22AA6EE5100A4A726 /* App */,
 				CF6B2CE02AA6EE3600A4A726 /* View */,
@@ -97,22 +116,11 @@
 		CF6B2CE02AA6EE3600A4A726 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CF6B2D042AA737F800A4A726 /* Cell */,
-				CF6B2CE12AA6EE3F00A4A726 /* ViewController */,
-				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
-				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CF6B2CE12AA6EE3F00A4A726 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
+				CF531B162AA8213000803669 /* Welcome */,
 				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
-				CF6B2CE52AA6EEAE00A4A726 /* WelcomeViewController.swift */,
 				CF6B2CE72AA7229000A4A726 /* BaseViewController.swift */,
 			);
-			path = ViewController;
+			path = View;
 			sourceTree = "<group>";
 		};
 		CF6B2CE22AA6EE5100A4A726 /* App */ = {
@@ -168,14 +176,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		CF6B2D042AA737F800A4A726 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				CF6B2D052AA7381000A4A726 /* KeywordCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -195,6 +195,7 @@
 			packageProductDependencies = (
 				CF6B2CEA2AA7244800A4A726 /* SnapKit */,
 				CF6B2CED2AA7245D00A4A726 /* CombineCocoa */,
+				CF531B102AA81E2A00803669 /* Lottie */,
 			);
 			productName = HallymNotice;
 			productReference = CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */;
@@ -227,6 +228,7 @@
 			packageReferences = (
 				CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CF6B2CEC2AA7245D00A4A726 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+				CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = CF6B2CC82AA6ED6600A4A726 /* Products */;
 			projectDirPath = "";
@@ -244,6 +246,7 @@
 			files = (
 				CF6B2CD72AA6ED6700A4A726 /* LaunchScreen.storyboard in Resources */,
 				CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */,
+				CF531B132AA81F6900803669 /* animation_notification.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +262,7 @@
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
+				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
 				CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */,
 				CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */,
 				CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */,
@@ -478,6 +482,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -497,6 +509,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CF531B102AA81E2A00803669 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		CF6B2CEA2AA7244800A4A726 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */;

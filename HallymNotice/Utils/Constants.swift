@@ -18,7 +18,7 @@ struct Constants {
     static let welcomeSubTitle2 = "알림을 받으시겠어요?"
     
     static let welcomeTitle3 = "모든 설정이 끝났어요."
-    static let welcomeSubTitle3 = "N개 키워드 등록,\n새 공지 알림 O\n\n공지 사항을 놓치지 않게 해드릴게요."
+    static let welcomeSubTitle3 = "\nN개 키워드 등록,\n새 공지 알림 O\n\n공지 사항을 놓치지 않게 해드릴게요."
 
     static let keywordCellIdentifier = "keywordCell"
     
