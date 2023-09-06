@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
 
         layout()
-//        presentWelcomeVC()
+        presentWelcomeVC()
     }
     
     //MARK: - Helpers

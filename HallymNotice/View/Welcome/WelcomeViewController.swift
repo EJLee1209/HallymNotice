@@ -110,14 +110,14 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
-        viewModel.backButtonIsHidden
-            .assign(to: \.isHidden, on: self.backButton)
-            .store(in: &cancellables)
-        
         viewModel.guideTitle.zip(viewModel.guideSubTitle)
             .sink { [weak self] (title, subTitle) in
                 self?.guideView.bind(title: title, subTitle: subTitle)
             }.store(in: &cancellables)
+        
+        viewModel.backButtonIsHidden
+            .assign(to: \.isHidden, on: self.backButton)
+            .store(in: &cancellables)
         
         viewModel.stepOneViewIsHidden
             .assign(to: \.isHidden, on: self.stepOneView)
