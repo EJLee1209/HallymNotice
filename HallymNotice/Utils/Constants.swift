@@ -9,6 +9,7 @@ import Foundation
 
 struct Constants {
     
+    //MARK: - String Resource
     static let welcomeTitle1 = "만나서 반가워요."
     static let welcomeSubTitle1 = "\n알림 키워드를 등록하고,\n새로운 공지사항 알림을 받아보세요!"
     static let welcomeAdvice = "1개 이상 선택 필수 (나중에 바꿀 수 있어요!)"
@@ -21,9 +22,13 @@ struct Constants {
     
     static let welcomeNoticePositiveButtonText = "네, 알림 받을래요!"
     static let welcomeNoticeNegativeButtonText = "아니요, 키워드 알림만 받을게요"
-
-    static let keywordCellIdentifier = "keywordCell"
     
+    
+    //MARK: - Cell Identifier
+    static let keywordCellIdentifier = "keywordCell"
+    static let weatherCellIdentifier = "weatherCell"
+    
+    //MARK: - dummy data
     static let defaultKeywords: [Keyword] = [
         Keyword(text: "장학금", isSelected: false),
         Keyword(text: "등록금", isSelected: false),

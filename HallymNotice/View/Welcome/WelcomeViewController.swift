@@ -177,6 +177,3 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         self.view.transform = .identity
     }
 }
-
-
-
