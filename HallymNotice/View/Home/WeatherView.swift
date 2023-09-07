@@ -43,16 +43,15 @@ final class WeatherView: UIView {
     }()
     
     private let blurView: UIVisualEffectView = {
-        let effect = UIBlurEffect(style: .regular)
+        let effect = UIBlurEffect(style: .dark)
         let view = UIVisualEffectView(effect: effect)
         view.addCornerRadius(radius: 12)
-        view.layer.opacity = 0.8
+        view.layer.opacity = 0.4
         return view
     }()
     
     private let localLabel: UILabel = {
         let label = UILabel()
-        label.text = "춘천시 퇴계동"
         label.font = ThemeFont.bold(ofSize: 13)
         label.textColor = .white
         return label
@@ -137,7 +136,19 @@ final class WeatherView: UIView {
     
     func bind(viewModel: HomeViewModel) {
         viewModel.address
-            .assign(to: \.text!, on: self.localLabel)
+            .sink(receiveValue: { [weak self] address in
+                self?.localLabel.text = address
+            })
+            .store(in: &cancellables)
+        
+        viewModel.currentTemp
+            .sink(receiveValue: { [weak self] currentTemp in
+                self?.tempLabel.text = currentTemp
+            })
+            .store(in: &cancellables)
+        
+        viewModel.weatherBackgroundImage
+            .assign(to: \.image, on: weatherImageView)
             .store(in: &cancellables)
     }
     
