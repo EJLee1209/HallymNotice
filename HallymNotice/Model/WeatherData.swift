@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherData: WeatherDataType, Equatable {
+struct WeatherData: Equatable {
     let id: UUID = .init()
     var code: Int?
     var date: Date?

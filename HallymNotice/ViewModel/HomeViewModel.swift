@@ -9,12 +9,44 @@ import Foundation
 import Combine
 import UIKit
 
+enum ForecastSection: CaseIterable {
+    case forecast
+}
+
+typealias ForecastDataSource = UICollectionViewDiffableDataSource<ForecastSection, WeatherData>
+typealias ForecastSnapshot = NSDiffableDataSourceSnapshot<ForecastSection, WeatherData>
+
 final class HomeViewModel {
+    //MARK: - Properties
+    
+    private var dataSource: ForecastDataSource?
     
     let locationProvider: LocationProviderType
     let weatherApi: WeatherApiType
     
     var cancellables: Set<AnyCancellable> = .init()
+    
+    
+    //MARK: - init
+    init(locationProvider: LocationProviderType, weatherApi: WeatherApiType) {
+        self.locationProvider = locationProvider
+        self.weatherApi = weatherApi
+        
+        locationProvider.requestLocation()
+        
+        locationProvider.currentLocation()
+            .sink { [weak self] location in
+                self?.weatherApi.requestWeather(location: location)
+            }.store(in: &cancellables)
+        
+        weatherApi.currentWeather
+            .sink { [weak self] data in
+                guard let currentWeather = data else { return }
+                
+                self?.currentTempSubject.send("\(Int(currentWeather.temperature))°")
+                self?.weatherBackgroundImageName.send(currentWeather.backgroundImageName)
+            }.store(in: &cancellables)
+    }
     
     //MARK: - Output
     
@@ -42,34 +74,23 @@ final class HomeViewModel {
     }
     
     
+    //MARK: - Intput
     
-    init(locationProvider: LocationProviderType, weatherApi: WeatherApiType) {
-        self.locationProvider = locationProvider
-        self.weatherApi = weatherApi
-        
-        locationProvider.requestLocation()
-        
-        locationProvider.currentLocation()
-            .sink { [weak self] location in
-                self?.weatherApi.requestWeather(location: location)
-            }.store(in: &cancellables)
-        
-        weatherApi.currentWeather
-            .sink { [weak self] data in
-                guard let currentWeather = data else { return }
-                
-                self?.currentTempSubject.send("\(Int(currentWeather.temperature))°")
-                self?.weatherBackgroundImageName.send(currentWeather.backgroundImageName)
-            }.store(in: &cancellables)
-        
-        weatherApi.forecastWeather
-            .sink { forecast in
-                print(forecast)
-            }.store(in: &cancellables)
+    
+    //MARK: - DiffableDataSource
+    
+    func setUpDataSource(collectionView: UICollectionView) {
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, forecast in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.forecastCellIdentifier, for: indexPath) as! ForecastCell
+            cell.bind(forecast: forecast)
+            return cell
+        })
     }
     
-    
-    
-    
-    
+    func updateHand(with forecast: [WeatherData]) {
+        var snapshot = ForecastSnapshot() // 스냅샷 생성
+        snapshot.appendSections(ForecastSection.allCases) // 섹션 추가
+        snapshot.appendItems(forecast) // 항목 추가
+        dataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
+    }
 }

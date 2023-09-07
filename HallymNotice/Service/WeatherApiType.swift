@@ -13,8 +13,8 @@ protocol WeatherApiType {
     
     func requestWeather(location: CLLocation)
     
-    var currentWeather: AnyPublisher<WeatherDataType?, Never> { get }
-    var forecastWeather: AnyPublisher<[WeatherDataType], Never> { get }
+    var currentWeather: AnyPublisher<WeatherData?, Never> { get }
+    var forecastWeather: AnyPublisher<[WeatherData], Never> { get }
 }
 
 extension WeatherApiType {

@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import Combine
-import CombineCocoa
+import SDWebImage
 
-final class WeatherCell: UICollectionViewCell {
+final class ForecastCell: UICollectionViewCell {
     
     //MARK: - Properties
     private let hourLabel: UILabel = {
@@ -67,4 +66,13 @@ final class WeatherCell: UICollectionViewCell {
         }
     }
     
+    func bind(forecast: WeatherData) {
+        hourLabel.text = "a hh시".makeFormattedDate(date: forecast.date)
+        tempLabel.text = "\(Int(forecast.temperature))°"
+        
+        let urlStr = "https://openweathermap.org/img/wn/\(forecast.icon)@2x.png"
+        guard let url = URL(string: urlStr) else { return }
+        weatherImageView.sd_setImage(with: url)
+    }
 }
+

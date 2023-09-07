@@ -25,7 +25,6 @@ final class WeatherView: UIView {
         iv.backgroundColor = .gray
         iv.addCornerRadius(radius: 12)
         iv.clipsToBounds = true
-        iv.image = UIImage(named: "bg_cloud")
         return iv
     }()
     
@@ -68,9 +67,10 @@ final class WeatherView: UIView {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
-        cv.register(WeatherCell.self, forCellWithReuseIdentifier: Constants.weatherCellIdentifier)
+        cv.register(ForecastCell.self, forCellWithReuseIdentifier: Constants.forecastCellIdentifier)
         return cv
     }()
     
@@ -150,6 +150,13 @@ final class WeatherView: UIView {
         viewModel.weatherBackgroundImage
             .assign(to: \.image, on: weatherImageView)
             .store(in: &cancellables)
+        
+        viewModel.setUpDataSource(collectionView: collectionView)
+        
+        viewModel.weatherApi.forecastWeather
+            .sink { forecast in
+                viewModel.updateHand(with: forecast)
+            }.store(in: &cancellables)
     }
     
 }

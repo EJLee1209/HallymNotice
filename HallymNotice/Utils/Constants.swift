@@ -31,7 +31,7 @@ struct Constants {
     
     //MARK: - Cell Identifier
     static let keywordCellIdentifier = "keywordCell"
-    static let weatherCellIdentifier = "weatherCell"
+    static let forecastCellIdentifier = "forecastCell"
     
     //MARK: - dummy data
     static let defaultKeywords: [Keyword] = [

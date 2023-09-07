@@ -13,17 +13,17 @@ final class WeatherApi: NetworkServiceType, WeatherApiType {
     
     private var cancellables: Set<AnyCancellable> = .init()
     
-    private let currentWeatherSubject: CurrentValueSubject<WeatherDataType?, Never> = .init(nil)
-    var currentWeather: AnyPublisher<WeatherDataType?, Never> {
+    private let currentWeatherSubject: CurrentValueSubject<WeatherData?, Never> = .init(nil)
+    var currentWeather: AnyPublisher<WeatherData?, Never> {
         return currentWeatherSubject.eraseToAnyPublisher()
     }
     
-    private let forecastWeatherSubject: CurrentValueSubject<[WeatherDataType], Never> = .init([])
-    var forecastWeather: AnyPublisher<[WeatherDataType], Never> {
+    private let forecastWeatherSubject: CurrentValueSubject<[WeatherData], Never> = .init([])
+    var forecastWeather: AnyPublisher<[WeatherData], Never> {
         return forecastWeatherSubject.eraseToAnyPublisher()
     }
     
-    private func fetchCurrentWeather(location: CLLocation) -> AnyPublisher<WeatherDataType?, Never> {
+    private func fetchCurrentWeather(location: CLLocation) -> AnyPublisher<WeatherData?, Never> {
         return composeURL(endPoint: Constants.currentWeatherEndpoint, from: location)
                 .flatMap { self.requestGET(url: $0, decodeType: CurrentWeather.self) }
                 .map{ WeatherData(currentWeather: $0) }
@@ -31,7 +31,7 @@ final class WeatherApi: NetworkServiceType, WeatherApiType {
                 .eraseToAnyPublisher()
     }
     
-    private func fetchForecast(location: CLLocation) -> AnyPublisher<[WeatherDataType], Never> {
+    private func fetchForecast(location: CLLocation) -> AnyPublisher<[WeatherData], Never> {
         composeURL(endPoint: Constants.forecastEndpoint, from: location)
             .flatMap { self.requestGET(url: $0, decodeType: Forecast.self) }
             .map { $0.list.map(WeatherData.init) }

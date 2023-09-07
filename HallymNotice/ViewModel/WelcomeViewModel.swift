@@ -12,12 +12,12 @@ enum WelcomeSection: CaseIterable {
     case keyword
 }
 
-typealias DataSource = UICollectionViewDiffableDataSource<WelcomeSection, Keyword>
-typealias Snapshot = NSDiffableDataSourceSnapshot<WelcomeSection, Keyword>
+typealias KeywordDataSource = UICollectionViewDiffableDataSource<WelcomeSection, Keyword>
+typealias KeywordSnapshot = NSDiffableDataSourceSnapshot<WelcomeSection, Keyword>
 
 final class WelcomeViewModel {
     
-    private var dataSource: DataSource?
+    private var dataSource: KeywordDataSource?
     private var cancellables: Set<AnyCancellable> = .init()
     
     //MARK: - Output
@@ -180,7 +180,7 @@ final class WelcomeViewModel {
     }
     
     func updateHand(with keywords: [Keyword]) {
-        var snapshot = Snapshot() // 스냅샷 생성
+        var snapshot = KeywordSnapshot() // 스냅샷 생성
         snapshot.appendSections(WelcomeSection.allCases) // 섹션 추가
         snapshot.appendItems(keywords) // 항목 추가
         dataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
