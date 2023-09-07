@@ -28,7 +28,9 @@ extension SceneDelegate {
     
     private func makeTabBarController() -> UITabBarController {
         let locationProvider = CoreLocationProvider()
-        let homeVM = HomeViewModel(locationProvider: locationProvider)
+        let weatherApi = WeatherApi()
+        
+        let homeVM = HomeViewModel(locationProvider: locationProvider, weatherApi: weatherApi)
         let homeVC = HomeViewController(viewModel: homeVM)
         let homeNav = makeNav(
             unselectedImage: UIImage(systemName: "house"),

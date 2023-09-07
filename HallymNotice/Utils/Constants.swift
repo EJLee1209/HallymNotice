@@ -44,4 +44,11 @@ struct Constants {
         Keyword(text: "병무청", isSelected: false),
         Keyword(text: "버스", isSelected: false),
     ]
+    
+    //MARK: - apikey
+    static let weatherApiKey = "72c0d23c0a30527d124b3c6a99435bfe"
+    
+    //MARK: - end point
+    static let currentWeatherEndpoint = "https://api.openweathermap.org/data/2.5/weather"
+    static let forecastEndpoint = "https://api.openweathermap.org/data/2.5/forecast"
 }
