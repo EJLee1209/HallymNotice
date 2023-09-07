@@ -26,12 +26,27 @@ class HomeViewController: UIViewController, BaseViewController {
     
     private let weatherView: WeatherView = .init()
     
+    let viewModel: HomeViewModel
+    
+    
+    //MARK: - init
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         layout()
-        presentWelcomeVC()
+        bind()
+//        presentWelcomeVC()
     }
     
     //MARK: - Helpers
@@ -48,7 +63,7 @@ class HomeViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
-        
+        weatherView.bind(viewModel: self.viewModel)
     }
     
     private func presentWelcomeVC() {

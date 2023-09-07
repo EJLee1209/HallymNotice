@@ -33,6 +33,11 @@
 		CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D092AA75B1D00A4A726 /* Keyword.swift */; };
 		CF790D322AA8AC5E003DE5E2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF790D312AA8AC5E003DE5E2 /* MapViewController.swift */; };
 		CF790D352AA8AD08003DE5E2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */; };
+		CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */; };
+		CFC41EE52AA96D28009732C2 /* CoreLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */; };
+		CFC41EE72AA96D7D009732C2 /* CLLocation+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE62AA96D7D009732C2 /* CLLocation+.swift */; };
+		CFC41EE92AA97235009732C2 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE82AA97235009732C2 /* HomeViewModel.swift */; };
+		CFC41EEB2AA9796F009732C2 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */; };
 		CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD5362AA849F800F56444 /* StepThreeView.swift */; };
 		CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */ = {isa = PBXBuildFile; fileRef = CFFAD5382AA84A3300F56444 /* animation_check.json */; };
 		CFFAD53B2AA84F8200F56444 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD53A2AA84F8200F56444 /* User.swift */; };
@@ -65,6 +70,11 @@
 		CF6B2D092AA75B1D00A4A726 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		CF790D312AA8AC5E003DE5E2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProviderType.swift; sourceTree = "<group>"; };
+		CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationProvider.swift; sourceTree = "<group>"; };
+		CFC41EE62AA96D7D009732C2 /* CLLocation+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+.swift"; sourceTree = "<group>"; };
+		CFC41EE82AA97235009732C2 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		CFFAD5362AA849F800F56444 /* StepThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeView.swift; sourceTree = "<group>"; };
 		CFFAD5382AA84A3300F56444 /* animation_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_check.json; sourceTree = "<group>"; };
 		CFFAD53A2AA84F8200F56444 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -116,8 +126,8 @@
 		CF6B2CC92AA6ED6600A4A726 /* HallymNotice */ = {
 			isa = PBXGroup;
 			children = (
-				CF531B122AA81F6900803669 /* animation_notification.json */,
-				CFFAD5382AA84A3300F56444 /* animation_check.json */,
+				CFC41EE12AA96CB1009732C2 /* Resource */,
+				CFC41EE02AA96CA9009732C2 /* Service */,
 				CF6B2CE32AA6EE5700A4A726 /* Model */,
 				CF6B2CE22AA6EE5100A4A726 /* App */,
 				CF6B2CE02AA6EE3600A4A726 /* View */,
@@ -156,6 +166,7 @@
 			children = (
 				CF6B2D092AA75B1D00A4A726 /* Keyword.swift */,
 				CFFAD53A2AA84F8200F56444 /* User.swift */,
+				CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */,
+				CFC41EE82AA97235009732C2 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -182,6 +194,7 @@
 			children = (
 				CF6B2CF52AA724BE00A4A726 /* UIColor+Extension.swift */,
 				CF6B2CF62AA724BE00A4A726 /* UIView+Extension.swift */,
+				CFC41EE62AA96D7D009732C2 /* CLLocation+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -210,6 +223,24 @@
 				CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		CFC41EE02AA96CA9009732C2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */,
+				CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		CFC41EE12AA96CB1009732C2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CF531B122AA81F6900803669 /* animation_notification.json */,
+				CFFAD5382AA84A3300F56444 /* animation_check.json */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		CFFAD5352AA849EC00F56444 /* StepView */ = {
@@ -317,14 +348,19 @@
 				CF6B2CF22AA724A600A4A726 /* ThemeFont.swift in Sources */,
 				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
+				CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
 				CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */,
 				CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */,
 				CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */,
+				CFC41EEB2AA9796F009732C2 /* CurrentWeather.swift in Sources */,
+				CFC41EE92AA97235009732C2 /* HomeViewModel.swift in Sources */,
+				CFC41EE52AA96D28009732C2 /* CoreLocationProvider.swift in Sources */,
 				CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */,
 				CF6B2CF92AA724BE00A4A726 /* UIView+Extension.swift in Sources */,
+				CFC41EE72AA96D7D009732C2 /* CLLocation+.swift in Sources */,
 				CF790D322AA8AC5E003DE5E2 /* MapViewController.swift in Sources */,
 				CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */,
 				CF6B2CFE2AA72B7E00A4A726 /* GuideView.swift in Sources */,
@@ -478,6 +514,8 @@
 				DEVELOPMENT_TEAM = EX6G2VC9J8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HallymNotice/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "더 많은 기능을 제공하기 위해 사용됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "더 많은 기능을 제공하기 위해 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -505,6 +543,8 @@
 				DEVELOPMENT_TEAM = EX6G2VC9J8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HallymNotice/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "더 많은 기능을 제공하기 위해 사용됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "더 많은 기능을 제공하기 위해 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

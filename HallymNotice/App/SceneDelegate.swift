@@ -27,7 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     
     private func makeTabBarController() -> UITabBarController {
-        let homeVC = HomeViewController()
+        let locationProvider = CoreLocationProvider()
+        let homeVM = HomeViewModel(locationProvider: locationProvider)
+        let homeVC = HomeViewController(viewModel: homeVM)
         let homeNav = makeNav(
             unselectedImage: UIImage(systemName: "house"),
             selectedImage: UIImage(systemName: "house.fill"),

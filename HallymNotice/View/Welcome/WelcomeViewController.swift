@@ -11,7 +11,6 @@ import CombineCocoa
 import Lottie
 
 final class WelcomeViewController: UIViewController, BaseViewController {
-    
     //MARK: - Properties
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
@@ -40,8 +39,6 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     }
     
     //MARK: - LifeCycle
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +151,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                     }
                 }
             })
-            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 1))
+            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         backButton.tapPublisher

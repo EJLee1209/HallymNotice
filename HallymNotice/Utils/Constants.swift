@@ -23,6 +23,11 @@ struct Constants {
     static let welcomeNoticePositiveButtonText = "네, 알림 받을래요!"
     static let welcomeNoticeNegativeButtonText = "아니요, 키워드 알림만 받을게요"
     
+    static let homeTitle1 = "오늘의 날씨"
+    static let homeTitle2 = "오늘의 메뉴"
+    static let homeTitle3 = "오늘 올라온 공지사항"
+    
+    
     
     //MARK: - Cell Identifier
     static let keywordCellIdentifier = "keywordCell"

@@ -15,7 +15,7 @@ final class WeatherView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = ThemeFont.bold(ofSize: 16)
-        label.text = "오늘 춘천 날씨"
+        label.text = Constants.homeTitle1
         return label
     }()
     
@@ -91,6 +91,8 @@ final class WeatherView: UIView {
         return sv
     }()
     
+    private var cancellables: Set<AnyCancellable> = .init()
+    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -130,6 +132,13 @@ final class WeatherView: UIView {
             make.edges.equalToSuperview().inset(12)
         }
         
+    }
+    
+    
+    func bind(viewModel: HomeViewModel) {
+        viewModel.address
+            .assign(to: \.text!, on: self.localLabel)
+            .store(in: &cancellables)
     }
     
 }
