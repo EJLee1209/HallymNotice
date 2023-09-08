@@ -71,6 +71,7 @@ final class WeatherView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.register(ForecastCell.self, forCellWithReuseIdentifier: Constants.forecastCellIdentifier)
+        cv.showsHorizontalScrollIndicator = false
         return cv
     }()
     
@@ -95,7 +96,6 @@ final class WeatherView: UIView {
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         layout()
     }
     
@@ -126,11 +126,10 @@ final class WeatherView: UIView {
             make.edges.equalToSuperview()
         }
         
-        weatherImageView.addSubview(contentVStackView)
+        backgroundView.addSubview(contentVStackView)
         contentVStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(12)
         }
-        
     }
     
     
@@ -151,12 +150,11 @@ final class WeatherView: UIView {
             .assign(to: \.image, on: weatherImageView)
             .store(in: &cancellables)
         
-        viewModel.setUpDataSource(collectionView: collectionView)
+        viewModel.setupWeatherDataSource(collectionView: collectionView)
         
-        viewModel.weatherApi.forecastWeather
+        viewModel.forecast
             .sink { forecast in
-                viewModel.updateHand(with: forecast)
+                viewModel.updateWeather(with: forecast)
             }.store(in: &cancellables)
     }
-    
 }

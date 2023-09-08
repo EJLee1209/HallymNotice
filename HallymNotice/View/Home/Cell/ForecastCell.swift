@@ -60,7 +60,7 @@ final class ForecastCell: UICollectionViewCell {
     //MARK: - Helpers
     private func layout() {
         
-        addSubview(vStackView)
+        contentView.addSubview(vStackView)
         vStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

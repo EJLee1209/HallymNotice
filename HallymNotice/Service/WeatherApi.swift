@@ -35,6 +35,16 @@ final class WeatherApi: NetworkServiceType, WeatherApiType {
         composeURL(endPoint: Constants.forecastEndpoint, from: location)
             .flatMap { self.requestGET(url: $0, decodeType: Forecast.self) }
             .map { $0.list.map(WeatherData.init) }
+            .map { forecast in
+                var forecast30Hour = [WeatherData]()
+                
+                if forecast.count > 10 {
+                    for i in 0...10 {
+                        forecast30Hour.append(forecast[i])
+                    }
+                }
+                return forecast30Hour
+            }
             .replaceError(with: [])
             .eraseToAnyPublisher()
     }

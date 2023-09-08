@@ -26,12 +26,17 @@ struct Constants {
     static let homeTitle1 = "오늘의 날씨"
     static let homeTitle2 = "오늘의 메뉴"
     static let homeTitle3 = "오늘 올라온 공지사항"
-    
-    
+
     
     //MARK: - Cell Identifier
     static let keywordCellIdentifier = "keywordCell"
     static let forecastCellIdentifier = "forecastCell"
+    static let weatherCellIdentifier = "weatherCell"
+    static let menuCellIdentifier = "menuCell"
+    static let noticeCellIdentifier = "noticeCell"
+    
+    static let homeHeaderIdentifier = "homeHeader"
+    
     
     //MARK: - dummy data
     static let defaultKeywords: [Keyword] = [
