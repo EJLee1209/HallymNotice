@@ -30,6 +30,7 @@ class HomeViewController: UIViewController, BaseViewController {
         cv.register(NoticeHeaderView.self, forSupplementaryViewOfKind: Constants.noticeHeaderViewKind, withReuseIdentifier: Constants.noticeHeaderIdentifier)
         cv.register(MenuCell.self, forCellWithReuseIdentifier: Constants.menuCellIdentifier)
         cv.register(NoticeCell.self, forCellWithReuseIdentifier: Constants.noticeCellIdentifier)
+        cv.delaysContentTouches = false
         cv.alwaysBounceVertical = true
         cv.showsVerticalScrollIndicator = false
         return cv
