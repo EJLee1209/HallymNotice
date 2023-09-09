@@ -85,7 +85,10 @@ final class HomeViewModel {
     }
     
     //MARK: - Intput
-    
+    private let showAllNoticeButtonTapSubject: PassthroughSubject<Void,Never> = .init()
+    var showAllNoticeButtonTapPublisher: AnyPublisher<Void, Never> {
+        return showAllNoticeButtonTapSubject.eraseToAnyPublisher()
+    }
     
     
     //MARK: - Home CollectionView DiffableDataSource
@@ -105,10 +108,19 @@ final class HomeViewModel {
         
         homeDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
             switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.homeHeaderIdentifier, for: indexPath) as! HomeHeaderView
+            case Constants.menuHeaderViewKind:
+                
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.menuHeaderIdentifier, for: indexPath) as! MenuHeaderView
                 header.bind(viewModel: self)
                 return header
+            case Constants.noticeHeaderViewKind:
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.noticeHeaderIdentifier, for: indexPath) as! NoticeHeaderView
+                header.showAllButtonTappedPublisher
+                    .sink { [weak self] _ in
+                        self?.showAllNoticeButtonTapSubject.send(())
+                    }.store(in: &self.cancellables)
+                return header
+            
             default:
                 return nil
             }

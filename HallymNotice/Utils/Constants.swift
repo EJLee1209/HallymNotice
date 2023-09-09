@@ -35,8 +35,11 @@ struct Constants {
     static let menuCellIdentifier = "menuCell"
     static let noticeCellIdentifier = "noticeCell"
     
-    static let homeHeaderIdentifier = "homeHeader"
+    static let menuHeaderIdentifier = "menuHeader"
+    static let menuHeaderViewKind = "headerViewOfMenu"
     
+    static let noticeHeaderIdentifier = "noticeHeader"
+    static let noticeHeaderViewKind = "headerViewOfnotice"
     
     //MARK: - dummy data
     static let defaultKeywords: [Keyword] = [

@@ -26,7 +26,8 @@ class HomeViewController: UIViewController, BaseViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: self.makeFlowLayout())
-        cv.register(HomeHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Constants.homeHeaderIdentifier)
+        cv.register(MenuHeaderView.self, forSupplementaryViewOfKind: Constants.menuHeaderViewKind, withReuseIdentifier: Constants.menuHeaderIdentifier)
+        cv.register(NoticeHeaderView.self, forSupplementaryViewOfKind: Constants.noticeHeaderViewKind, withReuseIdentifier: Constants.noticeHeaderIdentifier)
         cv.register(MenuCell.self, forCellWithReuseIdentifier: Constants.menuCellIdentifier)
         cv.register(NoticeCell.self, forCellWithReuseIdentifier: Constants.noticeCellIdentifier)
         cv.alwaysBounceVertical = true
@@ -34,7 +35,7 @@ class HomeViewController: UIViewController, BaseViewController {
         return cv
     }()
     
-    
+    private var cancellables: Set<AnyCancellable> = .init()
     let viewModel: HomeViewModel
     
     
@@ -55,7 +56,7 @@ class HomeViewController: UIViewController, BaseViewController {
 
         layout()
         bind()
-        presentWelcomeVC()
+//        presentWelcomeVC()
     }
     
     //MARK: - Helpers
@@ -76,6 +77,11 @@ class HomeViewController: UIViewController, BaseViewController {
         let noticeItem = (1...10).map { HomeSectionItem.notice(String($0)) }
         viewModel.updateHome(with: menuItem, toSection: .menu)
         viewModel.updateHome(with: noticeItem, toSection: .notice)
+        
+        viewModel.showAllNoticeButtonTapPublisher
+            .sink { _ in
+                print("공지사항 전체보기")
+            }.store(in: &cancellables)
     }
     
     private func presentWelcomeVC() {
@@ -133,9 +139,9 @@ extension HomeViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: 28,
+            top: 19,
             leading: 15,
-            bottom: 0,
+            bottom: 28,
             trailing: 15)
         
         // 수평 스크롤 설정
@@ -147,7 +153,7 @@ extension HomeViewController {
             heightDimension: .estimated(200))
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
+            elementKind: Constants.menuHeaderViewKind,
             alignment: .top)
 
         section.boundarySupplementaryItems = [header]
@@ -176,10 +182,20 @@ extension HomeViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: 28,
+            top: 19,
             leading: 15,
             bottom: 15,
             trailing: 15)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(30))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: Constants.noticeHeaderViewKind,
+            alignment: .top)
+        
+        section.boundarySupplementaryItems = [header]
         
         return section
     }

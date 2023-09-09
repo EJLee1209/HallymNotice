@@ -7,10 +7,24 @@
 
 import UIKit
 
-final class HomeHeaderView: UICollectionReusableView {
+final class MenuHeaderView: UICollectionReusableView {
     
     //MARK: - Properties
     private let weatherView: WeatherView = .init()
+    
+    private let menuHeaderLabel: UILabel = {
+        let label = UILabel()
+        label.font = ThemeFont.bold(ofSize: 16)
+        label.text = Constants.homeTitle2
+        return label
+    }()
+    
+    private lazy var vStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [weatherView, menuHeaderLabel])
+        sv.axis = .vertical
+        sv.spacing = 28
+        return sv
+    }()
     
     //MARK: - init
     override init(frame: CGRect) {
@@ -24,8 +38,8 @@ final class HomeHeaderView: UICollectionReusableView {
     
     //MARK: - Helpers
     private func layout() {
-        addSubview(weatherView)
-        weatherView.snp.makeConstraints { make in
+        addSubview(vStackView)
+        vStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
