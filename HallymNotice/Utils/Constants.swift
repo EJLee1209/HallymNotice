@@ -59,4 +59,6 @@ struct Constants {
     //MARK: - end point
     static let currentWeatherEndpoint = "https://api.openweathermap.org/data/2.5/weather"
     static let forecastEndpoint = "https://api.openweathermap.org/data/2.5/forecast"
+    
+    static let hallymEndpoint = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?"
 }

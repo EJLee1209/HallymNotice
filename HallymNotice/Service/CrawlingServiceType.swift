@@ -10,6 +10,6 @@ import Combine
 
 protocol CrawlingServiceType {
     
-    func noticeCrawl(page: Int) -> AnyPublisher<[Notice], Never>
+    func noticeCrawl(page: Int, keyword: String?) -> AnyPublisher<[Notice], Never>
     
 }

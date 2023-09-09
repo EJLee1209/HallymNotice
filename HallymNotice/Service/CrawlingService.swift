@@ -13,10 +13,12 @@ import SwiftSoup
 
 final class CrawlingService: CrawlingServiceType {
     
-    func noticeCrawl(page: Int) -> AnyPublisher<[Notice], Never> {
+    func noticeCrawl(page: Int, keyword: String?) -> AnyPublisher<[Notice], Never> {
         
-        let urlString = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?nttId=0&bbsTyCode=BBST00&bbsAttrbCode=BBSA03&authFlag=N&pageIndex=\(page)&searchType=0&searchWrd="
-        return getHtmlDoucment(url: urlString)
+        let urlString = "\(Constants.hallymEndpoint)&pageIndex=\(page)&searchType=0&searchWrd=\(keyword ?? "")"
+        let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        return getHtmlDoucment(url: encodedStr)
             .flatMap { doc in
                 self.getNotice(doc: doc)
             }

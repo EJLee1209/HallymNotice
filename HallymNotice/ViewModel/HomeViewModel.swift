@@ -58,7 +58,7 @@ final class HomeViewModel {
         self.locationProvider.requestLocation()
         
         // 공지사항 1 페이지 요청, publisher 구독
-        self.crawlingService.noticeCrawl(page: 1)
+        self.crawlingService.noticeCrawl(page: 1, keyword: nil)
             .sink { [weak self] noticeList in
                 let sectionItem = noticeList.map { HomeSectionItem.notice($0) }
                 self?.updateHome(with: sectionItem, toSection: .notice) // notice 섹션 데이터 업데이트

@@ -15,11 +15,25 @@ class NoticeViewController: UIViewController, BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width - 20, height: 100)
-        layout.sectionInset = .init(top: 12, left: 0, bottom: 12, right: 0)
+        layout.sectionInset = .init(top: 12, left: 0, bottom: 100, right: 0)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(NoticeCell.self, forCellWithReuseIdentifier: Constants.noticeCellIdentifier)
         cv.alwaysBounceVertical = true
+        cv.delaysContentTouches = false
         return cv
+    }()
+    
+    private lazy var searchController: UISearchController = {
+        let searchVM = SearchViewModel()
+        let searchVC = SearchViewController(viewModel: searchVM)
+        let controller = UISearchController(searchResultsController: searchVC)
+        controller.searchBar.placeholder = "검색어를 입력해주세요"
+        
+        controller.searchBar.textDidChangePublisher
+            .sink { keyword in
+                searchVM.searchKeyword.send(keyword)
+            }.store(in: &cancellables)
+        return controller
     }()
     
     var cancellables: Set<AnyCancellable> = .init()
@@ -40,14 +54,21 @@ class NoticeViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSearchController()
         layout()
         bind()
-        
     }
     
     
     //MARK: - Helpers
+    private func setupSearchController() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     func layout() {
+        
+        
         view.backgroundColor = .white
         view.addSubview(collectionView)
         
