@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol CrawlingServiceType {
-    var noticePublisher: AnyPublisher<[Notice], Never> { get }
     
-    func noticeCrawl(page: Int)
+    func noticeCrawl(page: Int) -> AnyPublisher<[Notice], Never>
+    
 }

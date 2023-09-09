@@ -29,7 +29,7 @@ final class HomeViewModel {
     private let crawlingService: CrawlingServiceType
     
     var cancellables: Set<AnyCancellable> = .init()
-    private lazy var todayDateString = getTodayDateString()
+    private lazy var todayDateString = Date.todayDateString()
     
     //MARK: - init
     init(locationProvider: LocationProviderType, weatherApi: WeatherApiType, crawlingService: CrawlingServiceType) {
@@ -57,19 +57,13 @@ final class HomeViewModel {
         // 위치 요청
         self.locationProvider.requestLocation()
         
-        // 공지사항 publisher 구독
-        self.crawlingService.noticePublisher
-            .sink{ [weak self] noticeList in
+        // 공지사항 1 페이지 요청, publisher 구독
+        self.crawlingService.noticeCrawl(page: 1)
+            .sink { [weak self] noticeList in
                 let sectionItem = noticeList.map { HomeSectionItem.notice($0) }
                 self?.updateHome(with: sectionItem, toSection: .notice) // notice 섹션 데이터 업데이트
             }.store(in: &cancellables)
         
-        // 공지사항 페이지 publisher 구독
-        self.noticePageSubject
-            .sink { [weak self] page in
-                // 공지사항 크롤링 요청
-                self?.crawlingService.noticeCrawl(page: page)
-            }.store(in: &cancellables)
     }
     
     //MARK: - Output
@@ -104,11 +98,9 @@ final class HomeViewModel {
     }
     
     //MARK: - Intput
-    
-    // 공지사항 페이지 publisher
-    private let noticePageSubject: CurrentValueSubject<Int, Never> = .init(1)
-    lazy var nextPage: () -> Void = {
-        self.noticePageSubject.send(self.noticePageSubject.value + 1)
+    private let showAllNoticeButtonTapSubject: PassthroughSubject<Void, Never> = .init()
+    var showAllNoticeButtonTap: AnyPublisher<Void, Never> {
+        return showAllNoticeButtonTapSubject.eraseToAnyPublisher()
     }
     
     //MARK: - Home CollectionView DiffableDataSource
@@ -135,6 +127,9 @@ final class HomeViewModel {
                 return header
             case Constants.noticeHeaderViewKind:
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.noticeHeaderIdentifier, for: indexPath) as! NoticeHeaderView
+                header.buttonTapped = { [weak self] in
+                    self?.showAllNoticeButtonTapSubject.send(())
+                }
                 return header
             
             default:
@@ -169,13 +164,10 @@ final class HomeViewModel {
     
     
     //MARK: - Helpers
-    func getTodayDateString() -> String {
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-        formatter.dateFormat = "yyyy-MM-dd"
-        
-        return formatter.string(from: now)
+    func makeNoticeViewModel() -> NoticeViewModel {
+        return NoticeViewModel(title: "공지사항", crawlingService: self.crawlingService)
     }
     
 }
+
+

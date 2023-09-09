@@ -13,13 +13,7 @@ import SwiftSoup
 
 final class CrawlingService: CrawlingServiceType {
     
-    private var cancellables = Set<AnyCancellable>()
-    private let noticeSubject: CurrentValueSubject<[Notice], Never> = .init([])
-    var noticePublisher: AnyPublisher<[Notice], Never> {
-        return noticeSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
-    }
-    
-    func noticeCrawl(page: Int) {
+    func noticeCrawl(page: Int) -> AnyPublisher<[Notice], Never> {
         
         let urlString = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?nttId=0&bbsTyCode=BBST00&bbsAttrbCode=BBSA03&authFlag=N&pageIndex=\(page)&searchType=0&searchWrd="
         return getHtmlDoucment(url: urlString)
@@ -27,15 +21,7 @@ final class CrawlingService: CrawlingServiceType {
                 self.getNotice(doc: doc)
             }
             .replaceError(with: [])
-            .sink { completion in
-                print(completion)
-            } receiveValue: { notices in
-                var newNotices = self.noticeSubject.value
-                newNotices.append(contentsOf: notices)
-                newNotices.sort(by: { $0.id > $1.id })
-                
-                self.noticeSubject.send(newNotices)
-            }.store(in: &cancellables)
+            .eraseToAnyPublisher()
     }
     
 }
@@ -56,7 +42,7 @@ extension CrawlingService {
         return Just(doc)
             .tryMap { doc -> [Notice] in
                 let ids = try doc.select("span.col.col-1.tc").map { try $0.text() }
-                var titles = try doc.select("span.col.col-2.dot").select("a").map { try $0.text() }
+                let titles = try doc.select("span.col.col-2.dot").select("a").map { try $0.text() }
                 let links = try doc.select("span.col.col-2.dot").select("a").map { try $0.attr("href") }
                 
                 let writers = try doc.select("span.col.col-3.tc")

@@ -17,6 +17,9 @@
 		CF5CC8B42AAC2A0E008B0E1E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = CF5CC8B32AAC2A0E008B0E1E /* SwiftSoup */; };
 		CF5CC8B62AAC2A25008B0E1E /* CrawlingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */; };
 		CF5CC8B82AAC2DDE008B0E1E /* CrawlingServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */; };
+		CF5CC8BA2AAC6D58008B0E1E /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */; };
+		CF5CC8BC2AAC6D9F008B0E1E /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8BB2AAC6D9F008B0E1E /* NoticeViewModel.swift */; };
+		CF5CC8BE2AAC6ED3008B0E1E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8BD2AAC6ED3008B0E1E /* Date+Extension.swift */; };
 		CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */; };
 		CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */; };
 		CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */; };
@@ -70,6 +73,9 @@
 		CF5CC8B02AAC29E7008B0E1E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlingService.swift; sourceTree = "<group>"; };
 		CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlingServiceType.swift; sourceTree = "<group>"; };
+		CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		CF5CC8BB2AAC6D9F008B0E1E /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
+		CF5CC8BD2AAC6ED3008B0E1E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HallymNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 			children = (
 				CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */,
 				CFC41EE82AA97235009732C2 /* HomeViewModel.swift */,
+				CF5CC8BB2AAC6D9F008B0E1E /* NoticeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -243,6 +250,7 @@
 				CF6B2CF62AA724BE00A4A726 /* UIView+Extension.swift */,
 				CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */,
 				CFC41EFB2AA9942E009732C2 /* String+Extension.swift */,
+				CF5CC8BD2AAC6ED3008B0E1E /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -328,6 +336,7 @@
 		CFFAD53C2AA850DF00F56444 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */,
 				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
 				CFFAD53D2AA8510B00F56444 /* WeatherView.swift */,
 				CF5CC8AD2AAC21DD008B0E1E /* Header */,
@@ -447,9 +456,11 @@
 				CFC41EFC2AA9942E009732C2 /* String+Extension.swift in Sources */,
 				CFC41EE92AA97235009732C2 /* HomeViewModel.swift in Sources */,
 				CFC41EE52AA96D28009732C2 /* CoreLocationProvider.swift in Sources */,
+				CF5CC8BC2AAC6D9F008B0E1E /* NoticeViewModel.swift in Sources */,
 				CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */,
 				CF6B2CF92AA724BE00A4A726 /* UIView+Extension.swift in Sources */,
 				CFC41EE72AA96D7D009732C2 /* CLLocation+Extension.swift in Sources */,
+				CF5CC8BE2AAC6ED3008B0E1E /* Date+Extension.swift in Sources */,
 				CFC41EF52AA97D08009732C2 /* NetworkServiceType.swift in Sources */,
 				CF790D322AA8AC5E003DE5E2 /* MapViewController.swift in Sources */,
 				CFC41EED2AA979E6009732C2 /* WeatherApiType.swift in Sources */,
@@ -460,6 +471,7 @@
 				CFFAD53E2AA8510B00F56444 /* WeatherView.swift in Sources */,
 				CF531B182AA825E100803669 /* StepTwoView.swift in Sources */,
 				CF5CC8B12AAC29E7008B0E1E /* Notice.swift in Sources */,
+				CF5CC8BA2AAC6D58008B0E1E /* NoticeViewController.swift in Sources */,
 				CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */,
 				CF6B2CF82AA724BE00A4A726 /* UIColor+Extension.swift in Sources */,
 				CFFAD53B2AA84F8200F56444 /* User.swift in Sources */,

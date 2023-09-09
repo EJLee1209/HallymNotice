@@ -69,6 +69,7 @@ class HomeViewController: UIViewController, BaseViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        
     }
     
     func bind() {
@@ -76,6 +77,10 @@ class HomeViewController: UIViewController, BaseViewController {
         
         let menuItem = (1...10).map { HomeSectionItem.menu(String($0)) }
         viewModel.updateHome(with: menuItem, toSection: .menu)
+        viewModel.showAllNoticeButtonTap
+            .sink { [weak self] _ in
+                self?.showAllNotice()
+            }.store(in: &cancellables)
 
     }
     
@@ -84,6 +89,12 @@ class HomeViewController: UIViewController, BaseViewController {
         let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
         welcomeVC.modalPresentationStyle = .fullScreen
         present(welcomeVC, animated: true)
+    }
+    
+    private func showAllNotice() {
+        let noticeVM = viewModel.makeNoticeViewModel()
+        let noticeVC = NoticeViewController(viewModel: noticeVM)
+        navigationController?.pushViewController(noticeVC, animated: true)
     }
     
     

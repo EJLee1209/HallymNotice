@@ -17,13 +17,29 @@ final class NoticeHeaderView: UICollectionReusableView {
         return label
     }()
     
+    private lazy var showAllButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("전체 보기 >", for: .normal)
+        button.tintColor = ThemeColor.primary
+        button.titleLabel?.font = ThemeFont.bold(ofSize: 14)
+        button.addTarget(self, action: #selector(handleButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    private lazy var hStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [headerLabel, showAllButton])
+        sv.axis = .horizontal
+        sv.spacing = 12
+        return sv
+    }()
+    
+    var buttonTapped: () -> Void = {}
     
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -32,9 +48,15 @@ final class NoticeHeaderView: UICollectionReusableView {
     
     //MARK: - Helpers
     private func layout() {
-        addSubview(headerLabel)
-        headerLabel.snp.makeConstraints { make in
+        addSubview(hStackView)
+        hStackView.snp.makeConstraints { make in
             make.left.top.bottom.equalToSuperview()
         }
+    }
+    
+    
+    //MARK: - Actions
+    @objc private func handleButtonTapped() {
+        buttonTapped()
     }
 }
