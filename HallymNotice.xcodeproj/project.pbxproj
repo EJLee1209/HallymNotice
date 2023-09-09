@@ -13,6 +13,10 @@
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
 		CF531B182AA825E100803669 /* StepTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B172AA825E100803669 /* StepTwoView.swift */; };
 		CF5CC8AF2AAC2203008B0E1E /* NoticeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8AE2AAC2203008B0E1E /* NoticeHeaderView.swift */; };
+		CF5CC8B12AAC29E7008B0E1E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B02AAC29E7008B0E1E /* Notice.swift */; };
+		CF5CC8B42AAC2A0E008B0E1E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = CF5CC8B32AAC2A0E008B0E1E /* SwiftSoup */; };
+		CF5CC8B62AAC2A25008B0E1E /* CrawlingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */; };
+		CF5CC8B82AAC2DDE008B0E1E /* CrawlingServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */; };
 		CF6B2CCB2AA6ED6600A4A726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */; };
 		CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */; };
 		CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */; };
@@ -63,6 +67,9 @@
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
 		CF5CC8AE2AAC2203008B0E1E /* NoticeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeHeaderView.swift; sourceTree = "<group>"; };
+		CF5CC8B02AAC29E7008B0E1E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlingService.swift; sourceTree = "<group>"; };
+		CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlingServiceType.swift; sourceTree = "<group>"; };
 		CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HallymNotice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6B2CCA2AA6ED6600A4A726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6B2CCC2AA6ED6600A4A726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 				CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */,
 				CFC41EFA2AA99067009732C2 /* SDWebImage in Frameworks */,
 				CF531B112AA81E2A00803669 /* Lottie in Frameworks */,
+				CF5CC8B42AAC2A0E008B0E1E /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +213,7 @@
 				CF6B2D092AA75B1D00A4A726 /* Keyword.swift */,
 				CFFAD53A2AA84F8200F56444 /* User.swift */,
 				CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */,
+				CF5CC8B02AAC29E7008B0E1E /* Notice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +281,8 @@
 				CFC41EEC2AA979E6009732C2 /* WeatherApiType.swift */,
 				CFC41EF42AA97D08009732C2 /* NetworkServiceType.swift */,
 				CFC41EF62AA97E1E009732C2 /* WeatherApi.swift */,
+				CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */,
+				CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -346,6 +357,7 @@
 				CF6B2CED2AA7245D00A4A726 /* CombineCocoa */,
 				CF531B102AA81E2A00803669 /* Lottie */,
 				CFC41EF92AA99067009732C2 /* SDWebImage */,
+				CF5CC8B32AAC2A0E008B0E1E /* SwiftSoup */,
 			);
 			productName = HallymNotice;
 			productReference = CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */;
@@ -380,6 +392,7 @@
 				CF6B2CEC2AA7245D00A4A726 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				CFC41EF82AA99067009732C2 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				CF5CC8B22AAC2A0E008B0E1E /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = CF6B2CC82AA6ED6600A4A726 /* Products */;
 			projectDirPath = "";
@@ -411,6 +424,7 @@
 			files = (
 				CF6B2CF22AA724A600A4A726 /* ThemeFont.swift in Sources */,
 				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
+				CF5CC8B62AAC2A25008B0E1E /* CrawlingService.swift in Sources */,
 				CFE317572AAB22EE000C7D27 /* MenuCell.swift in Sources */,
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
 				CFE317592AAB2343000C7D27 /* NoticeCell.swift in Sources */,
@@ -418,6 +432,7 @@
 				CFC41EF12AA97A44009732C2 /* Forecast.swift in Sources */,
 				CFC41EF22AA97A44009732C2 /* WeatherData.swift in Sources */,
 				CFE3175B2AAB2554000C7D27 /* HomeSection.swift in Sources */,
+				CF5CC8B82AAC2DDE008B0E1E /* CrawlingServiceType.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
@@ -444,6 +459,7 @@
 				CF6B2CF32AA724A600A4A726 /* ThemeColor.swift in Sources */,
 				CFFAD53E2AA8510B00F56444 /* WeatherView.swift in Sources */,
 				CF531B182AA825E100803669 /* StepTwoView.swift in Sources */,
+				CF5CC8B12AAC29E7008B0E1E /* Notice.swift in Sources */,
 				CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */,
 				CF6B2CF82AA724BE00A4A726 /* UIColor+Extension.swift in Sources */,
 				CFFAD53B2AA84F8200F56444 /* User.swift in Sources */,
@@ -670,6 +686,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		CF5CC8B22AAC2A0E008B0E1E /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CF6B2CE92AA7244800A4A726 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -701,6 +725,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		CF5CC8B32AAC2A0E008B0E1E /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF5CC8B22AAC2A0E008B0E1E /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		CF6B2CEA2AA7244800A4A726 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

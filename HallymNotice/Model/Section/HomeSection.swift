@@ -15,7 +15,7 @@ enum HomeSection: Hashable, CaseIterable {
 
 enum HomeSectionItem: Hashable {
     case menu(String)
-    case notice(String)
+    case notice(Notice)
 }
 
 typealias HomeDataSource = UICollectionViewDiffableDataSource<HomeSection, HomeSectionItem>

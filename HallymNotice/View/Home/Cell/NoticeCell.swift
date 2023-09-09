@@ -11,12 +11,55 @@ final class NoticeCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    private let label: UILabel = {
+    private let contentBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.addCornerRadius(radius: 12)
+        view.addShadow(
+            offset: CGSize(width: 1, height: 1),
+            color: .gray,
+            shadowRadius: 2,
+            opacity: 0.7,
+            cornerRadius: 12
+        )
+        return view
+    }()
+    
+    private let titlelabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
-        label.font = ThemeFont.bold(ofSize: 20)
+        label.font = ThemeFont.bold(ofSize: 16)
+        label.numberOfLines = 2
         return label
     }()
+    
+    private let writerLabel: UILabel = {
+        let label = UILabel()
+        label.font = ThemeFont.regular(ofSize: 13)
+        label.textColor = ThemeColor.gray
+        return label
+    }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = ThemeFont.regular(ofSize: 13)
+        label.textColor = ThemeColor.gray
+        return label
+    }()
+    
+    private lazy var hStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [writerLabel, dateLabel])
+        sv.axis = .horizontal
+        sv.distribution = .equalSpacing
+        return sv
+    }()
+    
+    private lazy var vStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [titlelabel, hStackView])
+        sv.axis = .vertical
+        sv.spacing = 5
+        return sv
+    }()
+    
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -32,16 +75,35 @@ final class NoticeCell: UICollectionViewCell {
     
     //MARK: - Helpers
     private func layout() {
-        
-        backgroundColor = .systemBlue
-        contentView.addSubview(label)
-        label.snp.makeConstraints { make in
+        contentView.addSubview(contentBackgroundView)
+        contentBackgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
+        contentBackgroundView.addSubview(vStackView)
+        vStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
     }
     
-    func bind(text: String) {
-        label.text = text
+    func bind(date: String, notice: Notice) {
+        titlelabel.text = notice.title
+        writerLabel.text = notice.writer
+        
+        if date == notice.publishDate {
+            let text = NSMutableAttributedString(
+                string: "NEW  \(notice.publishDate)"
+            )
+            text.addAttributes(
+                [
+                    .foregroundColor: UIColor.systemRed,
+                    .font: ThemeFont.demiBold(ofSize: 9)
+                ],
+                range: NSMakeRange(0, 3))
+            dateLabel.attributedText = text
+        } else {
+            dateLabel.text = notice.publishDate
+        }
+        
     }
 }

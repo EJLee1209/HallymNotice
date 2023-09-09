@@ -26,31 +26,50 @@ final class HomeViewModel {
     // Service
     private let locationProvider: LocationProviderType
     private let weatherApi: WeatherApiType
+    private let crawlingService: CrawlingServiceType
     
     var cancellables: Set<AnyCancellable> = .init()
-    
+    private lazy var todayDateString = getTodayDateString()
     
     //MARK: - init
-    init(locationProvider: LocationProviderType, weatherApi: WeatherApiType) {
+    init(locationProvider: LocationProviderType, weatherApi: WeatherApiType, crawlingService: CrawlingServiceType) {
+        // 의존성 주입
         self.locationProvider = locationProvider
         self.weatherApi = weatherApi
+        self.crawlingService = crawlingService
         
-        locationProvider.requestLocation()
-        
-        locationProvider.currentLocation()
-            .sink { [weak self] location in
-                self?.weatherApi.requestWeather(location: location) // 날씨 요청
-            }.store(in: &cancellables)
-        
-        weatherApi.currentWeather
+        // 현재 날씨 publisher 구독
+        self.weatherApi.currentWeather
             .sink { [weak self] data in
                 guard let currentWeather = data else { return }
                 
+                // 현재 온도, 배경 이미지 데이터를 subject로 전달
                 self?.currentTempSubject.send("\(Int(currentWeather.temperature))°")
                 self?.weatherBackgroundImageName.send(currentWeather.backgroundImageName)
             }.store(in: &cancellables)
         
+        // 현재 위치 publisher 구독
+        self.locationProvider.currentLocation()
+            .sink { [weak self] location in
+                self?.weatherApi.requestWeather(location: location) // 위치 기반으로 날씨 데이터 요청
+            }.store(in: &cancellables)
         
+        // 위치 요청
+        self.locationProvider.requestLocation()
+        
+        // 공지사항 publisher 구독
+        self.crawlingService.noticePublisher
+            .sink{ [weak self] noticeList in
+                let sectionItem = noticeList.map { HomeSectionItem.notice($0) }
+                self?.updateHome(with: sectionItem, toSection: .notice) // notice 섹션 데이터 업데이트
+            }.store(in: &cancellables)
+        
+        // 공지사항 페이지 publisher 구독
+        self.noticePageSubject
+            .sink { [weak self] page in
+                // 공지사항 크롤링 요청
+                self?.crawlingService.noticeCrawl(page: page)
+            }.store(in: &cancellables)
     }
     
     //MARK: - Output
@@ -85,11 +104,12 @@ final class HomeViewModel {
     }
     
     //MARK: - Intput
-    private let showAllNoticeButtonTapSubject: PassthroughSubject<Void,Never> = .init()
-    var showAllNoticeButtonTapPublisher: AnyPublisher<Void, Never> {
-        return showAllNoticeButtonTapSubject.eraseToAnyPublisher()
-    }
     
+    // 공지사항 페이지 publisher
+    private let noticePageSubject: CurrentValueSubject<Int, Never> = .init(1)
+    lazy var nextPage: () -> Void = {
+        self.noticePageSubject.send(self.noticePageSubject.value + 1)
+    }
     
     //MARK: - Home CollectionView DiffableDataSource
     func setupHomeDataSource(collectionView: UICollectionView) {
@@ -99,9 +119,9 @@ final class HomeViewModel {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.menuCellIdentifier, for: indexPath) as! MenuCell
                 cell.bind(text: value)
                 return cell
-            case .notice(let value):
+            case .notice(let notice):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noticeCellIdentifier, for: indexPath) as! NoticeCell
-                cell.bind(text: value)
+                cell.bind(date: self.todayDateString, notice: notice)
                 return cell
             }
         })
@@ -115,10 +135,6 @@ final class HomeViewModel {
                 return header
             case Constants.noticeHeaderViewKind:
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.noticeHeaderIdentifier, for: indexPath) as! NoticeHeaderView
-                header.showAllButtonTappedPublisher
-                    .sink { [weak self] _ in
-                        self?.showAllNoticeButtonTapSubject.send(())
-                    }.store(in: &self.cancellables)
                 return header
             
             default:
@@ -150,4 +166,16 @@ final class HomeViewModel {
         snapshot.appendItems(forecast) // 항목 추가
         weatherDataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
     }
+    
+    
+    //MARK: - Helpers
+    func getTodayDateString() -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter.string(from: now)
+    }
+    
 }

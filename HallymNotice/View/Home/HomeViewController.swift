@@ -53,7 +53,7 @@ class HomeViewController: UIViewController, BaseViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         layout()
         bind()
 //        presentWelcomeVC()
@@ -74,14 +74,8 @@ class HomeViewController: UIViewController, BaseViewController {
         viewModel.setupHomeDataSource(collectionView: self.collectionView)
         
         let menuItem = (1...10).map { HomeSectionItem.menu(String($0)) }
-        let noticeItem = (1...10).map { HomeSectionItem.notice(String($0)) }
         viewModel.updateHome(with: menuItem, toSection: .menu)
-        viewModel.updateHome(with: noticeItem, toSection: .notice)
-        
-        viewModel.showAllNoticeButtonTapPublisher
-            .sink { _ in
-                print("공지사항 전체보기")
-            }.store(in: &cancellables)
+
     }
     
     private func presentWelcomeVC() {
@@ -145,7 +139,7 @@ extension HomeViewController {
             trailing: 15)
         
         // 수평 스크롤 설정
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         
         // header
         let headerSize = NSCollectionLayoutSize(
@@ -176,7 +170,7 @@ extension HomeViewController {
         // group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(70))
+            heightDimension: .estimated(100))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // Section

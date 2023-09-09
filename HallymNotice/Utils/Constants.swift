@@ -25,7 +25,7 @@ struct Constants {
     
     static let homeTitle1 = "오늘의 날씨"
     static let homeTitle2 = "오늘의 메뉴"
-    static let homeTitle3 = "오늘 올라온 공지사항"
+    static let homeTitle3 = "학교 공지사항"
 
     
     //MARK: - Cell Identifier
