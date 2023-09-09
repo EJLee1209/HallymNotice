@@ -77,7 +77,7 @@ final class StepTwoView: UIView {
         }
         
         lottieAnimationView.snp.makeConstraints { make in
-            make.height.equalTo(lottieAnimationView.snp.width)
+            make.height.equalTo(lottieAnimationView.snp.width).dividedBy(1.5)
         }
         
         

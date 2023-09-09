@@ -55,7 +55,7 @@ class HomeViewController: UIViewController, BaseViewController {
 
         layout()
         bind()
-//        presentWelcomeVC()
+        presentWelcomeVC()
     }
     
     //MARK: - Helpers

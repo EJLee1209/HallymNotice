@@ -45,6 +45,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         
         layout()
         bind()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,28 +62,26 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     func layout() {
         view.backgroundColor = .white
         
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(18)
-        }
-        
         view.addSubview(guideView)
         guideView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.left.right.equalToSuperview().inset(18)
         }
         
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(18)
+        }
+        
         layoutStepOne()
         layoutStepTwo()
         layoutStepThree()
-        
-        stepTwoView.isHidden = true
     }
     
     func layoutStepOne() {
         view.addSubview(stepOneView)
         stepOneView.snp.makeConstraints { make in
-            make.top.equalTo(guideView.snp.bottom).offset(66)
+            make.top.equalTo(guideView.snp.bottom).offset(30)
             make.left.right.equalToSuperview().inset(18)
             make.bottom.equalTo(view).offset(-50)
         }
