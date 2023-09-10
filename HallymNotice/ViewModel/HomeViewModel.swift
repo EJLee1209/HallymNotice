@@ -172,8 +172,14 @@ final class HomeViewModel {
         return NoticeViewModel(title: "공지사항", crawlingService: self.crawlingService)
     }
     
-    func selectedNoticeItem(index: Int) -> Notice {
-        return self.noticeList.value[index]
+    func selectedSectionItem(section: Int, index: Int) -> HomeSectionItem {
+        switch HomeSection.allCases[section] {
+        case .menu:
+            return HomeSectionItem.menu("")
+        case .notice:
+            return HomeSectionItem.notice(self.noticeList.value[index])
+        }
+        
     }
 }
 

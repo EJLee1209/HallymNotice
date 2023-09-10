@@ -84,9 +84,14 @@ class HomeViewController: UIViewController, BaseViewController {
         
         collectionView.didSelectItemPublisher
             .compactMap { [weak self] indexPath in
-                self?.viewModel.selectedNoticeItem(index: indexPath.row)
+                self?.viewModel.selectedSectionItem(section: indexPath.section, index: indexPath.row)
             }.sink{ [weak self] notice in
-                self?.loadWebView(urlString: notice.detailLink)
+                switch notice {
+                case .menu(let menu):
+                    print(menu)
+                case .notice(let notice):
+                    self?.loadWebView(urlString: notice.detailLink)
+                }
             }
             .store(in: &cancellables)
 
