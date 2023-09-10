@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CF0F8C2C2AA8845E001466CD /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */; };
 		CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61ED2AAD82F100759248 /* LoadingView.swift */; };
+		CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C61F02AADB50C00759248 /* WebKit.framework */; };
+		CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F22AADB52300759248 /* WebViewController.swift */; };
 		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
 		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
@@ -70,6 +72,8 @@
 /* Begin PBXFileReference section */
 		CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		CF1C61ED2AAD82F100759248 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CF1C61F02AADB50C00759248 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		CF1C61F22AADB52300759248 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */,
 				CF6B2CEE2AA7245D00A4A726 /* CombineCocoa in Frameworks */,
 				CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */,
 				CFC41EFA2AA99067009732C2 /* SDWebImage in Frameworks */,
@@ -141,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF1C61EF2AADB50C00759248 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF1C61F02AADB50C00759248 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF531B162AA8213000803669 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +180,7 @@
 			children = (
 				CF6B2CC92AA6ED6600A4A726 /* HallymNotice */,
 				CF6B2CC82AA6ED6600A4A726 /* Products */,
+				CF1C61EF2AADB50C00759248 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -347,6 +361,7 @@
 				CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */,
 				CF5CC8BF2AACCC77008B0E1E /* SearchViewController.swift */,
 				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
+				CF1C61F22AADB52300759248 /* WebViewController.swift */,
 				CFFAD53D2AA8510B00F56444 /* WeatherView.swift */,
 				CF5CC8AD2AAC21DD008B0E1E /* Header */,
 				CFE317552AAB2239000C7D27 /* Cell */,
@@ -453,6 +468,7 @@
 				CFE3175B2AAB2554000C7D27 /* HomeSection.swift in Sources */,
 				CF5CC8B82AAC2DDE008B0E1E /* CrawlingServiceType.swift in Sources */,
 				CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */,
+				CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,

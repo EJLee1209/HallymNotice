@@ -30,9 +30,6 @@ final class NoticeViewModel {
     // 공지사항 리스트
     private let noticeListSubject: CurrentValueSubject<[Notice], Never> = .init([])
     
-    // 검색 리스트
-    private let searchListSubject: CurrentValueSubject<[Notice], Never> = .init([])
-    
     // 로딩 상태
     let isLoading: CurrentValueSubject<Bool, Never> = .init(false)
     
@@ -89,6 +86,7 @@ final class NoticeViewModel {
     
     private func getNextPage(_ page: Int) {
         self.isLoading.send(true)
+        
         self.crawlingService.noticeCrawl(page: page, keyword: nil)
             .sink(receiveValue: { noticeList in
                 var newNotices = self.noticeListSubject.value
@@ -103,5 +101,8 @@ final class NoticeViewModel {
         return SearchViewModel(crawlingService: self.crawlingService)
     }
     
+    func selectedNoticeItem(index: Int) -> Notice {
+        return self.noticeListSubject.value[index]
+    }
     
 }

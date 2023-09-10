@@ -24,14 +24,15 @@ final class SearchViewModel {
     init(crawlingService: CrawlingServiceType) {
         self.crawlingService = crawlingService
         
-        searchList
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] list in
-                self?.updateNotice(with: list)
-            }.store(in: &cancellables)
-        
-        searchKeyword
-            .throttle(for: .seconds(2), scheduler: DispatchQueue.global(), latest: true)
+        searchButtonTap
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.searchResultTextIsHidden.send(false)
+                self?.guideLabelIsHidden.send(true)
+                self?.guideLabelText.send(Constants.searchGuide)
+            })
+            .map { [weak self] _ in
+                self?.searchKeyword.value ?? ""
+            }
             .flatMap { [weak self] keyword in
                 self?.getSearchList(keyword: keyword) ?? Just([]).eraseToAnyPublisher()
             }
@@ -39,15 +40,40 @@ final class SearchViewModel {
                 self?.searchList.send(searchList)
             }.store(in: &cancellables)
         
-        page.sink { [weak self] page in
-            self?.getNextPage(page: page)
-        }.store(in: &cancellables)
+        cancelButtonTap
+            .sink { [weak self] _ in
+                self?.searchResultTextIsHidden.send(true)
+                self?.guideLabelIsHidden.send(false)
+                self?.guideLabelText.send(Constants.searchGuide)
+                self?.updateNotice(with: [])
+                self?.page.send(1)
+            }.store(in: &cancellables)
+        
+        searchList
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] list in
+                if list.isEmpty { // 검색 결과 없음
+                    self?.guideLabelText.send(Constants.searchResultIsEmpty)
+                    self?.guideLabelIsHidden.send(false)
+                }
+                self?.updateNotice(with: list)
+            }.store(in: &cancellables)
+        
+        page.dropFirst()
+            .sink { [weak self] page in
+                self?.getNextPage(page: page)
+            }.store(in: &cancellables)
     }
     
     //MARK: - Intput
     
     // 검색어
     let searchKeyword: CurrentValueSubject<String, Never> = .init("")
+    // 검색 버튼 탭
+    let searchButtonTap: PassthroughSubject<Void, Never> = .init()
+    // 취소 버튼 탭
+    let cancelButtonTap: PassthroughSubject<Void, Never> = .init()
     
     // 페이지
     private let page: CurrentValueSubject<Int, Never> = .init(1)
@@ -61,6 +87,15 @@ final class SearchViewModel {
     
     // 로딩 상태
     let isLoading: CurrentValueSubject<Bool, Never> = .init(false)
+    
+    // 검색 결과 텍스트 isHidden
+    let searchResultTextIsHidden: CurrentValueSubject<Bool, Never> = .init(true)
+    
+    // 검색 안내 text
+    let guideLabelText: CurrentValueSubject<String, Never> = .init(Constants.searchGuide)
+    
+    // 검색 안내 label isHidden
+    let guideLabelIsHidden: CurrentValueSubject<Bool, Never> = .init(false)
     
     //MARK: - Diffable DataSource
     func setupDataSource(collectionView: UICollectionView) {
@@ -82,7 +117,6 @@ final class SearchViewModel {
     
     //MARK: - Helpers
     private func getSearchList(keyword: String) -> AnyPublisher<[Notice], Never> {
-        searchList.send([])
         page.send(1)
         isLoading.send(true)
         return self.crawlingService.noticeCrawl(page: 1, keyword: keyword)

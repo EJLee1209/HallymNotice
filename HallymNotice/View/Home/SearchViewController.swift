@@ -18,10 +18,11 @@ class SearchViewController: UIViewController, BaseViewController {
         return label
     }()
     
-    private let loadingView: UIActivityIndicatorView = {
+    private lazy var loadingView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.color = ThemeColor.primary
         view.hidesWhenStopped = true
+        view.isHidden = true
         return view
     }()
     
@@ -51,6 +52,18 @@ class SearchViewController: UIViewController, BaseViewController {
         sv.distribution = .fill
         return sv
     }()
+    
+    private let guideLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constants.searchGuide
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.textColor = ThemeColor.primary
+        label.font = ThemeFont.demiBold(ofSize: 18)
+        return label
+    }()
+    
+    
     var cancellables: Set<AnyCancellable> = .init()
     let viewModel: SearchViewModel
     
@@ -80,39 +93,57 @@ class SearchViewController: UIViewController, BaseViewController {
         }
         
         keywordLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(18)
+            make.left.equalToSuperview().offset(18)
+            make.right.equalToSuperview().offset(-18)
         }
         
         collectionView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
         }
         
+        view.addSubview(guideLabel)
+        guideLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
+            make.centerX.equalToSuperview()
+        }
     }
     
     func bind() {
-        viewModel.searchKeyword
-            .map { "\"\($0)\" 검색 결과" }
-            .sink { text in
-                print(text)
-                self.keywordLabel.text = text
-            }.store(in: &cancellables)
-        
         viewModel.setupDataSource(collectionView: collectionView)
-        
         collectionView.reachedBottomPublisher()
             .sink { [weak self] _ in
                 self?.viewModel.nextPage()
             }.store(in: &cancellables)
         
+        viewModel.searchButtonTap
+            .compactMap { [weak self] _ in
+                self?.viewModel.searchKeyword.value
+            }.map { "\"\($0)\" 검색 결과" }
+            .sink { [weak self] text in
+                self?.keywordLabel.text = text
+            }.store(in: &cancellables)
+        
         viewModel.isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
-                print(isLoading)
                 self?.loadingView.isHidden = !isLoading
-                if !isLoading {
+                if isLoading {
                     self?.loadingView.startAnimating()
                 }
             }
+            .store(in: &cancellables)
+        
+        viewModel.searchResultTextIsHidden
+            .assign(to: \.isHidden, on: self.keywordLabel)
+            .store(in: &cancellables)
+        
+        viewModel.guideLabelText
+            .sink { [weak self] text in
+                self?.guideLabel.text = text
+            }.store(in: &cancellables)
+        
+        viewModel.guideLabelIsHidden
+            .assign(to: \.isHidden, on: self.guideLabel)
             .store(in: &cancellables)
     }
 }

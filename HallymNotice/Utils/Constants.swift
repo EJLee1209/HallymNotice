@@ -26,6 +26,9 @@ struct Constants {
     static let homeTitle1 = "오늘의 날씨"
     static let homeTitle2 = "오늘의 메뉴"
     static let homeTitle3 = "최근 학교 공지사항"
+    
+    static let searchGuide = "검색어를 입력하고\n검색 버튼을 눌러주세요"
+    static let searchResultIsEmpty = "검색 결과가 없습니다"
 
     
     //MARK: - Cell Identifier

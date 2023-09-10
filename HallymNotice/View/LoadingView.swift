@@ -86,30 +86,54 @@ final class LoadingView: UIView {
     func showLoadingViewAndStartAnimation() {
         isHidden = false
         
-        let opacityKeyframe = makeOpacityKeyFrame()
-        oneDotView.layer.add(opacityKeyframe, forKey: "oneDotAnim")
+        makeOpacityKeyFrame(targetView: self.oneDotView)
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { [weak self] in
-            self?.twoDotView.layer.add(opacityKeyframe, forKey: "twoDotAnim")
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.35) { [weak self] in
+            self?.makeOpacityKeyFrame(targetView: self?.twoDotView)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) { [weak self] in
-            self?.threeDotView.layer.add(opacityKeyframe, forKey: "threeDotAnim")
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.7) { [weak self] in
+            self?.makeOpacityKeyFrame(targetView: self?.threeDotView)
         }
     }
     
     func hideLoadingViewAndStopAnimation() {
         self.isHidden = true
-        
         [oneDotView, twoDotView, threeDotView].forEach { $0.layer.removeAllAnimations() }
     }
     
-    private func makeOpacityKeyFrame() -> CAKeyframeAnimation {
-        let opacityKeyframe = CAKeyframeAnimation(keyPath: "opacity")
-        opacityKeyframe.values = [0.3, 1.0, 0.3]
-        opacityKeyframe.keyTimes = [0, 0.5, 1]
-        opacityKeyframe.duration = 1.5
-        opacityKeyframe.repeatCount = .infinity
-        return opacityKeyframe
+    private func makeOpacityKeyFrame(targetView: UIView?) {
+        UIView.animateKeyframes(
+            withDuration: 1,
+            delay: 0,
+            options: .repeat,
+            animations: {
+                UIView.addKeyframe(
+                  withRelativeStartTime: 0,
+                  relativeDuration: 1 / 2,
+                  animations: { targetView?.transform = CGAffineTransform(scaleX: 0.5, y: 0.5) }
+                )
+                
+                UIView.addKeyframe(
+                  withRelativeStartTime: 1 / 2,
+                  relativeDuration: 1 / 2,
+                  animations: { targetView?.transform = .identity }
+                )
+                
+                UIView.addKeyframe(
+                  withRelativeStartTime: 0,
+                  relativeDuration: 1 / 2,
+                  animations: { targetView?.alpha = 0 }
+                )
+                
+                UIView.addKeyframe(
+                  withRelativeStartTime: 1 / 2,
+                  relativeDuration: 1 / 2,
+                  animations: { targetView?.alpha = 1 }
+                )
+              },
+              completion: nil
+        )
+        
     }
 }

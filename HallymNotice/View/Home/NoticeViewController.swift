@@ -33,6 +33,17 @@ class NoticeViewController: UIViewController, BaseViewController {
             .sink { keyword in
                 searchVM.searchKeyword.send(keyword)
             }.store(in: &cancellables)
+        
+        controller.searchBar.searchButtonClickedPublisher
+            .sink { _ in
+                searchVM.searchButtonTap.send(())
+            }.store(in: &cancellables)
+        
+        controller.searchBar.cancelButtonClickedPublisher
+            .sink { _ in
+                searchVM.cancelButtonTap.send(())
+            }.store(in: &cancellables)
+        
         return controller
     }()
     
@@ -116,7 +127,20 @@ class NoticeViewController: UIViewController, BaseViewController {
                     self?.loadingView.hideLoadingViewAndStopAnimation()
                 }
             }.store(in: &cancellables)
-            
         
+        collectionView.didSelectItemPublisher
+            .compactMap { [weak self] indexPath in
+                self?.viewModel.selectedNoticeItem(index: indexPath.row)
+            }.sink{ [weak self] notice in
+                self?.showNoticeDetail(urlString: notice.detailLink)
+            }
+            .store(in: &cancellables)
+        
+    }
+    
+    private func showNoticeDetail(urlString: String) {
+        let webVC = WebViewController()
+        webVC.bind(urlString: urlString)
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
 }
