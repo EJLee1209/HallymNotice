@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CF0F8C2C2AA8845E001466CD /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */; };
+		CF18B5E62AADD2780096C1FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */; };
+		CF18B5E92AADD2FF0096C1FD /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CF18B5E82AADD2FF0096C1FD /* FirebaseMessaging */; };
 		CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61ED2AAD82F100759248 /* LoadingView.swift */; };
 		CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C61F02AADB50C00759248 /* WebKit.framework */; };
 		CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F22AADB52300759248 /* WebViewController.swift */; };
@@ -72,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
+		CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF18B5EA2AADD7460096C1FD /* HallymNotice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HallymNotice.entitlements; sourceTree = "<group>"; };
 		CF1C61ED2AAD82F100759248 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1C61F02AADB50C00759248 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		CF1C61F22AADB52300759248 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			files = (
 				CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */,
 				CF6B2CEE2AA7245D00A4A726 /* CombineCocoa in Frameworks */,
+				CF18B5E92AADD2FF0096C1FD /* FirebaseMessaging in Frameworks */,
 				CF6B2CEB2AA7244800A4A726 /* SnapKit in Frameworks */,
 				CFC41EFA2AA99067009732C2 /* SDWebImage in Frameworks */,
 				CF531B112AA81E2A00803669 /* Lottie in Frameworks */,
@@ -197,16 +202,18 @@
 		CF6B2CC92AA6ED6600A4A726 /* HallymNotice */ = {
 			isa = PBXGroup;
 			children = (
+				CF18B5EA2AADD7460096C1FD /* HallymNotice.entitlements */,
+				CF6B2CE22AA6EE5100A4A726 /* App */,
 				CFC41EE12AA96CB1009732C2 /* Resource */,
 				CFC41EE02AA96CA9009732C2 /* Service */,
 				CF6B2CE32AA6EE5700A4A726 /* Model */,
-				CF6B2CE22AA6EE5100A4A726 /* App */,
 				CF6B2CE02AA6EE3600A4A726 /* View */,
 				CF6B2CE42AA6EE5C00A4A726 /* ViewModel */,
 				CF6B2CFF2AA72D6700A4A726 /* Utils */,
 				CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */,
 				CF6B2CD52AA6ED6700A4A726 /* LaunchScreen.storyboard */,
 				CF6B2CD82AA6ED6700A4A726 /* Info.plist */,
+				CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */,
 			);
 			path = HallymNotice;
 			sourceTree = "<group>";
@@ -394,6 +401,7 @@
 				CF531B102AA81E2A00803669 /* Lottie */,
 				CFC41EF92AA99067009732C2 /* SDWebImage */,
 				CF5CC8B32AAC2A0E008B0E1E /* SwiftSoup */,
+				CF18B5E82AADD2FF0096C1FD /* FirebaseMessaging */,
 			);
 			productName = HallymNotice;
 			productReference = CF6B2CC72AA6ED6600A4A726 /* HallymNotice.app */;
@@ -429,6 +437,7 @@
 				CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				CFC41EF82AA99067009732C2 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				CF5CC8B22AAC2A0E008B0E1E /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				CF18B5E72AADD2FF0096C1FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CF6B2CC82AA6ED6600A4A726 /* Products */;
 			projectDirPath = "";
@@ -446,6 +455,7 @@
 			files = (
 				CF6B2CD72AA6ED6700A4A726 /* LaunchScreen.storyboard in Resources */,
 				CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */,
+				CF18B5E62AADD2780096C1FD /* GoogleService-Info.plist in Resources */,
 				CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */,
 				CF531B132AA81F6900803669 /* animation_notification.json in Resources */,
 			);
@@ -645,6 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HallymNotice/HallymNotice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EX6G2VC9J8;
@@ -674,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HallymNotice/HallymNotice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EX6G2VC9J8;
@@ -722,6 +734,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CF18B5E72AADD2FF0096C1FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -765,6 +785,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CF18B5E82AADD2FF0096C1FD /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF18B5E72AADD2FF0096C1FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		CF531B102AA81E2A00803669 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CF531B0F2AA81E2A00803669 /* XCRemoteSwiftPackageReference "lottie-spm" */;

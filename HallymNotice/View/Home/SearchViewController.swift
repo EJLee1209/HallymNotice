@@ -83,6 +83,7 @@ class SearchViewController: UIViewController, BaseViewController {
     }
 
     //MARK: - Helpers
+    
     func layout() {
         view.backgroundColor = .white
         
@@ -154,4 +155,5 @@ class SearchViewController: UIViewController, BaseViewController {
             }
             .store(in: &cancellables)
     }
+    
 }
