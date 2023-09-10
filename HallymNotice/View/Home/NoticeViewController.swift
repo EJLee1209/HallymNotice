@@ -132,15 +132,11 @@ class NoticeViewController: UIViewController, BaseViewController {
             .compactMap { [weak self] indexPath in
                 self?.viewModel.selectedNoticeItem(index: indexPath.row)
             }.sink{ [weak self] notice in
-                self?.showNoticeDetail(urlString: notice.detailLink)
+                self?.loadWebView(urlString: notice.detailLink)
             }
             .store(in: &cancellables)
         
     }
-    
-    private func showNoticeDetail(urlString: String) {
-        let webVC = WebViewController()
-        webVC.bind(urlString: urlString)
-        self.navigationController?.pushViewController(webVC, animated: true)
-    }
 }
+
+

@@ -11,6 +11,7 @@
 		CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61ED2AAD82F100759248 /* LoadingView.swift */; };
 		CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C61F02AADB50C00759248 /* WebKit.framework */; };
 		CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F22AADB52300759248 /* WebViewController.swift */; };
+		CF1C61F52AADBD2400759248 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F42AADBD2400759248 /* UIViewController+Extension.swift */; };
 		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
 		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
@@ -74,6 +75,7 @@
 		CF1C61ED2AAD82F100759248 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1C61F02AADB50C00759248 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		CF1C61F22AADB52300759248 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		CF1C61F42AADBD2400759248 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */,
 				CFC41EFB2AA9942E009732C2 /* String+Extension.swift */,
 				CF5CC8BD2AAC6ED3008B0E1E /* Date+Extension.swift */,
+				CF1C61F42AADBD2400759248 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */,
 				CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */,
 				CF5CC8C22AACCD2D008B0E1E /* SearchViewModel.swift in Sources */,
+				CF1C61F52AADBD2400759248 /* UIViewController+Extension.swift in Sources */,
 				CFE317602AAB25D7000C7D27 /* MenuHeaderView.swift in Sources */,
 				CF5CC8AF2AAC2203008B0E1E /* NoticeHeaderView.swift in Sources */,
 				CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */,

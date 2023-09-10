@@ -81,6 +81,14 @@ class HomeViewController: UIViewController, BaseViewController {
             .sink { [weak self] _ in
                 self?.showAllNotice()
             }.store(in: &cancellables)
+        
+        collectionView.didSelectItemPublisher
+            .compactMap { [weak self] indexPath in
+                self?.viewModel.selectedNoticeItem(index: indexPath.row)
+            }.sink{ [weak self] notice in
+                self?.loadWebView(urlString: notice.detailLink)
+            }
+            .store(in: &cancellables)
 
     }
     

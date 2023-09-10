@@ -61,6 +61,7 @@ final class HomeViewModel {
         self.crawlingService.noticeCrawl(page: 1, keyword: nil)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] noticeList in
+                self?.noticeList.send(noticeList)
                 let sectionItem = noticeList.map { HomeSectionItem.notice($0) }
                 self?.updateHome(with: sectionItem, toSection: .notice) // notice 섹션 데이터 업데이트
             }.store(in: &cancellables)
@@ -97,6 +98,8 @@ final class HomeViewModel {
     var forecast: AnyPublisher<[WeatherData], Never> {
         return weatherApi.forecastWeather.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
+    
+    private let noticeList: CurrentValueSubject<[Notice], Never> = .init([])
     
     //MARK: - Intput
     private let showAllNoticeButtonTapSubject: PassthroughSubject<Void, Never> = .init()
@@ -169,6 +172,9 @@ final class HomeViewModel {
         return NoticeViewModel(title: "공지사항", crawlingService: self.crawlingService)
     }
     
+    func selectedNoticeItem(index: Int) -> Notice {
+        return self.noticeList.value[index]
+    }
 }
 
 

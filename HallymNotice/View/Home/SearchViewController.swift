@@ -145,5 +145,13 @@ class SearchViewController: UIViewController, BaseViewController {
         viewModel.guideLabelIsHidden
             .assign(to: \.isHidden, on: self.guideLabel)
             .store(in: &cancellables)
+        
+        collectionView.didSelectItemPublisher
+            .compactMap { [weak self] indexPath in
+                self?.viewModel.selectedNoticeItem(index: indexPath.row)
+            }.sink{ [weak self] notice in
+                self?.loadWebView(urlString: notice.detailLink)
+            }
+            .store(in: &cancellables)
     }
 }

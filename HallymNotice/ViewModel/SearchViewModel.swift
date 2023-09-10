@@ -137,4 +137,8 @@ final class SearchViewModel {
             }).store(in: &cancellables)
     }
     
+    func selectedNoticeItem(index: Int) -> Notice {
+        return self.searchList.value[index]
+    }
+    
 }
