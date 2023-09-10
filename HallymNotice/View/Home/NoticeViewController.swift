@@ -36,6 +36,8 @@ class NoticeViewController: UIViewController, BaseViewController {
         return controller
     }()
     
+    private let loadingView: LoadingView = .init(frame: .zero)
+    
     var cancellables: Set<AnyCancellable> = .init()
     
     let viewModel: NoticeViewModel
@@ -59,6 +61,13 @@ class NoticeViewController: UIViewController, BaseViewController {
         bind()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.layoutIfNeeded()
+        
+        loadingView.setLoadingViewCornerRadius()
+    }
+    
     
     //MARK: - Helpers
     private func setupSearchController() {
@@ -74,6 +83,12 @@ class NoticeViewController: UIViewController, BaseViewController {
         
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
     }
     
@@ -91,5 +106,17 @@ class NoticeViewController: UIViewController, BaseViewController {
             .sink { [weak self] _ in
                 self?.viewModel.nextPage()
             }.store(in: &cancellables)
+        
+        viewModel.isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    self?.loadingView.showLoadingViewAndStartAnimation()
+                } else {
+                    self?.loadingView.hideLoadingViewAndStopAnimation()
+                }
+            }.store(in: &cancellables)
+            
+        
     }
 }

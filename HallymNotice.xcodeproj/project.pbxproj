@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF0F8C2C2AA8845E001466CD /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */; };
+		CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61ED2AAD82F100759248 /* LoadingView.swift */; };
 		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
 		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
+		CF1C61ED2AAD82F100759248 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		CF6B2CE02AA6EE3600A4A726 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF1C61ED2AAD82F100759248 /* LoadingView.swift */,
 				CF531B162AA8213000803669 /* Welcome */,
 				CFFAD53C2AA850DF00F56444 /* Home */,
 				CF790D332AA8AC78003DE5E2 /* Map */,
@@ -449,6 +452,7 @@
 				CFC41EF22AA97A44009732C2 /* WeatherData.swift in Sources */,
 				CFE3175B2AAB2554000C7D27 /* HomeSection.swift in Sources */,
 				CF5CC8B82AAC2DDE008B0E1E /* CrawlingServiceType.swift in Sources */,
+				CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,

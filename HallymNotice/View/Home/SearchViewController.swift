@@ -18,6 +18,20 @@ class SearchViewController: UIViewController, BaseViewController {
         return label
     }()
     
+    private let loadingView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.color = ThemeColor.primary
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
+    private lazy var hStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [keywordLabel, loadingView])
+        sv.axis = .horizontal
+        sv.spacing = 12
+        return sv
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width - 20, height: 100)
@@ -30,10 +44,10 @@ class SearchViewController: UIViewController, BaseViewController {
     }()
     
     private lazy var vStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [keywordLabel, collectionView])
+        let sv = UIStackView(arrangedSubviews: [hStackView, collectionView])
         sv.axis = .vertical
         sv.spacing = 8
-        sv.alignment = .fill
+        sv.alignment = .leading
         sv.distribution = .fill
         return sv
     }()
@@ -89,5 +103,16 @@ class SearchViewController: UIViewController, BaseViewController {
             .sink { [weak self] _ in
                 self?.viewModel.nextPage()
             }.store(in: &cancellables)
+        
+        viewModel.isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                print(isLoading)
+                self?.loadingView.isHidden = !isLoading
+                if !isLoading {
+                    self?.loadingView.startAnimating()
+                }
+            }
+            .store(in: &cancellables)
     }
 }

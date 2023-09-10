@@ -33,6 +33,9 @@ final class NoticeViewModel {
     // 검색 리스트
     private let searchListSubject: CurrentValueSubject<[Notice], Never> = .init([])
     
+    // 로딩 상태
+    let isLoading: CurrentValueSubject<Bool, Never> = .init(false)
+    
     //MARK: - init
     init(title: String, crawlingService: CrawlingServiceType) {
         //MARK: - 의존성 주입
@@ -46,9 +49,11 @@ final class NoticeViewModel {
         }.store(in: &cancellables)
         
         // 공지사항 publisher 구독
-        noticeListSubject.sink { [weak self] list in
-            self?.updateNotice(with: list) // 섹션 업데이트
-        }.store(in: &cancellables)
+        noticeListSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] list in
+                self?.updateNotice(with: list) // 섹션 업데이트
+            }.store(in: &cancellables)
         
 
     }
@@ -77,11 +82,13 @@ final class NoticeViewModel {
         snapshot.appendSections([0])
         snapshot.appendItems(list) // 항목 추가
         noticeDataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
+        self.isLoading.send(false)
     }
     
     //MARK: - Helpers
     
     private func getNextPage(_ page: Int) {
+        self.isLoading.send(true)
         self.crawlingService.noticeCrawl(page: page, keyword: nil)
             .sink(receiveValue: { noticeList in
                 var newNotices = self.noticeListSubject.value
