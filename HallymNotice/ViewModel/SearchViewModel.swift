@@ -7,10 +7,86 @@
 
 import Foundation
 import Combine
+import UIKit
 
 final class SearchViewModel {
     
-    let searchKeyword: CurrentValueSubject<String, Never> = .init("")
+    //MARK: - Properties
     
+    let crawlingService: CrawlingServiceType
+    
+    private var cancellables: Set<AnyCancellable> = .init()
+    private var noticeDataSource: NoticeDataSource?
+    
+    private lazy var todayDateString = Date.todayDateString()
+    
+    //MARK: - init
+    init(crawlingService: CrawlingServiceType) {
+        self.crawlingService = crawlingService
+        
+        searchList
+            .subscribe(on: DispatchQueue.main)
+            .sink { [weak self] list in
+                self?.updateNotice(with: list)
+            }.store(in: &cancellables)
+        
+        searchKeyword
+            .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+            .flatMap { [weak self] keyword in
+                self?.getSearchList(keyword: keyword) ?? Just([]).eraseToAnyPublisher()
+            }.sink { [weak self] searchList in
+                self?.searchList.send(searchList)
+            }.store(in: &cancellables)
+        
+        page.sink { [weak self] page in
+            self?.getNextPage(page: page)
+        }.store(in: &cancellables)
+    }
+    
+    let searchKeyword: CurrentValueSubject<String, Never> = .init("")
+    private let page: CurrentValueSubject<Int, Never> = .init(1)
+    private let searchList: CurrentValueSubject<[Notice], Never> = .init([])
+    
+    lazy var nextPage: () -> Void = {
+        self.page.send(self.page.value + 1)
+    }
+    
+    //MARK: - Diffable DataSource
+    func setupDataSource(collectionView: UICollectionView) {
+        noticeDataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, notice in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noticeCellIdentifier, for: indexPath) as! NoticeCell
+            cell.bind(date: self.todayDateString, notice: notice)
+            return cell
+        })
+    }
+    
+    func updateNotice(with list: [Notice]) {
+        var snapshot = NoticeSnapshot() // 스냅샷 생성
+        snapshot.appendSections([0])
+        snapshot.appendItems(list) // 항목 추가
+        noticeDataSource?.apply(snapshot, animatingDifferences: true) // 데이터 소스에 적용
+    }
+    
+    //MARK: - Helpers
+    private func getSearchList(keyword: String) -> AnyPublisher<[Notice], Never> {
+        searchList.send([])
+        page.send(1)
+        return self.crawlingService.noticeCrawl(page: 1, keyword: keyword)
+    }
+    
+    private func getNextPage(page: Int) {
+        if page <= 1 { return }
+        
+        print("nextPage")
+        let keyword = searchKeyword.value
+        self.crawlingService.noticeCrawl(page: page, keyword: keyword)
+            .sink(receiveValue: { noticeList in
+                var newNotices = self.searchList.value
+                newNotices.append(contentsOf: noticeList)
+                newNotices.sort(by: { $0.id > $1.id })
+                
+                self.searchList.send(newNotices)
+            }).store(in: &cancellables)
+    }
     
 }

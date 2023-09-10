@@ -92,6 +92,9 @@ final class NoticeViewModel {
             }).store(in: &cancellables)
     }
     
+    func makeSearchViewModel() -> SearchViewModel {
+        return SearchViewModel(crawlingService: self.crawlingService)
+    }
     
     
 }

@@ -24,7 +24,7 @@ class NoticeViewController: UIViewController, BaseViewController {
     }()
     
     private lazy var searchController: UISearchController = {
-        let searchVM = SearchViewModel()
+        let searchVM = viewModel.makeSearchViewModel()
         let searchVC = SearchViewController(viewModel: searchVM)
         let controller = UISearchController(searchResultsController: searchVC)
         controller.searchBar.placeholder = "검색어를 입력해주세요"
