@@ -66,6 +66,10 @@
 		CFE3175B2AAB2554000C7D27 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175A2AAB2554000C7D27 /* HomeSection.swift */; };
 		CFE3175D2AAB257C000C7D27 /* ForecastSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175C2AAB257C000C7D27 /* ForecastSection.swift */; };
 		CFE317602AAB25D7000C7D27 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175F2AAB25D7000C7D27 /* MenuHeaderView.swift */; };
+		CFF77CBF2AAF4B8100523C0A /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CBE2AAF4B8100523C0A /* Tab.swift */; };
+		CFF77CC22AAF4B9500523C0A /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC02AAF4B9500523C0A /* TabView.swift */; };
+		CFF77CC32AAF4B9500523C0A /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC12AAF4B9500523C0A /* TabItemView.swift */; };
+		CFF77CC52AAF4B9B00523C0A /* AutoPaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */; };
 		CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD5362AA849F800F56444 /* StepThreeView.swift */; };
 		CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */ = {isa = PBXBuildFile; fileRef = CFFAD5382AA84A3300F56444 /* animation_check.json */; };
 		CFFAD53B2AA84F8200F56444 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD53A2AA84F8200F56444 /* User.swift */; };
@@ -129,6 +133,10 @@
 		CFE3175A2AAB2554000C7D27 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		CFE3175C2AAB257C000C7D27 /* ForecastSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastSection.swift; sourceTree = "<group>"; };
 		CFE3175F2AAB25D7000C7D27 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
+		CFF77CBE2AAF4B8100523C0A /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tab.swift; path = ../../../iOSLAB/iOSLAB/View/Page/Tab.swift; sourceTree = "<group>"; };
+		CFF77CC02AAF4B9500523C0A /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabView.swift; path = ../../../../iOSLAB/iOSLAB/View/Page/TabView.swift; sourceTree = "<group>"; };
+		CFF77CC12AAF4B9500523C0A /* TabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabItemView.swift; path = ../../../../iOSLAB/iOSLAB/View/Page/TabItemView.swift; sourceTree = "<group>"; };
+		CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoPaddingButton.swift; path = ../../../../iOSLAB/iOSLAB/View/AutoLayout/AutoPaddingButton.swift; sourceTree = "<group>"; };
 		CFFAD5362AA849F800F56444 /* StepThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeView.swift; sourceTree = "<group>"; };
 		CFFAD5382AA84A3300F56444 /* animation_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_check.json; sourceTree = "<group>"; };
 		CFFAD53A2AA84F8200F56444 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -250,6 +258,7 @@
 				CFFAD53A2AA84F8200F56444 /* User.swift */,
 				CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */,
 				CF5CC8B02AAC29E7008B0E1E /* Notice.swift */,
+				CFF77CBE2AAF4B8100523C0A /* Tab.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -373,6 +382,9 @@
 				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
 				CF1C61F22AADB52300759248 /* WebViewController.swift */,
 				CFFAD53D2AA8510B00F56444 /* WeatherView.swift */,
+				CFF77CC12AAF4B9500523C0A /* TabItemView.swift */,
+				CFF77CC02AAF4B9500523C0A /* TabView.swift */,
+				CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */,
 				CF5CC8AD2AAC21DD008B0E1E /* Header */,
 				CFE317552AAB2239000C7D27 /* Cell */,
 			);
@@ -469,12 +481,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF6B2CF22AA724A600A4A726 /* ThemeFont.swift in Sources */,
+				CFF77CC22AAF4B9500523C0A /* TabView.swift in Sources */,
 				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
 				CF5CC8B62AAC2A25008B0E1E /* CrawlingService.swift in Sources */,
 				CFE317572AAB22EE000C7D27 /* MenuCell.swift in Sources */,
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
 				CFE317592AAB2343000C7D27 /* NoticeCell.swift in Sources */,
 				CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */,
+				CFF77CBF2AAF4B8100523C0A /* Tab.swift in Sources */,
+				CFF77CC32AAF4B9500523C0A /* TabItemView.swift in Sources */,
 				CFC41EF12AA97A44009732C2 /* Forecast.swift in Sources */,
 				CF5CC8C02AACCC77008B0E1E /* SearchViewController.swift in Sources */,
 				CFC41EF22AA97A44009732C2 /* WeatherData.swift in Sources */,
@@ -483,6 +498,7 @@
 				CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */,
 				CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
+				CFF77CC52AAF4B9B00523C0A /* AutoPaddingButton.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
 				CFE3175D2AAB257C000C7D27 /* ForecastSection.swift in Sources */,

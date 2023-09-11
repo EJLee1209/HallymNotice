@@ -12,6 +12,13 @@ import CombineCocoa
 class NoticeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
+    
+    private lazy var tabView: TabView = {
+        let view = TabView()
+        view.setup(items: NoticeCategory.allCases)
+        return view
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width - 20, height: 100)
@@ -46,6 +53,8 @@ class NoticeViewController: UIViewController, BaseViewController {
         
         return controller
     }()
+    
+    
     
     private let loadingView: LoadingView = .init(frame: .zero)
     
@@ -87,13 +96,18 @@ class NoticeViewController: UIViewController, BaseViewController {
     }
     
     func layout() {
-        
-        
         view.backgroundColor = .white
-        view.addSubview(collectionView)
         
+        view.addSubview(tabView)
+        tabView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.bottom.left.right.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
         }
         
         view.addSubview(loadingView)
@@ -136,6 +150,10 @@ class NoticeViewController: UIViewController, BaseViewController {
             }
             .store(in: &cancellables)
         
+        tabView.selectedTabPublisher
+            .sink { [weak self] tab in
+                self?.viewModel.categorySubject.send(tab)
+            }.store(in: &cancellables)
     }
 }
 

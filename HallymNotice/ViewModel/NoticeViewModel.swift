@@ -52,6 +52,11 @@ final class NoticeViewModel {
                 self?.updateNotice(with: list) // 섹션 업데이트
             }.store(in: &cancellables)
         
+        // 카테고리 탭 publisher 구독
+        categorySubject
+            .sink { category in
+                print(category)
+            }.store(in: &cancellables)
 
     }
     
@@ -64,6 +69,10 @@ final class NoticeViewModel {
     lazy var nextPage: () -> Void = {
         self.currentPageSubject.send(self.currentPageSubject.value + 1)
     }
+    
+    // 카테고리 탭
+    let categorySubject: CurrentValueSubject<NoticeCategory, Never> = .init(.all)
+    
     
     //MARK: - Diffable DataSource
     func setupDataSource(collectionView: UICollectionView) {
