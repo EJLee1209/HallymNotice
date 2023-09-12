@@ -10,9 +10,11 @@ import UIKit
 final class NoticeHeaderView: UICollectionReusableView {
     
     //MARK: - Properties
+    private let weatherView: WeatherView = .init()
+    
     private let headerLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeFont.bold(ofSize: 16)
+        label.font = ThemeFont.bold(ofSize: 18)
         label.text = Constants.homeTitle3
         return label
     }()
@@ -34,6 +36,15 @@ final class NoticeHeaderView: UICollectionReusableView {
         return sv
     }()
     
+    private lazy var vStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [weatherView, hStackView])
+        sv.axis = .vertical
+        sv.spacing = 28
+        return sv
+    }()
+    
+    
+    
     var buttonTapped: () -> Void = {}
     
     //MARK: - init
@@ -48,11 +59,16 @@ final class NoticeHeaderView: UICollectionReusableView {
     
     //MARK: - Helpers
     private func layout() {
-        addSubview(hStackView)
-        hStackView.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
+        addSubview(vStackView)
+        vStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
+    
+    func bind(viewModel: HomeViewModel) {
+        weatherView.bind(viewModel: viewModel)
+    }
+    
     
     
     //MARK: - Actions

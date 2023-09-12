@@ -22,7 +22,6 @@ extension WeatherApiType {
     func composeURL(endPoint: String, from location: CLLocation) -> AnyPublisher<URL, Never> {
         let urlStr = "\(endPoint)?lat=\(location.coordinate.latitude)&lon=\(location.coordinate.longitude)&appid=\(Constants.weatherApiKey)&lang=kr&units=metric"
         
-        print(urlStr)
         return Just(urlStr)
             .compactMap { URL(string: $0) }
             .eraseToAnyPublisher()

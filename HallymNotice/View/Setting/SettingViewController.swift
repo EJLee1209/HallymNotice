@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, BaseViewController {
+class SettingViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
     

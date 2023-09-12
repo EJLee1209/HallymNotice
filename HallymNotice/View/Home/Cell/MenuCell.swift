@@ -10,13 +10,11 @@ import UIKit
 final class MenuCell: UICollectionViewCell {
     
     //MARK: - Properties
-    private let label: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = ThemeFont.bold(ofSize: 20)
-        return label
-    }()
     
+    private let menuImageView: UIImageView = {
+        let view = UIImageView()
+        return view
+    }()
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -33,16 +31,19 @@ final class MenuCell: UICollectionViewCell {
     //MARK: - Helpers
     private func layout() {
         
-        backgroundColor = .systemBlue
-        contentView.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        backgroundColor = .white
+        
+        contentView.addSubview(menuImageView)
+        menuImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalToSuperview()
         }
         
     }
     
-    func bind(text: String) {
-        label.text = text
+    func bind(imgUrl: String) {
+        guard let url = URL(string: imgUrl) else { return }
+        menuImageView.sd_setImage(with: url)
     }
 }
 

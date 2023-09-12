@@ -9,12 +9,10 @@ import Foundation
 import UIKit
 
 enum HomeSection: Hashable, CaseIterable {
-    case menu
     case notice
 }
 
 enum HomeSectionItem: Hashable {
-    case menu(String)
     case notice(Notice)
 }
 

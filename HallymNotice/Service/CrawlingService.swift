@@ -9,8 +9,6 @@ import Foundation
 import Combine
 import SwiftSoup
 
-
-
 final class CrawlingService: CrawlingServiceType {
     
     func noticeCrawl(page: Int, keyword: String?, category: NoticeCategory) -> AnyPublisher<[Notice], Never> {
@@ -25,7 +23,6 @@ final class CrawlingService: CrawlingServiceType {
             .replaceError(with: [])
             .eraseToAnyPublisher()
     }
-    
 }
 
 
