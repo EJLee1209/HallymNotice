@@ -33,6 +33,9 @@ final class NoticeViewModel {
     // 로딩 상태
     let isLoading: CurrentValueSubject<Bool, Never> = .init(false)
     
+    // 블러뷰 isHidden
+    let blurViewIsHidden: CurrentValueSubject<Bool, Never> = .init(true)
+    
     //MARK: - init
     init(title: String, crawlingService: CrawlingServiceType) {
         //MARK: - 의존성 주입
@@ -47,6 +50,7 @@ final class NoticeViewModel {
         
         // 공지사항 publisher 구독
         noticeListSubject
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] list in
                 self?.updateNotice(with: list) // 섹션 업데이트
@@ -54,8 +58,9 @@ final class NoticeViewModel {
         
         // 카테고리 탭 publisher 구독
         categorySubject
-            .sink { category in
-                print(category)
+            .dropFirst()
+            .sink { [weak self] category in
+                self?.changedCategory(to: category)
             }.store(in: &cancellables)
 
     }
@@ -96,7 +101,7 @@ final class NoticeViewModel {
     private func getNextPage(_ page: Int) {
         self.isLoading.send(true)
         
-        self.crawlingService.noticeCrawl(page: page, keyword: nil)
+        self.crawlingService.noticeCrawl(page: page, keyword: nil, category: self.categorySubject.value)
             .sink(receiveValue: { noticeList in
                 var newNotices = self.noticeListSubject.value
                 newNotices.append(contentsOf: noticeList)
@@ -114,4 +119,11 @@ final class NoticeViewModel {
         return self.noticeListSubject.value[index]
     }
     
+    private func changedCategory(to category: NoticeCategory) {
+        self.noticeListSubject.send([])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.currentPageSubject.send(1)
+        }
+    }
 }

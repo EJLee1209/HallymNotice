@@ -58,7 +58,7 @@ final class HomeViewModel {
         self.locationProvider.requestLocation()
         
         // 공지사항 1 페이지 요청, publisher 구독
-        self.crawlingService.noticeCrawl(page: 1, keyword: nil)
+        self.crawlingService.noticeCrawl(page: 1, keyword: nil, category: .all)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] noticeList in
                 self?.noticeList.send(noticeList)
