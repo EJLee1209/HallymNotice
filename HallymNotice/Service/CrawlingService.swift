@@ -13,9 +13,9 @@ import SwiftSoup
 
 final class CrawlingService: CrawlingServiceType {
     
-    func noticeCrawl(page: Int, keyword: String?) -> AnyPublisher<[Notice], Never> {
+    func noticeCrawl(page: Int, keyword: String?, category: NoticeCategory) -> AnyPublisher<[Notice], Never> {
         
-        let urlString = "\(Constants.hallymEndpoint)&pageIndex=\(page)&searchType=0&searchWrd=\(keyword ?? "")"
+        let urlString = "\(Constants.hallymEndpoint)&pageIndex=\(page)&searchType=0&searchWrd=\(keyword ?? "")&category=\(category.id)"
         let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         return getHtmlDoucment(url: encodedStr)

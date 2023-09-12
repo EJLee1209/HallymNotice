@@ -119,7 +119,7 @@ final class SearchViewModel {
     private func getSearchList(keyword: String) -> AnyPublisher<[Notice], Never> {
         page.send(1)
         isLoading.send(true)
-        return self.crawlingService.noticeCrawl(page: 1, keyword: keyword)
+        return self.crawlingService.noticeCrawl(page: 1, keyword: keyword, category: .all)
     }
     
     private func getNextPage(page: Int) {
@@ -127,7 +127,7 @@ final class SearchViewModel {
         
         isLoading.send(true)
         let keyword = searchKeyword.value
-        self.crawlingService.noticeCrawl(page: page, keyword: keyword)
+        self.crawlingService.noticeCrawl(page: page, keyword: keyword, category: .all)
             .sink(receiveValue: { noticeList in
                 var newNotices = self.searchList.value
                 newNotices.append(contentsOf: noticeList)

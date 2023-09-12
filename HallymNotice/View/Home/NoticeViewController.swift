@@ -54,9 +54,14 @@ class NoticeViewController: UIViewController, BaseViewController {
         return controller
     }()
     
-    
-    
     private let loadingView: LoadingView = .init(frame: .zero)
+    private let blurView: UIVisualEffectView = {
+        let effect = UIBlurEffect(style: .systemMaterial)
+        let view = UIVisualEffectView(effect: effect)
+        view.layer.opacity = 0.95
+        view.isHidden = true
+        return view
+    }()
     
     var cancellables: Set<AnyCancellable> = .init()
     
@@ -110,11 +115,18 @@ class NoticeViewController: UIViewController, BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
         }
         
+        view.addSubview(blurView)
+        blurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         view.addSubview(loadingView)
         loadingView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
+        
+        
     }
     
     func bind() {
@@ -142,6 +154,11 @@ class NoticeViewController: UIViewController, BaseViewController {
                 }
             }.store(in: &cancellables)
         
+        viewModel.isLoading
+            .map { !$0 }
+            .assign(to: \.isHidden, on: self.blurView)
+            .store(in: &cancellables)
+        
         collectionView.didSelectItemPublisher
             .compactMap { [weak self] indexPath in
                 self?.viewModel.selectedNoticeItem(index: indexPath.row)
@@ -154,6 +171,8 @@ class NoticeViewController: UIViewController, BaseViewController {
             .sink { [weak self] tab in
                 self?.viewModel.categorySubject.send(tab)
             }.store(in: &cancellables)
+        
+        
     }
 }
 

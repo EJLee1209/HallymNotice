@@ -14,11 +14,13 @@ struct Notice: Hashable {
     let publishDate: String
     let detailLink: String
     
+    private let identifier: String = UUID().uuidString
+    
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(identifier)
     }
     
     static func == (lhs: Notice, rhs: Notice) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.identifier == rhs.identifier
     }
 }
