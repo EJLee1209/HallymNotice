@@ -14,6 +14,9 @@
 		CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C61F02AADB50C00759248 /* WebKit.framework */; };
 		CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F22AADB52300759248 /* WebViewController.swift */; };
 		CF1C61F52AADBD2400759248 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61F42AADBD2400759248 /* UIViewController+Extension.swift */; };
+		CF319CDB2AB07B64007039A6 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF319CD82AB07B04007039A6 /* TabView.swift */; };
+		CF319CDC2AB07B64007039A6 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF319CD92AB07B04007039A6 /* TabItemView.swift */; };
+		CF319CDD2AB07B64007039A6 /* AutoPaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF319CDA2AB07B04007039A6 /* AutoPaddingButton.swift */; };
 		CF531B112AA81E2A00803669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CF531B102AA81E2A00803669 /* Lottie */; };
 		CF531B132AA81F6900803669 /* animation_notification.json in Resources */ = {isa = PBXBuildFile; fileRef = CF531B122AA81F6900803669 /* animation_notification.json */; };
 		CF531B152AA8211000803669 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF531B142AA8211000803669 /* StepOneView.swift */; };
@@ -47,8 +50,10 @@
 		CF6B2D062AA7381000A4A726 /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D052AA7381000A4A726 /* KeywordCell.swift */; };
 		CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */; };
 		CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D092AA75B1D00A4A726 /* Keyword.swift */; };
-		CF790D322AA8AC5E003DE5E2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF790D312AA8AC5E003DE5E2 /* MapViewController.swift */; };
 		CF790D352AA8AD08003DE5E2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */; };
+		CFA4CD002AB435970075775E /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CCFF2AB435970075775E /* MenuCell.swift */; };
+		CFA4CD022AB43E430075775E /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD012AB43E430075775E /* Menu.swift */; };
+		CFA4CD062AB44ABF0075775E /* EditKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */; };
 		CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */; };
 		CFC41EE52AA96D28009732C2 /* CoreLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */; };
 		CFC41EE72AA96D7D009732C2 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */; };
@@ -61,15 +66,10 @@
 		CFC41EF72AA97E1E009732C2 /* WeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EF62AA97E1E009732C2 /* WeatherApi.swift */; };
 		CFC41EFA2AA99067009732C2 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CFC41EF92AA99067009732C2 /* SDWebImage */; };
 		CFC41EFC2AA9942E009732C2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EFB2AA9942E009732C2 /* String+Extension.swift */; };
-		CFE317572AAB22EE000C7D27 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE317562AAB22EE000C7D27 /* MenuCell.swift */; };
 		CFE317592AAB2343000C7D27 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE317582AAB2343000C7D27 /* NoticeCell.swift */; };
 		CFE3175B2AAB2554000C7D27 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175A2AAB2554000C7D27 /* HomeSection.swift */; };
 		CFE3175D2AAB257C000C7D27 /* ForecastSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175C2AAB257C000C7D27 /* ForecastSection.swift */; };
-		CFE317602AAB25D7000C7D27 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3175F2AAB25D7000C7D27 /* MenuHeaderView.swift */; };
 		CFF77CBF2AAF4B8100523C0A /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CBE2AAF4B8100523C0A /* Tab.swift */; };
-		CFF77CC22AAF4B9500523C0A /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC02AAF4B9500523C0A /* TabView.swift */; };
-		CFF77CC32AAF4B9500523C0A /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC12AAF4B9500523C0A /* TabItemView.swift */; };
-		CFF77CC52AAF4B9B00523C0A /* AutoPaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */; };
 		CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD5362AA849F800F56444 /* StepThreeView.swift */; };
 		CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */ = {isa = PBXBuildFile; fileRef = CFFAD5382AA84A3300F56444 /* animation_check.json */; };
 		CFFAD53B2AA84F8200F56444 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFAD53A2AA84F8200F56444 /* User.swift */; };
@@ -84,6 +84,9 @@
 		CF1C61F02AADB50C00759248 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		CF1C61F22AADB52300759248 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CF1C61F42AADBD2400759248 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		CF319CD82AB07B04007039A6 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		CF319CD92AB07B04007039A6 /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		CF319CDA2AB07B04007039A6 /* AutoPaddingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPaddingButton.swift; sourceTree = "<group>"; };
 		CF531B122AA81F6900803669 /* animation_notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_notification.json; sourceTree = "<group>"; };
 		CF531B142AA8211000803669 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
 		CF531B172AA825E100803669 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
@@ -115,8 +118,10 @@
 		CF6B2D052AA7381000A4A726 /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		CF6B2D092AA75B1D00A4A726 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
-		CF790D312AA8AC5E003DE5E2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		CFA4CCFF2AB435970075775E /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		CFA4CD012AB43E430075775E /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKeywordViewController.swift; sourceTree = "<group>"; };
 		CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProviderType.swift; sourceTree = "<group>"; };
 		CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationProvider.swift; sourceTree = "<group>"; };
 		CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
@@ -128,15 +133,10 @@
 		CFC41EF42AA97D08009732C2 /* NetworkServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceType.swift; sourceTree = "<group>"; };
 		CFC41EF62AA97E1E009732C2 /* WeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApi.swift; sourceTree = "<group>"; };
 		CFC41EFB2AA9942E009732C2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		CFE317562AAB22EE000C7D27 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		CFE317582AAB2343000C7D27 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		CFE3175A2AAB2554000C7D27 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		CFE3175C2AAB257C000C7D27 /* ForecastSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastSection.swift; sourceTree = "<group>"; };
-		CFE3175F2AAB25D7000C7D27 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
 		CFF77CBE2AAF4B8100523C0A /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tab.swift; path = ../../../iOSLAB/iOSLAB/View/Page/Tab.swift; sourceTree = "<group>"; };
-		CFF77CC02AAF4B9500523C0A /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabView.swift; path = ../../../../iOSLAB/iOSLAB/View/Page/TabView.swift; sourceTree = "<group>"; };
-		CFF77CC12AAF4B9500523C0A /* TabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabItemView.swift; path = ../../../../iOSLAB/iOSLAB/View/Page/TabItemView.swift; sourceTree = "<group>"; };
-		CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoPaddingButton.swift; path = ../../../../iOSLAB/iOSLAB/View/AutoLayout/AutoPaddingButton.swift; sourceTree = "<group>"; };
 		CFFAD5362AA849F800F56444 /* StepThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeView.swift; sourceTree = "<group>"; };
 		CFFAD5382AA84A3300F56444 /* animation_check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_check.json; sourceTree = "<group>"; };
 		CFFAD53A2AA84F8200F56444 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -169,13 +169,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CF319CD62AB07AF6007039A6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */,
+				CF5CC8BF2AACCC77008B0E1E /* SearchViewController.swift */,
+				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
+				CF1C61F22AADB52300759248 /* WebViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		CF319CD72AB07B04007039A6 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CF1C61ED2AAD82F100759248 /* LoadingView.swift */,
+				CFFAD53D2AA8510B00F56444 /* WeatherView.swift */,
+				CF319CD92AB07B04007039A6 /* TabItemView.swift */,
+				CF319CD82AB07B04007039A6 /* TabView.swift */,
+				CF319CDA2AB07B04007039A6 /* AutoPaddingButton.swift */,
+				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
+				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		CF531B162AA8213000803669 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
 				CF6B2D052AA7381000A4A726 /* KeywordCell.swift */,
 				CF6B2CE52AA6EEAE00A4A726 /* WelcomeViewController.swift */,
-				CF6B2CFD2AA72B7E00A4A726 /* GuideView.swift */,
-				CF6B2D022AA7324000A4A726 /* BackgroundTextField.swift */,
 				CFFAD5352AA849EC00F56444 /* StepView */,
 			);
 			path = Welcome;
@@ -184,7 +207,6 @@
 		CF5CC8AD2AAC21DD008B0E1E /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				CFE3175F2AAB25D7000C7D27 /* MenuHeaderView.swift */,
 				CF5CC8AE2AAC2203008B0E1E /* NoticeHeaderView.swift */,
 			);
 			path = Header;
@@ -229,11 +251,10 @@
 		CF6B2CE02AA6EE3600A4A726 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CF1C61ED2AAD82F100759248 /* LoadingView.swift */,
 				CF531B162AA8213000803669 /* Welcome */,
 				CFFAD53C2AA850DF00F56444 /* Home */,
-				CF790D332AA8AC78003DE5E2 /* Map */,
 				CF790D362AA8AD0C003DE5E2 /* Menu */,
+				CF319CD72AB07B04007039A6 /* CustomView */,
 				CF6B2CE72AA7229000A4A726 /* BaseViewController.swift */,
 			);
 			path = View;
@@ -259,6 +280,7 @@
 				CFC41EEA2AA9796F009732C2 /* CurrentWeather.swift */,
 				CF5CC8B02AAC29E7008B0E1E /* Notice.swift */,
 				CFF77CBE2AAF4B8100523C0A /* Tab.swift */,
+				CFA4CD012AB43E430075775E /* Menu.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,27 +321,29 @@
 		CF6B2CFF2AA72D6700A4A726 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CF6B2D002AA72D7400A4A726 /* Constants.swift */,
 				CF6B2CF42AA724BE00A4A726 /* Extension */,
 				CF6B2CEF2AA724A600A4A726 /* Theme */,
-				CF6B2D002AA72D7400A4A726 /* Constants.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		CF790D332AA8AC78003DE5E2 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				CF790D312AA8AC5E003DE5E2 /* MapViewController.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		CF790D362AA8AD0C003DE5E2 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */,
+				CFA4CD072AB451540075775E /* ViewController */,
+				CFA4CCFF2AB435970075775E /* MenuCell.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		CFA4CD072AB451540075775E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */,
+				CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		CFC41EE02AA96CA9009732C2 /* Service */ = {
@@ -349,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */,
-				CFE317562AAB22EE000C7D27 /* MenuCell.swift */,
 				CFE317582AAB2343000C7D27 /* NoticeCell.swift */,
 			);
 			path = Cell;
@@ -377,14 +400,7 @@
 		CFFAD53C2AA850DF00F56444 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CF5CC8B92AAC6D58008B0E1E /* NoticeViewController.swift */,
-				CF5CC8BF2AACCC77008B0E1E /* SearchViewController.swift */,
-				CF6B2CDE2AA6EDFF00A4A726 /* HomeViewController.swift */,
-				CF1C61F22AADB52300759248 /* WebViewController.swift */,
-				CFFAD53D2AA8510B00F56444 /* WeatherView.swift */,
-				CFF77CC12AAF4B9500523C0A /* TabItemView.swift */,
-				CFF77CC02AAF4B9500523C0A /* TabView.swift */,
-				CFF77CC42AAF4B9B00523C0A /* AutoPaddingButton.swift */,
+				CF319CD62AB07AF6007039A6 /* ViewController */,
 				CF5CC8AD2AAC21DD008B0E1E /* Header */,
 				CFE317552AAB2239000C7D27 /* Cell */,
 			);
@@ -481,15 +497,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF6B2CF22AA724A600A4A726 /* ThemeFont.swift in Sources */,
-				CFF77CC22AAF4B9500523C0A /* TabView.swift in Sources */,
+				CF319CDC2AB07B64007039A6 /* TabItemView.swift in Sources */,
+				CFA4CD002AB435970075775E /* MenuCell.swift in Sources */,
+				CF319CDB2AB07B64007039A6 /* TabView.swift in Sources */,
 				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
 				CF5CC8B62AAC2A25008B0E1E /* CrawlingService.swift in Sources */,
-				CFE317572AAB22EE000C7D27 /* MenuCell.swift in Sources */,
+				CFA4CD022AB43E430075775E /* Menu.swift in Sources */,
 				CF6B2D032AA7324000A4A726 /* BackgroundTextField.swift in Sources */,
 				CFE317592AAB2343000C7D27 /* NoticeCell.swift in Sources */,
 				CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */,
 				CFF77CBF2AAF4B8100523C0A /* Tab.swift in Sources */,
-				CFF77CC32AAF4B9500523C0A /* TabItemView.swift in Sources */,
 				CFC41EF12AA97A44009732C2 /* Forecast.swift in Sources */,
 				CF5CC8C02AACCC77008B0E1E /* SearchViewController.swift in Sources */,
 				CFC41EF22AA97A44009732C2 /* WeatherData.swift in Sources */,
@@ -498,7 +515,7 @@
 				CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */,
 				CF1C61F32AADB52300759248 /* WebViewController.swift in Sources */,
 				CF6B2D012AA72D7400A4A726 /* Constants.swift in Sources */,
-				CFF77CC52AAF4B9B00523C0A /* AutoPaddingButton.swift in Sources */,
+				CFA4CD062AB44ABF0075775E /* EditKeywordViewController.swift in Sources */,
 				CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */,
 				CF531B152AA8211000803669 /* StepOneView.swift in Sources */,
 				CFE3175D2AAB257C000C7D27 /* ForecastSection.swift in Sources */,
@@ -506,7 +523,6 @@
 				CFFAD5372AA849F800F56444 /* StepThreeView.swift in Sources */,
 				CF5CC8C22AACCD2D008B0E1E /* SearchViewModel.swift in Sources */,
 				CF1C61F52AADBD2400759248 /* UIViewController+Extension.swift in Sources */,
-				CFE317602AAB25D7000C7D27 /* MenuHeaderView.swift in Sources */,
 				CF5CC8AF2AAC2203008B0E1E /* NoticeHeaderView.swift in Sources */,
 				CF6B2CE82AA7229000A4A726 /* BaseViewController.swift in Sources */,
 				CFC41EEB2AA9796F009732C2 /* CurrentWeather.swift in Sources */,
@@ -520,7 +536,6 @@
 				CFC41EE72AA96D7D009732C2 /* CLLocation+Extension.swift in Sources */,
 				CF5CC8BE2AAC6ED3008B0E1E /* Date+Extension.swift in Sources */,
 				CFC41EF52AA97D08009732C2 /* NetworkServiceType.swift in Sources */,
-				CF790D322AA8AC5E003DE5E2 /* MapViewController.swift in Sources */,
 				CFC41EED2AA979E6009732C2 /* WeatherApiType.swift in Sources */,
 				CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */,
 				CF6B2CFE2AA72B7E00A4A726 /* GuideView.swift in Sources */,
@@ -530,6 +545,7 @@
 				CF531B182AA825E100803669 /* StepTwoView.swift in Sources */,
 				CF5CC8B12AAC29E7008B0E1E /* Notice.swift in Sources */,
 				CF5CC8BA2AAC6D58008B0E1E /* NoticeViewController.swift in Sources */,
+				CF319CDD2AB07B64007039A6 /* AutoPaddingButton.swift in Sources */,
 				CF6B2CE62AA6EEAE00A4A726 /* WelcomeViewController.swift in Sources */,
 				CF6B2CF82AA724BE00A4A726 /* UIColor+Extension.swift in Sources */,
 				CFFAD53B2AA84F8200F56444 /* User.swift in Sources */,

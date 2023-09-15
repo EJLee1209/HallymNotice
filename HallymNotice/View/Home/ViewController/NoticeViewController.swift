@@ -12,7 +12,6 @@ import CombineCocoa
 class NoticeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
-    
     private lazy var tabView: TabView = {
         let view = TabView()
         view.setup(items: NoticeCategory.allCases)
@@ -156,7 +155,7 @@ class NoticeViewController: UIViewController, BaseViewController {
         
         viewModel.isLoading
             .map { !$0 }
-            .assign(to: \.isHidden, on: self.blurView)
+            .assign(to: \.isHidden, on: self.blurView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         collectionView.didSelectItemPublisher

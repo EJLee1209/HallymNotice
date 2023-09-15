@@ -38,7 +38,9 @@ class WebViewController: UIViewController {
         }
     }
     func bind(urlString: String) {
-        guard let url = URL(string: urlString) else { return }
+        let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url = URL(string: encodedStr) else { return }
         let request = URLRequest(url: url)
         
         self.webView.load(request)

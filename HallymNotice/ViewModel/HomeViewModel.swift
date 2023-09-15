@@ -16,12 +16,6 @@ final class HomeViewModel {
     private var weatherDataSource: ForecastDataSource?
     private var homeDataSource: HomeDataSource?
     
-    // DifableSnapshot
-    private var homeSnapshot: HomeSnapshot = {
-        var snapshot = HomeSnapshot()
-        snapshot.appendSections(HomeSection.allCases)
-        return snapshot
-    }()
     
     // Service
     private let locationProvider: LocationProviderType
@@ -111,10 +105,6 @@ final class HomeViewModel {
     func setupHomeDataSource(collectionView: UICollectionView) {
         homeDataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
-            case .menu(let value):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.menuCellIdentifier, for: indexPath) as! MenuCell
-                cell.bind(text: value)
-                return cell
             case .notice(let notice):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noticeCellIdentifier, for: indexPath) as! NoticeCell
                 cell.bind(date: self.todayDateString, notice: notice)
@@ -124,16 +114,12 @@ final class HomeViewModel {
         
         homeDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
             switch kind {
-            case Constants.menuHeaderViewKind:
-                
-                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.menuHeaderIdentifier, for: indexPath) as! MenuHeaderView
-                header.bind(viewModel: self)
-                return header
             case Constants.noticeHeaderViewKind:
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.noticeHeaderIdentifier, for: indexPath) as! NoticeHeaderView
                 header.buttonTapped = { [weak self] in
                     self?.showAllNoticeButtonTapSubject.send(())
                 }
+                header.bind(viewModel: self)
                 return header
             
             default:
@@ -146,8 +132,10 @@ final class HomeViewModel {
         with sectionItem: [HomeSectionItem],
         toSection: HomeSection
     ) {
-        homeSnapshot.appendItems(sectionItem, toSection: toSection)
-        homeDataSource?.apply(homeSnapshot, animatingDifferences: true)
+        var snapshot = HomeSnapshot()
+        snapshot.appendSections(HomeSection.allCases)
+        snapshot.appendItems(sectionItem, toSection: toSection)
+        homeDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     //MARK: - HomeHeader CollectionView DiffableDataSource
@@ -174,8 +162,6 @@ final class HomeViewModel {
     
     func selectedSectionItem(section: Int, index: Int) -> HomeSectionItem {
         switch HomeSection.allCases[section] {
-        case .menu:
-            return HomeSectionItem.menu("")
         case .notice:
             return HomeSectionItem.notice(self.noticeList.value[index])
         }

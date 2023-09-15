@@ -14,7 +14,7 @@ final class WeatherView: UIView {
     //MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeFont.bold(ofSize: 16)
+        label.font = ThemeFont.bold(ofSize: 18)
         label.text = Constants.homeTitle1
         return label
     }()

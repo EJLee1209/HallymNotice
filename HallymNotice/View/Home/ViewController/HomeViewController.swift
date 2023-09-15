@@ -26,9 +26,7 @@ class HomeViewController: UIViewController, BaseViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: self.makeFlowLayout())
-        cv.register(MenuHeaderView.self, forSupplementaryViewOfKind: Constants.menuHeaderViewKind, withReuseIdentifier: Constants.menuHeaderIdentifier)
         cv.register(NoticeHeaderView.self, forSupplementaryViewOfKind: Constants.noticeHeaderViewKind, withReuseIdentifier: Constants.noticeHeaderIdentifier)
-        cv.register(MenuCell.self, forCellWithReuseIdentifier: Constants.menuCellIdentifier)
         cv.register(NoticeCell.self, forCellWithReuseIdentifier: Constants.noticeCellIdentifier)
         cv.delaysContentTouches = false
         cv.alwaysBounceVertical = true
@@ -63,11 +61,12 @@ class HomeViewController: UIViewController, BaseViewController {
     //MARK: - Helpers
     func layout() {
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = bellButton
+        navigationItem.rightBarButtonItems = [bellButton]
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.bottom.equalToSuperview()
         }
         
     }
@@ -75,8 +74,8 @@ class HomeViewController: UIViewController, BaseViewController {
     func bind() {
         viewModel.setupHomeDataSource(collectionView: self.collectionView)
         
-        let menuItem = (1...10).map { HomeSectionItem.menu(String($0)) }
-        viewModel.updateHome(with: menuItem, toSection: .menu)
+        viewModel.updateHome(with: [], toSection: .notice)
+        
         viewModel.showAllNoticeButtonTap
             .sink { [weak self] _ in
                 self?.showAllNotice()
@@ -87,8 +86,6 @@ class HomeViewController: UIViewController, BaseViewController {
                 self?.viewModel.selectedSectionItem(section: indexPath.section, index: indexPath.row)
             }.sink{ [weak self] notice in
                 switch notice {
-                case .menu(let menu):
-                    print(menu)
                 case .notice(let notice):
                     self?.loadWebView(urlString: notice.detailLink)
                 }
@@ -116,6 +113,7 @@ class HomeViewController: UIViewController, BaseViewController {
     @objc private func bellButtonTapped() {
         print("DEBUG: bell button tapped")
     }
+    
 }
 
 
@@ -126,57 +124,12 @@ extension HomeViewController {
 
         let layout = UICollectionViewCompositionalLayout { section, ev -> NSCollectionLayoutSection? in
             switch HomeSection.allCases[section] {
-            case .menu:
-                return self.makeMenuSection()
             case .notice:
                 return self.makeNoticeSection()
             }
         }
 
         return layout
-    }
-    
-    private func makeMenuSection() -> NSCollectionLayoutSection? {
-        
-        // item
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 0,
-            bottom: 0,
-            trailing: 10
-        )
-        // group
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.8),
-            heightDimension: .estimated(146))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        // Section
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 19,
-            leading: 15,
-            bottom: 28,
-            trailing: 15)
-        
-        // 수평 스크롤 설정
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        
-        // header
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(200))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: Constants.menuHeaderViewKind,
-            alignment: .top)
-
-        section.boundarySupplementaryItems = [header]
-        return section
     }
     
     private func makeNoticeSection() -> NSCollectionLayoutSection? {
@@ -206,14 +159,15 @@ extension HomeViewController {
             bottom: 15,
             trailing: 15)
         
+        // header
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(30))
+            heightDimension: .estimated(200))
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: Constants.noticeHeaderViewKind,
             alignment: .top)
-        
+
         section.boundarySupplementaryItems = [header]
         
         return section

@@ -14,9 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let tabBarController = makeTabBarController()
-        
-        window.rootViewController = tabBarController
+        window.rootViewController = makeTabBarController()
         
         self.window = window
         window.makeKeyAndVisible()
@@ -39,12 +37,6 @@ extension SceneDelegate {
             rootViewController: homeVC)
         
         
-        let mapVC = MapViewController()
-        let mapNav = makeNav(
-            unselectedImage: UIImage(systemName: "map"),
-            selectedImage: UIImage(systemName: "map.fill"),
-            rootViewController: mapVC)
-        
         let menuVC = MenuViewController()
         let menuNav = makeNav(
             unselectedImage: UIImage(systemName: "line.3.horizontal"),
@@ -55,11 +47,10 @@ extension SceneDelegate {
         
         tabBarController.tabBar.backgroundColor = .white
         tabBarController.setViewControllers([
-            mapNav,
             homeNav,
             menuNav
         ], animated: true)
-        tabBarController.selectedIndex = 1
+        tabBarController.selectedIndex = 0
         
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.stackedLayoutAppearance.selected.iconColor = ThemeColor.primary
