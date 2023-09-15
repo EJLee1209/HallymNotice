@@ -114,9 +114,6 @@ class HomeViewController: UIViewController, BaseViewController {
         print("DEBUG: bell button tapped")
     }
     
-    @objc private func gearButtonTapped() {
-        print("DEBUG: gear button tapped")
-    }
 }
 
 
