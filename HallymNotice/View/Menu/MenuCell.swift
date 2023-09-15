@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CombineCocoa
+import Combine
 
 final class MenuCell: UITableViewCell {
     //MARK: - Properties
@@ -29,23 +31,21 @@ final class MenuCell: UITableViewCell {
         return label
     }()
     
-    private lazy var hStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [imageBackgroundView, menuLabel])
-        sv.axis = .horizontal
-        sv.spacing = 12
-        sv.alignment = .center
-        return sv
-    }()
-    
-    private let switchView: UISwitch = .init()
     private let rightArrowImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.image = UIImage(systemName: "chevron.right")
         iv.tintColor = ThemeColor.gray
         return iv
     }()
     
+    private lazy var hStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [imageBackgroundView, menuLabel, rightArrowImageView])
+        sv.axis = .horizontal
+        sv.spacing = 12
+        sv.alignment = .center
+        return sv
+    }()
     
     static let identifier = "menuCell"
     
@@ -78,13 +78,5 @@ final class MenuCell: UITableViewCell {
         menuLabel.text = type.rawValue
         menuImageView.image = type.image
         imageBackgroundView.backgroundColor = type.imageBackgroundColor
-    }
-    
-    func setRightContent(isToggleView: Bool = false) {
-        if isToggleView {
-            hStackView.addArrangedSubview(switchView)
-        } else {
-            hStackView.addArrangedSubview(rightArrowImageView)
-        }
     }
 }

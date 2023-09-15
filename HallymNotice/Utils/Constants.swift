@@ -14,6 +14,7 @@ struct Constants {
     static let welcomeSubTitle1 = "\n알림 키워드를 등록하고,\n새로운 공지사항 알림을 받아보세요!"
     static let welcomeAdvice = "1개 이상 선택 필수 (나중에 바꿀 수 있어요!)"
     static let inputPlaceHolder = "직접 입력해서 추가"
+    static let inputPlaceHolder2 = "등록할 키워드를 입력해주세요"
     
     static let welcomeTitle2 = "새 공지가 올라왔을 때,"
     static let welcomeSubTitle2 = "\n알림을 받으시겠어요?"

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import Combine
+import CombineCocoa
 
 class MenuViewController: UIViewController, BaseViewController {
     
@@ -20,6 +21,8 @@ class MenuViewController: UIViewController, BaseViewController {
         return tv
     }()
     
+    
+    private var cancellables: Set<AnyCancellable> = .init()
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +48,41 @@ class MenuViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
-        
+        tableView.didSelectRowPublisher
+            .handleEvents(receiveOutput: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .map { Menu.allCases[$0.row] }
+            .sink { [weak self] menu in
+                self?.selectMenu(menu)
+            }.store(in: &cancellables)
     }
     
+    private func selectMenu(_ menu: Menu) {
+        switch menu {
+        case .notification:
+            self.openAppSettings()
+        case .keywords:
+            self.navigateToEditKeywordVC()
+        case .talkToDeveloper:
+            print("개발자에게 한마디")
+        case .privacyPolicy:
+            self.loadWebView(urlString: "https://sites.google.com/view/hallym-notice-privacy/홈")
+        }
+    }
 
+    private func openAppSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    private func navigateToEditKeywordVC() {
+        let vc = EditKeywordViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MenuViewController: UITableViewDataSource {
@@ -60,13 +94,6 @@ extension MenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuCell.identifier, for: indexPath) as! MenuCell
         let type = Menu.allCases[indexPath.row]
         cell.bind(type: type)
-        if type == .notification {
-            cell.setRightContent(isToggleView: true)
-        } else {
-            cell.setRightContent()
-        }
-        
-        
         return cell
     }
 }
