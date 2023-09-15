@@ -12,7 +12,6 @@ import CombineCocoa
 class NoticeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
-    
     private lazy var tabView: TabView = {
         let view = TabView()
         view.setup(items: NoticeCategory.allCases)

@@ -27,7 +27,6 @@ class HomeViewController: UIViewController, BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: self.makeFlowLayout())
         cv.register(NoticeHeaderView.self, forSupplementaryViewOfKind: Constants.noticeHeaderViewKind, withReuseIdentifier: Constants.noticeHeaderIdentifier)
-        cv.register(MenuCell.self, forCellWithReuseIdentifier: Constants.menuCellIdentifier)
         cv.register(NoticeCell.self, forCellWithReuseIdentifier: Constants.noticeCellIdentifier)
         cv.delaysContentTouches = false
         cv.alwaysBounceVertical = true
@@ -62,7 +61,7 @@ class HomeViewController: UIViewController, BaseViewController {
     //MARK: - Helpers
     func layout() {
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = bellButton
+        navigationItem.rightBarButtonItems = [bellButton]
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -113,6 +112,10 @@ class HomeViewController: UIViewController, BaseViewController {
     
     @objc private func bellButtonTapped() {
         print("DEBUG: bell button tapped")
+    }
+    
+    @objc private func gearButtonTapped() {
+        print("DEBUG: gear button tapped")
     }
 }
 

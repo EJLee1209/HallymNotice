@@ -14,6 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
+        window.rootViewController = makeTabBarController()
+        
+        self.window = window
+        window.makeKeyAndVisible()
+    }
+    
+}
+
+extension SceneDelegate {
+    
+    private func makeTabBarController() -> UITabBarController {
         let locationProvider = CoreLocationProvider()
         let weatherApi = WeatherApi()
         let crawlingService = CrawlingService()
@@ -25,15 +36,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             selectedImage: UIImage(systemName: "house.fill"),
             rootViewController: homeVC)
         
-        window.rootViewController = homeNav
         
-        self.window = window
-        window.makeKeyAndVisible()
+        let menuVC = MenuViewController()
+        let menuNav = makeNav(
+            unselectedImage: UIImage(systemName: "line.3.horizontal"),
+            selectedImage: UIImage(systemName: "line.3.horizontal"),
+            rootViewController: menuVC)
+        
+        let tabBarController = UITabBarController()
+        
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.setViewControllers([
+            homeNav,
+            menuNav
+        ], animated: true)
+        tabBarController.selectedIndex = 0
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = ThemeColor.primary
+        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = ThemeColor.gray
+        tabBarController.tabBar.standardAppearance = tabBarAppearance
+        
+        return tabBarController
     }
-    
-}
-
-extension SceneDelegate {
     
     private func makeNav(
         unselectedImage: UIImage?,

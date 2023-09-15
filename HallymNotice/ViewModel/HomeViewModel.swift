@@ -16,12 +16,6 @@ final class HomeViewModel {
     private var weatherDataSource: ForecastDataSource?
     private var homeDataSource: HomeDataSource?
     
-    // DifableSnapshot
-    private var homeSnapshot: HomeSnapshot = {
-        var snapshot = HomeSnapshot()
-        snapshot.appendSections(HomeSection.allCases)
-        return snapshot
-    }()
     
     // Service
     private let locationProvider: LocationProviderType
@@ -138,8 +132,10 @@ final class HomeViewModel {
         with sectionItem: [HomeSectionItem],
         toSection: HomeSection
     ) {
-        homeSnapshot.appendItems(sectionItem, toSection: toSection)
-        homeDataSource?.apply(homeSnapshot, animatingDifferences: true)
+        var snapshot = HomeSnapshot()
+        snapshot.appendSections(HomeSection.allCases)
+        snapshot.appendItems(sectionItem, toSection: toSection)
+        homeDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     //MARK: - HomeHeader CollectionView DiffableDataSource
