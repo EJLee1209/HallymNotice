@@ -55,6 +55,7 @@
 		CFA4CD002AB435970075775E /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CCFF2AB435970075775E /* MenuCell.swift */; };
 		CFA4CD022AB43E430075775E /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD012AB43E430075775E /* Menu.swift */; };
 		CFA4CD062AB44ABF0075775E /* EditKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */; };
+		CFBD49822ABDBEE70094D2F1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD49812ABDBEE70094D2F1 /* AuthService.swift */; };
 		CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */; };
 		CFC41EE52AA96D28009732C2 /* CoreLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */; };
 		CFC41EE72AA96D7D009732C2 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */; };
@@ -123,6 +124,7 @@
 		CFA4CCFF2AB435970075775E /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		CFA4CD012AB43E430075775E /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKeywordViewController.swift; sourceTree = "<group>"; };
+		CFBD49812ABDBEE70094D2F1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProviderType.swift; sourceTree = "<group>"; };
 		CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationProvider.swift; sourceTree = "<group>"; };
 		CFC41EE62AA96D7D009732C2 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
@@ -336,16 +338,25 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		CFC41EE02AA96CA9009732C2 /* Service */ = {
+		CFBD49832ABDC2EB0094D2F1 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */,
-				CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */,
 				CFC41EEC2AA979E6009732C2 /* WeatherApiType.swift */,
 				CFC41EF42AA97D08009732C2 /* NetworkServiceType.swift */,
+				CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CFC41EE02AA96CA9009732C2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CFBD49832ABDC2EB0094D2F1 /* Protocol */,
+				CFC41EE42AA96D28009732C2 /* CoreLocationProvider.swift */,
 				CFC41EF62AA97E1E009732C2 /* WeatherApi.swift */,
 				CF5CC8B52AAC2A25008B0E1E /* CrawlingService.swift */,
-				CF5CC8B72AAC2DDE008B0E1E /* CrawlingServiceType.swift */,
+				CFBD49812ABDBEE70094D2F1 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -543,6 +554,7 @@
 				CFFAD53B2AA84F8200F56444 /* User.swift in Sources */,
 				CF0F8C2C2AA8845E001466CD /* ForecastCell.swift in Sources */,
 				CF790D352AA8AD08003DE5E2 /* MenuViewController.swift in Sources */,
+				CFBD49822ABDBEE70094D2F1 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,6 +63,7 @@ struct Constants {
     //MARK: - end point
     static let currentWeatherEndpoint = "https://api.openweathermap.org/data/2.5/weather"
     static let forecastEndpoint = "https://api.openweathermap.org/data/2.5/forecast"
+    static let BASE_URL = "https://3aa5-2001-2d8-e2b6-59f8-24c7-91ba-52d0-7f66.ngrok.io"
     
     static let hallymEndpoint = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?"
 }
