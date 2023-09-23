@@ -60,12 +60,6 @@ class EditKeywordViewController: UIViewController, BaseViewController {
         bind()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        viewModel.updateKeywords()
-    }
-    
     //MARK: - Helpers
     func layout() {
         navigationItem.title = "알림 키워드 편집"

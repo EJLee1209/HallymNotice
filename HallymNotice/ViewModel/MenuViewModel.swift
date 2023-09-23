@@ -43,6 +43,7 @@ final class MenuViewModel {
         var newKeywords = keywords.value
         newKeywords.remove(at: index)
         keywords.send(newKeywords)
+        updateKeywords(keywords: newKeywords)
     }
     
     func addKeyword(_ keyword: String) {
@@ -51,12 +52,13 @@ final class MenuViewModel {
         if !newKeywords.contains(keyword) {
             newKeywords.insert(keyword, at: 0)
             keywords.send(newKeywords)
+            updateKeywords(keywords: newKeywords)
         }
     }
     
-    func updateKeywords() {
+    private func updateKeywords(keywords: [String]) {
         guard var user = self.user.value else { return }
-        user.keywords = self.keywords.value
+        user.keywords = keywords
         
         self.authService.updateKeywords(user: user)
             .sink { completion in
