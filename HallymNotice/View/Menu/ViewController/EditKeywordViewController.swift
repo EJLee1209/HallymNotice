@@ -40,12 +40,30 @@ class EditKeywordViewController: UIViewController, BaseViewController {
     private var cancellables: Set<AnyCancellable> = .init()
     private var keywords: [String] = Constants.defaultKeywords.map { $0.text }
     
+    private let viewModel: MenuViewModel
+    
+    //MARK: - init
+    init(viewModel: MenuViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         layout()
         bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.updateKeywords()
     }
     
     //MARK: - Helpers
@@ -65,31 +83,25 @@ class EditKeywordViewController: UIViewController, BaseViewController {
     func bind() {
         inputTextField.doneButtonTap
             .sink { [weak self] keyword in
-                self?.addKeywords(keyword: keyword)
+                self?.viewModel.addKeyword(keyword)
             }.store(in: &cancellables)
-    }
-    
-    func addKeywords(keyword: String) {
-        if !keywords.contains(keyword) {
-            keywords.insert(keyword, at: 0)
-            tableView.reloadData()
-        }
-    }
-    func removeKeywords(at indexPath: IndexPath, to tableView: UITableView) {
-        keywords.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        viewModel.keywordsPublisher
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }.store(in: &cancellables)
     }
 }
 
 //MARK: - UITableViewDataSource
 extension EditKeywordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keywords.count
+        return viewModel.keywordsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "keywordCell", for: indexPath)
-        cell.textLabel?.text = keywords[indexPath.row]
+        cell.textLabel?.text = viewModel.keyword(for: indexPath.row)
         return cell
     }
     
@@ -102,7 +114,8 @@ extension EditKeywordViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.removeKeywords(at: indexPath, to: tableView)
+            viewModel.removeKeyword(for: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

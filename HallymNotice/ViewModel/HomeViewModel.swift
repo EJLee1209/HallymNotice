@@ -16,21 +16,28 @@ final class HomeViewModel {
     private var weatherDataSource: ForecastDataSource?
     private var homeDataSource: HomeDataSource?
     
-    
     // Service
     private let locationProvider: LocationProviderType
     private let weatherApi: WeatherApiType
     private let crawlingService: CrawlingServiceType
+    private let authService: AuthServiceType
     
     var cancellables: Set<AnyCancellable> = .init()
     private lazy var todayDateString = Date.todayDateString()
+    private var user: User?
     
     //MARK: - init
-    init(locationProvider: LocationProviderType, weatherApi: WeatherApiType, crawlingService: CrawlingServiceType) {
+    init(
+        locationProvider: LocationProviderType,
+        weatherApi: WeatherApiType,
+        crawlingService: CrawlingServiceType,
+        authService: AuthServiceType
+    ) {
         // 의존성 주입
         self.locationProvider = locationProvider
         self.weatherApi = weatherApi
         self.crawlingService = crawlingService
+        self.authService = authService
         
         // 현재 날씨 publisher 구독
         self.weatherApi.currentWeather
@@ -59,7 +66,6 @@ final class HomeViewModel {
                 let sectionItem = noticeList.map { HomeSectionItem.notice($0) }
                 self?.updateHome(with: sectionItem, toSection: .notice) // notice 섹션 데이터 업데이트
             }.store(in: &cancellables)
-        
     }
     
     //MARK: - Output
@@ -94,6 +100,11 @@ final class HomeViewModel {
     }
     
     private let noticeList: CurrentValueSubject<[Notice], Never> = .init([])
+    
+    private let presentWelcomeVCSubject: PassthroughSubject<Void, Never> = .init()
+    var presentWelcomeVC: AnyPublisher<Void, Never> {
+        return presentWelcomeVCSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
+    }
     
     //MARK: - Intput
     private let showAllNoticeButtonTapSubject: PassthroughSubject<Void, Never> = .init()
@@ -166,6 +177,24 @@ final class HomeViewModel {
             return HomeSectionItem.notice(self.noticeList.value[index])
         }
         
+    }
+    
+    func makeWelcomeViewModel() -> WelcomeViewModel {
+        return WelcomeViewModel(authService: self.authService)
+    }
+    
+    func checkUser() {
+        self.authService.getUser()
+            .sink { _ in
+                
+            } receiveValue: { [weak self] response in
+                if response.status == ResponseStatus.error {
+                    self?.presentWelcomeVCSubject.send(())
+                    return
+                }
+                
+                self?.user = response.user
+            }.store(in: &cancellables)
     }
 }
 

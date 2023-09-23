@@ -28,16 +28,22 @@ extension SceneDelegate {
         let locationProvider = CoreLocationProvider()
         let weatherApi = WeatherApi()
         let crawlingService = CrawlingService()
+        let authService = AuthService()
         
-        let homeVM = HomeViewModel(locationProvider: locationProvider, weatherApi: weatherApi, crawlingService: crawlingService)
+        let homeVM = HomeViewModel(
+            locationProvider: locationProvider,
+            weatherApi: weatherApi,
+            crawlingService: crawlingService,
+            authService: authService
+        )
         let homeVC = HomeViewController(viewModel: homeVM)
         let homeNav = makeNav(
             unselectedImage: UIImage(systemName: "house"),
             selectedImage: UIImage(systemName: "house.fill"),
             rootViewController: homeVC)
         
-        
-        let menuVC = MenuViewController()
+        let menuVM = MenuViewModel(authService: authService)
+        let menuVC = MenuViewController(viewModel: menuVM)
         let menuNav = makeNav(
             unselectedImage: UIImage(systemName: "line.3.horizontal"),
             selectedImage: UIImage(systemName: "line.3.horizontal"),

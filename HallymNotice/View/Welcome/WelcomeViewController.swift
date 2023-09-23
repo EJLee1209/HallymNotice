@@ -12,18 +12,10 @@ import Lottie
 
 final class WelcomeViewController: UIViewController, BaseViewController {
     //MARK: - Properties
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        button.setTitle(" 뒤로", for: .normal)
-        button.tintColor = .black
-        return button
-    }()
     
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
     private let stepTwoView: StepTwoView = .init()
-    private let stepThreeView: StepThreeView = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
     let viewModel: WelcomeViewModel
@@ -45,6 +37,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         
         layout()
         bind()
+        
         
     }
     
@@ -68,13 +61,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
             make.left.right.equalToSuperview().inset(18)
         }
         
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(18)
-        }
-        
         layoutStepOne()
-        layoutStepTwo()
         layoutStepThree()
     }
     
@@ -87,18 +74,9 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         }
     }
     
-    func layoutStepTwo() {
+    func layoutStepThree() {
         view.addSubview(stepTwoView)
         stepTwoView.snp.makeConstraints { make in
-            make.top.equalTo(guideView.snp.bottom).offset(66)
-            make.left.right.equalToSuperview().inset(18)
-            make.bottom.equalTo(view).offset(-50)
-        }
-    }
-    
-    func layoutStepThree() {
-        view.addSubview(stepThreeView)
-        stepThreeView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
             make.bottom.equalTo(view).offset(-50)
@@ -121,10 +99,6 @@ final class WelcomeViewController: UIViewController, BaseViewController {
                 }
             }.store(in: &cancellables)
         
-        viewModel.backButtonIsHidden
-            .assign(to: \.isHidden, on: self.backButton, animation: .fade(duration: 0.5))
-            .store(in: &cancellables)
-        
         viewModel.stepOneViewIsHidden
             .assign(to: \.isHidden, on: self.stepOneView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
@@ -133,33 +107,17 @@ final class WelcomeViewController: UIViewController, BaseViewController {
             .handleEvents(receiveOutput: { [weak self] isHidden in
                 if !isHidden {
                     self?.stepTwoView.playAnimate()
-                } else{
-                    self?.stepTwoView.pauseAnimate()
                 }
             })
             .assign(to: \.isHidden, on: self.stepTwoView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
-        viewModel.stepThreeViewIsHidden
-            .handleEvents(receiveOutput: { [weak self] isHidden in
-                if !isHidden {
-                    self?.stepThreeView.playAnimate()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now()+4) { [weak self] in
-                        self?.dismiss(animated: true)
-                    }
-                }
-            })
-            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 0.5))
-            .store(in: &cancellables)
-        
-        backButton.tapPublisher
+        viewModel.endOfResister
             .sink { [weak self] _ in
-                self?.viewModel.stepChanged(step: 1)
+                self?.dismiss(animated: true)
             }.store(in: &cancellables)
         
         stepOneView.bind(viewModel: viewModel)
-        stepTwoView.bind(viewModel: viewModel)
     }
     
     

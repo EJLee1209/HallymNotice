@@ -12,30 +12,45 @@ enum ApiError: Error {
     case emptyToken
 }
 
-struct AuthResponse: Codable {
-    let success: Bool
+enum ResponseStatus: String, Codable {
+    case error
+    case success
 }
 
-final class AuthService: NetworkServiceType {
-    
-    func saveUser(keywords: [String]) -> AnyPublisher<AuthResponse, Error> {
+struct AuthResponse: Codable {
+    let status: ResponseStatus
+    let errorMsg: String?
+    let user: User?
+}
+
+final class AuthService: NetworkServiceType, AuthServiceType {
+    func register(keywords: [String]) -> AnyPublisher<AuthResponse, Error> {
         guard let token = getFCMToken() else { return Empty().eraseToAnyPublisher() }
         
-        let endpoint = "\(Constants.BASE_URL)/user"
-        let user = User(fcmToken: token, keywords: keywords)
+        let endpoint = "\(Constants.BASE_URL)/register"
+        let user = User(id: 0, fcmToken: token, keywords: keywords)
         return requestPost(endPoint: endpoint, body: user, modelType: AuthResponse.self)
     }
     
-    func updateUser(keywords: [String]) -> AnyPublisher<AuthResponse, Error> {
+    func updateKeywords(user: User) -> AnyPublisher<AuthResponse, Error> {
         guard let token = getFCMToken() else { return Empty().eraseToAnyPublisher() }
         
-        let endpoint = "\(Constants.BASE_URL)/update"
-        let user = User(fcmToken: token, keywords: keywords)
+        let endpoint = "\(Constants.BASE_URL)/update/keywords"
+        print("DEBUG update keywords user : \(user)")
         return requestPost(endPoint: endpoint, body: user, modelType: AuthResponse.self)
     }
     
-    func getFCMToken() -> String? {
+    func getUser() -> AnyPublisher<AuthResponse, Error> {
+        let endPoint = "\(Constants.BASE_URL)/user?id=\(getId())"
+        let url = URL(string: endPoint)!
+        return requestGET(url: url, decodeType: AuthResponse.self)
+    }
+    
+    private func getId() -> Int {
+        return UserDefaults.standard.integer(forKey: "myId")
+    }
+    
+    private func getFCMToken() -> String? {
         return UserDefaults.standard.string(forKey: "fcmToken")
     }
-    
 }

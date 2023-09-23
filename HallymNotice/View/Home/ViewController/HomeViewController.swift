@@ -55,7 +55,6 @@ class HomeViewController: UIViewController, BaseViewController {
         
         layout()
         bind()
-//        presentWelcomeVC()
     }
     
     //MARK: - Helpers
@@ -91,11 +90,19 @@ class HomeViewController: UIViewController, BaseViewController {
                 }
             }
             .store(in: &cancellables)
-
+        
+        viewModel.presentWelcomeVC
+            .sink { [weak self] _ in
+                self?.presentWelcomeVC()
+            }.store(in: &cancellables)
+        
+        viewModel.checkUser()
+        
+    
     }
     
     private func presentWelcomeVC() {
-        let welcomeVM = WelcomeViewModel(keywords: Constants.defaultKeywords)
+        let welcomeVM = viewModel.makeWelcomeViewModel()
         let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
         welcomeVC.modalPresentationStyle = .fullScreen
         present(welcomeVC, animated: true)

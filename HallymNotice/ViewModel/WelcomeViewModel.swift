@@ -20,6 +20,8 @@ final class WelcomeViewModel {
     private var dataSource: KeywordDataSource?
     private var cancellables: Set<AnyCancellable> = .init()
     
+    private let authService: AuthServiceType
+    
     //MARK: - Output
     
     // default 키워드들 or 커스텀 키워드
@@ -39,8 +41,7 @@ final class WelcomeViewModel {
     
 //    설정 단계
 //    1단계 : 키워드 등록
-//    2단계 : 새 공지 알림 여부 확인
-//    3단계 : 모든 설정 완료
+//    2단계 : 모든 설정 완료
     private let stepSubject: CurrentValueSubject<Int, Never> = .init(1)
     var step: AnyPublisher<Int, Never> {
         return stepSubject.eraseToAnyPublisher()
@@ -64,30 +65,26 @@ final class WelcomeViewModel {
         return stepOneViewIsHiddenSubject.eraseToAnyPublisher()
     }
     
-    // stepTwoView isHidden
+    // stepThreeView isHidden
     private let stepTwoViewIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
     var stepTwoViewIsHidden: AnyPublisher<Bool, Never> {
         return stepTwoViewIsHiddenSubject.eraseToAnyPublisher()
     }
     
-    // stepThreeView isHidden
-    private let stepThreeViewIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
-    var stepThreeViewIsHidden: AnyPublisher<Bool, Never> {
-        return stepThreeViewIsHiddenSubject.eraseToAnyPublisher()
+    private let endOfResisterSubject: PassthroughSubject<Void, Never> = .init()
+    var endOfResister: AnyPublisher<Void, Never> {
+        return endOfResisterSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
     
-    // backButton isHidden
-    private let backButtonIsHiddenSubject: CurrentValueSubject<Bool, Never> = .init(true)
-    var backButtonIsHidden: AnyPublisher<Bool, Never> {
-        return backButtonIsHiddenSubject.eraseToAnyPublisher()
+    private let errorMsgSubject: PassthroughSubject<String, Never> = .init()
+    var errorMsg: AnyPublisher<String, Never> {
+        return errorMsgSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
-    
-    // 새 공지가 올라왔을 때 알림 수신 여부
-    var isNewNoticeReceiveNotify: Bool = false
     
     //MARK: - init
-    init(keywords: [Keyword]) {
-        self.keywordsSubject = .init(keywords)
+    init(authService: AuthServiceType) {
+        self.keywordsSubject = .init(Constants.defaultKeywords)
+        self.authService = authService
         
         self.keywordsSubject
             .sink { [weak self] update in
@@ -97,14 +94,11 @@ final class WelcomeViewModel {
                 self?.selectedKeywords = selected
                 self?.validationSubject.send(selected.count > 0)
             }.store(in: &cancellables)
-        
-        
     }
     
     private var lastGuideText: String {
         let keywordsCount = selectedKeywords.count
-        let isNewNotiStr = isNewNoticeReceiveNotify ? "O" : "X"
-        let subTitle = "\n\(keywordsCount)개 키워드 등록,\n새 공지 알림 \(isNewNotiStr)\n\n공지 사항을 놓치지 않게 해드릴게요."
+        let subTitle = "\n\(keywordsCount)개 키워드 등록,\n\n공지 사항을 놓치지 않게 해드릴게요."
         
         return subTitle
     }
@@ -140,28 +134,29 @@ final class WelcomeViewModel {
             // 단계별 View의 isHidden 속성값 변경
             stepOneViewIsHiddenSubject.send(false)
             stepTwoViewIsHiddenSubject.send(true)
-            stepThreeViewIsHiddenSubject.send(true)
-            
-            // Back Button의 isHidden 속성값 변경
-            backButtonIsHiddenSubject.send(true)
         case 2:
             guideTitleSubject.send(Constants.welcomeTitle2)
-            guideSubTitleSubject.send(Constants.welcomeSubTitle2)
-            
-            stepOneViewIsHiddenSubject.send(true)
-            stepTwoViewIsHiddenSubject.send(false)
-            stepThreeViewIsHiddenSubject.send(true)
-            
-            backButtonIsHiddenSubject.send(false)
-        case 3:
-            guideTitleSubject.send(Constants.welcomeTitle3)
             guideSubTitleSubject.send(lastGuideText)
             
             stepOneViewIsHiddenSubject.send(true)
-            stepTwoViewIsHiddenSubject.send(true)
-            stepThreeViewIsHiddenSubject.send(false)
+            stepTwoViewIsHiddenSubject.send(false)
             
-            backButtonIsHiddenSubject.send(true)
+            self.authService.register(keywords: selectedKeywords)
+                .sink { [weak self] completion in
+                    switch completion {
+                    case .failure(let error):
+                        self?.errorMsgSubject.send(error.localizedDescription)
+                    default:
+                        break
+                    }
+                } receiveValue: { [weak self] response in
+                    guard let id = response.user?.id else { return }
+                    
+                    UserDefaults.standard.set(id, forKey: "myId")
+                    DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+                        self?.endOfResisterSubject.send(())
+                    }
+                }.store(in: &cancellables)
         default:
             return
         }
