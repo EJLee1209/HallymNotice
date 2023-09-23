@@ -71,9 +71,9 @@ final class WelcomeViewModel {
         return stepTwoViewIsHiddenSubject.eraseToAnyPublisher()
     }
     
-    private let endOfResisterSubject: PassthroughSubject<Void, Never> = .init()
-    var endOfResister: AnyPublisher<Void, Never> {
-        return endOfResisterSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
+    private let endOfRegisterSubject: PassthroughSubject<User?, Never> = .init()
+    var endOfRegister: AnyPublisher<User?, Never> {
+        return endOfRegisterSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
     
     private let errorMsgSubject: PassthroughSubject<String, Never> = .init()
@@ -154,7 +154,7 @@ final class WelcomeViewModel {
                     
                     UserDefaults.standard.set(id, forKey: "myId")
                     DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                        self?.endOfResisterSubject.send(())
+                        self?.endOfRegisterSubject.send(response.user)
                     }
                 }.store(in: &cancellables)
         default:

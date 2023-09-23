@@ -59,6 +59,6 @@ struct Constants {
     static let currentWeatherEndpoint = "https://api.openweathermap.org/data/2.5/weather"
     static let forecastEndpoint = "https://api.openweathermap.org/data/2.5/forecast"
     static let BASE_URL = "http://192.168.219.103:8080"
-    
+    static let privacyPolicyUrl = "https://sites.google.com/view/hallym-notice-privacy/홈"
     static let hallymEndpoint = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?"
 }

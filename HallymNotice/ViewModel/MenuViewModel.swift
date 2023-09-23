@@ -11,25 +11,18 @@ import Combine
 final class MenuViewModel {
     
     private let authService: AuthServiceType
-    
     private var cancellables: Set<AnyCancellable> = .init()
     
     init(authService: AuthServiceType) {
         self.authService = authService
         
-        user.sink { [weak self] user in
-            guard let keywords = user?.keywords else { return }
-            self?.keywords.send(keywords)
-        }.store(in: &cancellables)
+        user.dropFirst()
+            .sink { [weak self] user in
+                guard let keywords = user?.keywords else { return }
+                self?.keywords.send(keywords)
+            }.store(in: &cancellables)
         
-        authService.getUser()
-            .sink { completion in
-                print(completion)
-            } receiveValue: { [weak self] response in
-                self?.user.send(response.user)
-            }.store(in: &self.cancellables)
-
-        
+        self.getUser()
     }
     
     private var user: CurrentValueSubject<User?, Never> = .init(nil)
@@ -71,5 +64,19 @@ final class MenuViewModel {
             } receiveValue: { response in
                 print("DEBUG update : \(response)")
             }.store(in: &cancellables)
+    }
+    
+    func getUser() {
+        print("DEBUG getUser")
+        self.authService.getUser()
+            .sink { completion in
+                print(completion)
+            } receiveValue: { [weak self] response in
+                self?.user.send(response.user)
+            }.store(in: &self.cancellables)
+    }
+    
+    func newUser(user: User?) {
+        self.user.send(user)
     }
 }

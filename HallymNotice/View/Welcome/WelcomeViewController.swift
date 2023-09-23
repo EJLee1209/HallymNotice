@@ -10,15 +10,21 @@ import Combine
 import CombineCocoa
 import Lottie
 
+protocol WelcomeVCDelegate: AnyObject {
+    func endOfRegister(user: User?)
+}
+
 final class WelcomeViewController: UIViewController, BaseViewController {
     //MARK: - Properties
     
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
-    private let stepTwoView: StepTwoView = .init()
+    private let stepThreeView: StepTwoView = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
+    var delegate: WelcomeVCDelegate?
     let viewModel: WelcomeViewModel
+    
     
     //MARK: - init
     init(viewModel: WelcomeViewModel) {
@@ -29,6 +35,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     //MARK: - LifeCycle
     
@@ -75,8 +82,8 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     }
     
     func layoutStepThree() {
-        view.addSubview(stepTwoView)
-        stepTwoView.snp.makeConstraints { make in
+        view.addSubview(stepThreeView)
+        stepThreeView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
             make.bottom.equalTo(view).offset(-50)
@@ -106,14 +113,15 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         viewModel.stepTwoViewIsHidden
             .handleEvents(receiveOutput: { [weak self] isHidden in
                 if !isHidden {
-                    self?.stepTwoView.playAnimate()
+                    self?.stepThreeView.playAnimate()
                 }
             })
-            .assign(to: \.isHidden, on: self.stepTwoView, animation: .fade(duration: 0.5))
+            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
-        viewModel.endOfResister
-            .sink { [weak self] _ in
+        viewModel.endOfRegister
+            .sink { [weak self] user in
+                self?.delegate?.endOfRegister(user: user)
                 self?.dismiss(animated: true)
             }.store(in: &cancellables)
         
@@ -139,5 +147,9 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     
     @objc func keyboardDown() {
         self.view.transform = .identity
+    }
+    
+    @objc func endOfRegister() {
+        
     }
 }

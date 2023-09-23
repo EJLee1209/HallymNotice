@@ -40,7 +40,6 @@ class MenuViewController: UIViewController, BaseViewController {
         setupNav()
         layout()
         bind()
-        
     }
     
     //MARK: - Helpers
@@ -76,9 +75,9 @@ class MenuViewController: UIViewController, BaseViewController {
         case .keywords:
             self.navigateToEditKeywordVC()
         case .talkToDeveloper:
-            print("개발자에게 한마디")
+            print(menu.rawValue)
         case .privacyPolicy:
-            self.loadWebView(urlString: "https://sites.google.com/view/hallym-notice-privacy/홈")
+            self.loadWebView(urlString: Constants.privacyPolicyUrl)
         }
     }
 
@@ -94,8 +93,14 @@ class MenuViewController: UIViewController, BaseViewController {
         let vc = EditKeywordViewController(viewModel: self.viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //MARK: - Actions
+    @objc private func endOfRegister() {
+        viewModel.getUser()
+    }
 }
 
+//MARK: - UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Menu.allCases.count
@@ -106,5 +111,12 @@ extension MenuViewController: UITableViewDataSource {
         let type = Menu.allCases[indexPath.row]
         cell.bind(type: type)
         return cell
+    }
+}
+
+//MARK: - HomeVCDelegate
+extension MenuViewController: HomeVCDelegate {
+    func endOfRegister(user: User?) {
+        viewModel.newUser(user: user)
     }
 }

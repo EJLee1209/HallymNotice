@@ -10,6 +10,10 @@ import SnapKit
 import Combine
 import CombineCocoa
 
+protocol HomeVCDelegate: AnyObject {
+    func endOfRegister(user: User?)
+}
+
 class HomeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
@@ -35,6 +39,7 @@ class HomeViewController: UIViewController, BaseViewController {
     }()
     
     private var cancellables: Set<AnyCancellable> = .init()
+    var delegate: HomeVCDelegate?
     let viewModel: HomeViewModel
     
     
@@ -104,6 +109,7 @@ class HomeViewController: UIViewController, BaseViewController {
     private func presentWelcomeVC() {
         let welcomeVM = viewModel.makeWelcomeViewModel()
         let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
+        welcomeVC.delegate = self
         welcomeVC.modalPresentationStyle = .fullScreen
         present(welcomeVC, animated: true)
     }
@@ -180,4 +186,11 @@ extension HomeViewController {
         return section
     }
 
+}
+
+//MARK: - WelcomeVCDelegate
+extension HomeViewController: WelcomeVCDelegate {
+    func endOfRegister(user: User?) {
+        self.delegate?.endOfRegister(user: user)
+    }
 }
