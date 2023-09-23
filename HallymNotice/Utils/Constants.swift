@@ -48,8 +48,9 @@ struct Constants {
         Keyword(text: "근로", isSelected: false),
         Keyword(text: "인턴", isSelected: false),
         Keyword(text: "취업", isSelected: false),
+        Keyword(text: "현장실습", isSelected: false),
+        Keyword(text: "동아리", isSelected: false),
         Keyword(text: "병무청", isSelected: false),
-        Keyword(text: "버스", isSelected: false),
     ]
     
     //MARK: - apikey

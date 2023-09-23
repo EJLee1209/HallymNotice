@@ -184,9 +184,15 @@ final class HomeViewModel {
     }
     
     func checkUser() {
+        let id = UserDefaults.standard.integer(forKey: "myId")
+        if id == 0 {
+            self.presentWelcomeVCSubject.send(())
+            return
+        }
+        
         self.authService.getUser()
-            .sink { _ in
-                
+            .sink { completion in
+                print("DEBUG checkUser completion: \(completion)")
             } receiveValue: { [weak self] response in
                 if response.status == ResponseStatus.error {
                     self?.presentWelcomeVCSubject.send(())
