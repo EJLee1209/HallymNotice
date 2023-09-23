@@ -17,16 +17,6 @@ protocol HomeVCDelegate: AnyObject {
 class HomeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
-    private lazy var bellButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "bell"),
-            style: .done,
-            target: self,
-            action: #selector(bellButtonTapped)
-        )
-        button.tintColor = .black
-        return button
-    }()
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: self.makeFlowLayout())
@@ -65,7 +55,6 @@ class HomeViewController: UIViewController, BaseViewController {
     //MARK: - Helpers
     func layout() {
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItems = [bellButton]
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -118,13 +107,6 @@ class HomeViewController: UIViewController, BaseViewController {
         let noticeVM = viewModel.makeNoticeViewModel()
         let noticeVC = NoticeViewController(viewModel: noticeVM)
         navigationController?.pushViewController(noticeVC, animated: true)
-    }
-    
-    
-    //MARK: - Actions
-    
-    @objc private func bellButtonTapped() {
-        print("DEBUG: bell button tapped")
     }
     
 }

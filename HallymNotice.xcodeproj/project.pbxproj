@@ -51,10 +51,10 @@
 		CF6B2D082AA73A2300A4A726 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */; };
 		CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6B2D092AA75B1D00A4A726 /* Keyword.swift */; };
 		CF790D352AA8AD08003DE5E2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */; };
-		CFA4CD002AB435970075775E /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CCFF2AB435970075775E /* MenuCell.swift */; };
 		CFA4CD022AB43E430075775E /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD012AB43E430075775E /* Menu.swift */; };
 		CFA4CD062AB44ABF0075775E /* EditKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */; };
 		CFB23F672ABED2D9001154D1 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB23F662ABED2D8001154D1 /* MenuViewModel.swift */; };
+		CFB23F782ABF1314001154D1 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB23F772ABF1314001154D1 /* MenuCell.swift */; };
 		CFBD49822ABDBEE70094D2F1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD49812ABDBEE70094D2F1 /* AuthService.swift */; };
 		CFBD49852ABDC59A0094D2F1 /* AuthServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD49842ABDC59A0094D2F1 /* AuthServiceType.swift */; };
 		CFC41EE32AA96CDA009732C2 /* LocationProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */; };
@@ -121,10 +121,10 @@
 		CF6B2D072AA73A2300A4A726 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		CF6B2D092AA75B1D00A4A726 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		CF790D342AA8AD08003DE5E2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		CFA4CCFF2AB435970075775E /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		CFA4CD012AB43E430075775E /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		CFA4CD052AB44ABF0075775E /* EditKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKeywordViewController.swift; sourceTree = "<group>"; };
 		CFB23F662ABED2D8001154D1 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		CFB23F772ABF1314001154D1 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		CFBD49812ABDBEE70094D2F1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CFBD49842ABDC59A0094D2F1 /* AuthServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceType.swift; sourceTree = "<group>"; };
 		CFC41EE22AA96CDA009732C2 /* LocationProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProviderType.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				CFA4CD072AB451540075775E /* ViewController */,
-				CFA4CCFF2AB435970075775E /* MenuCell.swift */,
+				CFB23F772ABF1314001154D1 /* MenuCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -504,7 +504,6 @@
 			files = (
 				CF00A2E42AB959C2004865C6 /* NoticeCategory.swift in Sources */,
 				CF319CDC2AB07B64007039A6 /* TabItemView.swift in Sources */,
-				CFA4CD002AB435970075775E /* MenuCell.swift in Sources */,
 				CFB23F672ABED2D9001154D1 /* MenuViewModel.swift in Sources */,
 				CF319CDB2AB07B64007039A6 /* TabView.swift in Sources */,
 				CF6B2D0A2AA75B1D00A4A726 /* Keyword.swift in Sources */,
@@ -547,6 +546,7 @@
 				CFC41EF52AA97D08009732C2 /* NetworkServiceType.swift in Sources */,
 				CFC41EED2AA979E6009732C2 /* WeatherApiType.swift in Sources */,
 				CF6B2CCD2AA6ED6600A4A726 /* SceneDelegate.swift in Sources */,
+				CFB23F782ABF1314001154D1 /* MenuCell.swift in Sources */,
 				CF6B2CFE2AA72B7E00A4A726 /* GuideView.swift in Sources */,
 				CF6B2CDF2AA6EDFF00A4A726 /* HomeViewController.swift in Sources */,
 				CFFAD53E2AA8510B00F56444 /* WeatherView.swift in Sources */,

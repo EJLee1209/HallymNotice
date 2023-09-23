@@ -74,8 +74,6 @@ class MenuViewController: UIViewController, BaseViewController {
             self.openAppSettings()
         case .keywords:
             self.navigateToEditKeywordVC()
-        case .talkToDeveloper:
-            print(menu.rawValue)
         case .privacyPolicy:
             self.loadWebView(urlString: Constants.privacyPolicyUrl)
         }
