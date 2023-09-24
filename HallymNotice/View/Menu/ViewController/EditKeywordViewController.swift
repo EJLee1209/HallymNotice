@@ -84,6 +84,11 @@ class EditKeywordViewController: UIViewController, BaseViewController {
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
             }.store(in: &cancellables)
+        
+        tableView.didSelectRowPublisher
+            .sink { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            }.store(in: &cancellables)
     }
 }
 

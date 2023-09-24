@@ -13,7 +13,7 @@ final class StepTwoView: UIView {
     //MARK: - Properties
     private lazy var lottieAnimationView: LottieAnimationView = {
         let view = LottieAnimationView(name: "animation_check")
-        view.loopMode = .playOnce
+        view.loopMode = .loop
         return view
     }()
     
@@ -40,6 +40,10 @@ final class StepTwoView: UIView {
     
     func playAnimate() {
         self.lottieAnimationView.play()
+    }
+    
+    func stopAnimate() {
+        self.lottieAnimationView.stop()
     }
     
 }

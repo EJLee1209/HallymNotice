@@ -143,19 +143,13 @@ final class WelcomeViewModel {
             
             self.authService.register(keywords: selectedKeywords)
                 .sink { [weak self] completion in
-                    switch completion {
-                    case .failure(let error):
-                        self?.errorMsgSubject.send(error.localizedDescription)
-                    default:
-                        break
-                    }
+                    
+                    print("DEBUG register completion: \(completion)")
                 } receiveValue: { [weak self] response in
                     guard let id = response.user?.id else { return }
                     
                     UserDefaults.standard.set(id, forKey: "myId")
-                    DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                        self?.endOfRegisterSubject.send(response.user)
-                    }
+                    self?.endOfRegisterSubject.send(response.user)
                 }.store(in: &cancellables)
         default:
             return

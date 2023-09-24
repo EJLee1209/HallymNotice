@@ -19,7 +19,7 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     
     private let guideView = GuideView()
     private let stepOneView: StepOneView = .init()
-    private let stepThreeView: StepTwoView = .init()
+    private let stepTwoView: StepTwoView = .init()
     
     private var cancellables: Set<AnyCancellable> = .init()
     var delegate: WelcomeVCDelegate?
@@ -82,8 +82,8 @@ final class WelcomeViewController: UIViewController, BaseViewController {
     }
     
     func layoutStepThree() {
-        view.addSubview(stepThreeView)
-        stepThreeView.snp.makeConstraints { make in
+        view.addSubview(stepTwoView)
+        stepTwoView.snp.makeConstraints { make in
             make.top.equalTo(guideView.snp.bottom).offset(66)
             make.left.right.equalToSuperview().inset(18)
             make.bottom.equalTo(view).offset(-50)
@@ -113,16 +113,18 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         viewModel.stepTwoViewIsHidden
             .handleEvents(receiveOutput: { [weak self] isHidden in
                 if !isHidden {
-                    self?.stepThreeView.playAnimate()
+                    self?.stepTwoView.playAnimate()
                 }
             })
-            .assign(to: \.isHidden, on: self.stepThreeView, animation: .fade(duration: 0.5))
+            .assign(to: \.isHidden, on: self.stepTwoView, animation: .fade(duration: 0.5))
             .store(in: &cancellables)
         
         viewModel.endOfRegister
             .sink { [weak self] user in
                 self?.delegate?.endOfRegister(user: user)
-                self?.dismiss(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+                    self?.dismiss(animated: true)
+                }
             }.store(in: &cancellables)
         
         stepOneView.bind(viewModel: viewModel)
@@ -149,7 +151,4 @@ final class WelcomeViewController: UIViewController, BaseViewController {
         self.view.transform = .identity
     }
     
-    @objc func endOfRegister() {
-        
-    }
 }

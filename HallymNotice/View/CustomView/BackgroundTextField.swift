@@ -77,7 +77,7 @@ final class BackgroundTextField: UIView {
         toolBar.barStyle = .default
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(
-            title: "Done",
+            title: "추가",
             style: .plain,
             target: self,
             action: #selector(doneButtonTapped))
@@ -89,6 +89,7 @@ final class BackgroundTextField: UIView {
             ),
             doneButton
         ]
+         
         toolBar.isUserInteractionEnabled = true
         textField.inputAccessoryView = toolBar
     }
