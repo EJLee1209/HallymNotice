@@ -21,15 +21,25 @@ class MenuViewController: UIViewController, BaseViewController {
         return tv
     }()
     
-    
     private var cancellables: Set<AnyCancellable> = .init()
+    private let viewModel: MenuViewModel
+    
+    //MARK: - init
+    init(viewModel: MenuViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNav()
         layout()
         bind()
-        
     }
     
     //MARK: - Helpers
@@ -64,10 +74,8 @@ class MenuViewController: UIViewController, BaseViewController {
             self.openAppSettings()
         case .keywords:
             self.navigateToEditKeywordVC()
-        case .talkToDeveloper:
-            print("개발자에게 한마디")
         case .privacyPolicy:
-            self.loadWebView(urlString: "https://sites.google.com/view/hallym-notice-privacy/홈")
+            self.loadWebView(urlString: Constants.privacyPolicyUrl)
         }
     }
 
@@ -80,11 +88,17 @@ class MenuViewController: UIViewController, BaseViewController {
     }
     
     private func navigateToEditKeywordVC() {
-        let vc = EditKeywordViewController()
+        let vc = EditKeywordViewController(viewModel: self.viewModel)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //MARK: - Actions
+    @objc private func endOfRegister() {
+        viewModel.getUser()
     }
 }
 
+//MARK: - UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Menu.allCases.count
@@ -95,5 +109,12 @@ extension MenuViewController: UITableViewDataSource {
         let type = Menu.allCases[indexPath.row]
         cell.bind(type: type)
         return cell
+    }
+}
+
+//MARK: - HomeVCDelegate
+extension MenuViewController: HomeVCDelegate {
+    func endOfRegister(user: User?) {
+        viewModel.newUser(user: user)
     }
 }

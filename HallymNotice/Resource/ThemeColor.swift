@@ -1,8 +1,8 @@
 //
 //  ThemeColor.swift
-//  Pokedex
+//  HallymNotice
 //
-//  Created by 이은재 on 2023/08/31.
+//  Created by 이은재 on 2023/09/19.
 //
 
 import UIKit
@@ -12,4 +12,3 @@ struct ThemeColor {
     static let secondary = UIColor(hexString: "EBF4FB")
     static let gray = UIColor(hexString: "ACACAC")
 }
-

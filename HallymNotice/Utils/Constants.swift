@@ -16,13 +16,8 @@ struct Constants {
     static let inputPlaceHolder = "직접 입력해서 추가"
     static let inputPlaceHolder2 = "등록할 키워드를 입력해주세요"
     
-    static let welcomeTitle2 = "새 공지가 올라왔을 때,"
-    static let welcomeSubTitle2 = "\n알림을 받으시겠어요?"
     
-    static let welcomeTitle3 = "모든 설정이 끝났어요."
-    
-    static let welcomeNoticePositiveButtonText = "네, 알림 받을래요!"
-    static let welcomeNoticeNegativeButtonText = "아니요, 키워드 알림만 받을게요"
+    static let welcomeTitle2 = "모든 설정이 끝났어요."
     
     static let homeTitle1 = "오늘의 날씨"
     static let homeTitle2 = "오늘의 메뉴"
@@ -53,8 +48,9 @@ struct Constants {
         Keyword(text: "근로", isSelected: false),
         Keyword(text: "인턴", isSelected: false),
         Keyword(text: "취업", isSelected: false),
+        Keyword(text: "현장실습", isSelected: false),
+        Keyword(text: "동아리", isSelected: false),
         Keyword(text: "병무청", isSelected: false),
-        Keyword(text: "버스", isSelected: false),
     ]
     
     //MARK: - apikey
@@ -63,6 +59,7 @@ struct Constants {
     //MARK: - end point
     static let currentWeatherEndpoint = "https://api.openweathermap.org/data/2.5/weather"
     static let forecastEndpoint = "https://api.openweathermap.org/data/2.5/forecast"
-    
+    static let BASE_URL = "http://203.245.41.173:8080"
+    static let privacyPolicyUrl = "https://sites.google.com/view/hallym-notice-privacy/홈"
     static let hallymEndpoint = "https://www.hallym.ac.kr/hallym_univ/sub05/cP3/sCP1?"
 }

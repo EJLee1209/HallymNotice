@@ -29,7 +29,7 @@ final class TabView: UIView {
     
     private let tabIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = ThemeColor.primary
         return view
     }()
     

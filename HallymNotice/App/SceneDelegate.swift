@@ -28,20 +28,28 @@ extension SceneDelegate {
         let locationProvider = CoreLocationProvider()
         let weatherApi = WeatherApi()
         let crawlingService = CrawlingService()
+        let authService = AuthService()
         
-        let homeVM = HomeViewModel(locationProvider: locationProvider, weatherApi: weatherApi, crawlingService: crawlingService)
+        let menuVM = MenuViewModel(authService: authService)
+        let menuVC = MenuViewController(viewModel: menuVM)
+        let menuNav = makeNav(
+            unselectedImage: UIImage(systemName: "line.3.horizontal"),
+            selectedImage: UIImage(systemName: "line.3.horizontal"),
+            rootViewController: menuVC)
+        
+        let homeVM = HomeViewModel(
+            locationProvider: locationProvider,
+            weatherApi: weatherApi,
+            crawlingService: crawlingService,
+            authService: authService
+        )
         let homeVC = HomeViewController(viewModel: homeVM)
+        homeVC.delegate = menuVC // delegate 설정 (유저 회원가입시 유저 정보 넘겨주기 위해서)
         let homeNav = makeNav(
             unselectedImage: UIImage(systemName: "house"),
             selectedImage: UIImage(systemName: "house.fill"),
             rootViewController: homeVC)
         
-        
-        let menuVC = MenuViewController()
-        let menuNav = makeNav(
-            unselectedImage: UIImage(systemName: "line.3.horizontal"),
-            selectedImage: UIImage(systemName: "line.3.horizontal"),
-            rootViewController: menuVC)
         
         let tabBarController = UITabBarController()
         

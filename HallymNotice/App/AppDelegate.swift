@@ -47,6 +47,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     
     /// FCMToken 업데이트시
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        UserDefaults.standard.set(fcmToken, forKey: "fcmToken")
         print("🟢", #function, fcmToken)
     }
     

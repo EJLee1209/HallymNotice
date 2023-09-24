@@ -10,19 +10,13 @@ import SnapKit
 import Combine
 import CombineCocoa
 
+protocol HomeVCDelegate: AnyObject {
+    func endOfRegister(user: User?)
+}
+
 class HomeViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
-    private lazy var bellButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "bell"),
-            style: .done,
-            target: self,
-            action: #selector(bellButtonTapped)
-        )
-        button.tintColor = .black
-        return button
-    }()
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: self.makeFlowLayout())
@@ -35,6 +29,7 @@ class HomeViewController: UIViewController, BaseViewController {
     }()
     
     private var cancellables: Set<AnyCancellable> = .init()
+    var delegate: HomeVCDelegate?
     let viewModel: HomeViewModel
     
     
@@ -55,13 +50,11 @@ class HomeViewController: UIViewController, BaseViewController {
         
         layout()
         bind()
-//        presentWelcomeVC()
     }
     
     //MARK: - Helpers
     func layout() {
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItems = [bellButton]
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -91,12 +84,21 @@ class HomeViewController: UIViewController, BaseViewController {
                 }
             }
             .store(in: &cancellables)
-
+        
+        viewModel.presentWelcomeVC
+            .sink { [weak self] _ in
+                self?.presentWelcomeVC()
+            }.store(in: &cancellables)
+        
+        viewModel.checkUser()
+        
+    
     }
     
     private func presentWelcomeVC() {
-        let welcomeVM = WelcomeViewModel(keywords: Constants.defaultKeywords)
+        let welcomeVM = viewModel.makeWelcomeViewModel()
         let welcomeVC = WelcomeViewController(viewModel: welcomeVM)
+        welcomeVC.delegate = self
         welcomeVC.modalPresentationStyle = .fullScreen
         present(welcomeVC, animated: true)
     }
@@ -105,13 +107,6 @@ class HomeViewController: UIViewController, BaseViewController {
         let noticeVM = viewModel.makeNoticeViewModel()
         let noticeVC = NoticeViewController(viewModel: noticeVM)
         navigationController?.pushViewController(noticeVC, animated: true)
-    }
-    
-    
-    //MARK: - Actions
-    
-    @objc private func bellButtonTapped() {
-        print("DEBUG: bell button tapped")
     }
     
 }
@@ -173,4 +168,11 @@ extension HomeViewController {
         return section
     }
 
+}
+
+//MARK: - WelcomeVCDelegate
+extension HomeViewController: WelcomeVCDelegate {
+    func endOfRegister(user: User?) {
+        self.delegate?.endOfRegister(user: user)
+    }
 }
