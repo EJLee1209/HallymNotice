@@ -5,6 +5,9 @@
 중요한 공지사항이 올라왔을 때, 놓친적이 있었고, 불편함을 느껴 앱으로 개발했습니다. <br>
 알림 받기 원하는 키워드를 등록하면, 해당 키워드가 포함된 공지사항이 올라왔을 때 알림을 받을 수 있습니다.
 
+## 다운로드
+
+<a href='https://apps.apple.com/kr/app/%ED%95%9C%EB%A6%BC%EB%85%B8%ED%8B%B0/id6467556355'><img alt='Available on the App Store' src='https://user-images.githubusercontent.com/67373938/227817078-7aab7bea-3af0-4930-b341-1a166a39501d.svg' height='60px'/></a> 
 
 <img src="https://github.com/EJLee1209/MusicPlayer/assets/101651909/b666f417-9ff2-47b5-ac63-a7b1f6abd675"/> | <img src="https://github.com/EJLee1209/MusicPlayer/assets/101651909/b5acfc06-eacf-4c45-82a6-4cf413187256"/> | <img src="https://github.com/EJLee1209/MusicPlayer/assets/101651909/733ae089-4bf0-4fd3-b8d1-de701f5cd1d3"/>
 |---|---|---|
