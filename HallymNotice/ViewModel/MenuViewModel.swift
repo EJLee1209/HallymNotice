@@ -35,6 +35,10 @@ final class MenuViewModel {
         return keywords.value.count
     }
     
+    var toggleIsOn: Bool {
+        return user.value?.receiveNewNotice ?? false
+    }
+    
     func keyword(for index: Int) -> String {
         return keywords.value[index]
     }
@@ -60,7 +64,20 @@ final class MenuViewModel {
         guard var user = self.user.value else { return }
         user.keywords = keywords
         
-        self.authService.updateKeywords(user: user)
+        self.authService.updateUser(user: user)
+            .sink { completion in
+                print("DEBUG update : \(completion)")
+            } receiveValue: { response in
+                print("DEBUG update : \(response)")
+            }.store(in: &cancellables)
+    }
+    
+    func toggleSwitch() {
+        guard var user = self.user.value else { return }
+        user.receiveNewNotice.toggle()
+        self.user.send(user)
+        
+        self.authService.updateUser(user: user)
             .sink { completion in
                 print("DEBUG update : \(completion)")
             } receiveValue: { response in

@@ -11,7 +11,7 @@
 		CF00A2E22AB958B7004865C6 /* ThemeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00A2E12AB958B7004865C6 /* ThemeFont.swift */; };
 		CF00A2E42AB959C2004865C6 /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00A2E32AB959C2004865C6 /* NoticeCategory.swift */; };
 		CF0F8C2C2AA8845E001466CD /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */; };
-		CF18B5E62AADD2780096C1FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */; };
+		CF0FB2162AD0198000E80041 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF0FB2152AD0198000E80041 /* GoogleService-Info.plist */; };
 		CF18B5E92AADD2FF0096C1FD /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CF18B5E82AADD2FF0096C1FD /* FirebaseMessaging */; };
 		CF1C61EE2AAD82F100759248 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1C61ED2AAD82F100759248 /* LoadingView.swift */; };
 		CF1C61F12AADB50C00759248 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C61F02AADB50C00759248 /* WebKit.framework */; };
@@ -83,7 +83,7 @@
 		CF00A2E12AB958B7004865C6 /* ThemeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFont.swift; sourceTree = "<group>"; };
 		CF00A2E32AB959C2004865C6 /* NoticeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCategory.swift; sourceTree = "<group>"; };
 		CF0F8C2B2AA8845E001466CD /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
-		CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF0FB2152AD0198000E80041 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF18B5EA2AADD7460096C1FD /* HallymNotice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HallymNotice.entitlements; sourceTree = "<group>"; };
 		CF1C61ED2AAD82F100759248 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1C61F02AADB50C00759248 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -247,7 +247,7 @@
 				CF6B2CD32AA6ED6700A4A726 /* Assets.xcassets */,
 				CF6B2CD52AA6ED6700A4A726 /* LaunchScreen.storyboard */,
 				CF6B2CD82AA6ED6700A4A726 /* Info.plist */,
-				CF18B5E52AADD2780096C1FD /* GoogleService-Info.plist */,
+				CF0FB2152AD0198000E80041 /* GoogleService-Info.plist */,
 			);
 			path = HallymNotice;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			files = (
 				CF6B2CD72AA6ED6700A4A726 /* LaunchScreen.storyboard in Resources */,
 				CFFAD5392AA84A3300F56444 /* animation_check.json in Resources */,
-				CF18B5E62AADD2780096C1FD /* GoogleService-Info.plist in Resources */,
+				CF0FB2162AD0198000E80041 /* GoogleService-Info.plist in Resources */,
 				CF6B2CD42AA6ED6700A4A726 /* Assets.xcassets in Resources */,
 				CF531B132AA81F6900803669 /* animation_notification.json in Resources */,
 			);

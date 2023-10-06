@@ -28,14 +28,14 @@ final class AuthService: NetworkServiceType, AuthServiceType {
         guard let token = getFCMToken() else { return Empty().eraseToAnyPublisher() }
         
         let endpoint = "\(Constants.BASE_URL)/register"
-        let user = User(id: 0, fcmToken: token, keywords: keywords)
+        let user = User(id: 0, fcmToken: token, keywords: keywords, receiveNewNotice: false)
         return requestPost(endPoint: endpoint, body: user, modelType: AuthResponse.self)
     }
     
-    func updateKeywords(user: User) -> AnyPublisher<AuthResponse, Error> {
+    func updateUser(user: User) -> AnyPublisher<AuthResponse, Error> {
         guard let token = getFCMToken() else { return Empty().eraseToAnyPublisher() }
         
-        let endpoint = "\(Constants.BASE_URL)/update/keywords"
+        let endpoint = "\(Constants.BASE_URL)/update/user"
         print("DEBUG update keywords user : \(user)")
         return requestPost(endPoint: endpoint, body: user, modelType: AuthResponse.self)
     }

@@ -10,6 +10,6 @@ import Combine
 
 protocol AuthServiceType {
     func register(keywords: [String]) -> AnyPublisher<AuthResponse, Error>
-    func updateKeywords(user: User) -> AnyPublisher<AuthResponse, Error>
+    func updateUser(user: User) -> AnyPublisher<AuthResponse, Error>
     func getUser() -> AnyPublisher<AuthResponse, Error>
 }

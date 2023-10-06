@@ -9,12 +9,13 @@ import UIKit
 import Combine
 import CombineCocoa
 
-class MenuViewController: UIViewController, BaseViewController {
+final class MenuViewController: UIViewController, BaseViewController {
     
     //MARK: - Properties
     private lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(MenuCell.self, forCellReuseIdentifier: MenuCell.identifier)
+        
         tv.rowHeight = 60
         tv.alwaysBounceVertical = true
         tv.dataSource = self
@@ -76,6 +77,8 @@ class MenuViewController: UIViewController, BaseViewController {
             self.navigateToEditKeywordVC()
         case .privacyPolicy:
             self.loadWebView(urlString: Constants.privacyPolicyUrl)
+        default:
+            return
         }
     }
 
@@ -107,7 +110,9 @@ extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuCell.identifier, for: indexPath) as! MenuCell
         let type = Menu.allCases[indexPath.row]
-        cell.bind(type: type)
+        cell.bind(type: type, toggleIsOn: viewModel.toggleIsOn)
+        cell.delegate = self
+        cell.rightContentSytle = type == .receiveNewNotice ? .toggleSwitch : .rightArrowImageView
         return cell
     }
 }
@@ -116,5 +121,11 @@ extension MenuViewController: UITableViewDataSource {
 extension MenuViewController: HomeVCDelegate {
     func endOfRegister(user: User?) {
         viewModel.newUser(user: user)
+    }
+}
+
+extension MenuViewController: MenuCellDelegate {
+    func toggleSwitch(isOn: Bool) {
+        viewModel.toggleSwitch()
     }
 }

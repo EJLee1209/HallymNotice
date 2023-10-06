@@ -9,6 +9,15 @@ import UIKit
 import CombineCocoa
 import Combine
 
+enum RightContentStyle {
+    case rightArrowImageView
+    case toggleSwitch
+}
+
+protocol MenuCellDelegate: AnyObject {
+    func toggleSwitch(isOn: Bool)
+}
+
 final class MenuCell: UITableViewCell {
     //MARK: - Properties
     
@@ -39,8 +48,14 @@ final class MenuCell: UITableViewCell {
         return iv
     }()
     
+    private lazy var toggleSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.addTarget(self, action: #selector(handleToggle), for: .valueChanged)
+        return toggle
+    }()
+    
     private lazy var hStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [imageBackgroundView, menuLabel, rightArrowImageView])
+        let sv = UIStackView(arrangedSubviews: [imageBackgroundView, menuLabel])
         sv.axis = .horizontal
         sv.spacing = 12
         sv.alignment = .center
@@ -48,6 +63,21 @@ final class MenuCell: UITableViewCell {
     }()
     
     static let identifier = "menuCell"
+    
+    weak var delegate: MenuCellDelegate?
+    
+    var rightContentSytle: RightContentStyle? {
+        didSet {
+            guard let style = rightContentSytle else { return }
+            switch style {
+            case .rightArrowImageView:
+                hStackView.addArrangedSubview(rightArrowImageView)
+            case .toggleSwitch:
+                hStackView.addArrangedSubview(toggleSwitch)
+            }
+        }
+    }
+    
     
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -74,9 +104,20 @@ final class MenuCell: UITableViewCell {
         }
     }
     
-    func bind(type: Menu) {
+    func bind(type: Menu, toggleIsOn: Bool = false) {
         menuLabel.text = type.rawValue
         menuImageView.image = type.image
         imageBackgroundView.backgroundColor = type.imageBackgroundColor
+        
+        toggleSwitch.isOn = toggleIsOn
+    }
+    
+    
+    
+    //MARK: - Actions
+    
+    @objc func handleToggle(_ toggleSwitch: UISwitch) {
+        delegate?.toggleSwitch(isOn: toggleSwitch.isOn)
     }
 }
+
